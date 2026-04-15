@@ -1393,7 +1393,8 @@ li.cat .cat-category3,
     display: inline !important;
     visibility: visible !important;
     opacity: 1 !important;
-    color: #fff !important;
+    color: var(--gm-navy) !important;
+    background: transparent !important;
     font-size: 10.5px !important;
     font-family: var(--gm-sans) !important;
 }
