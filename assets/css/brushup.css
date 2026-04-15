@@ -288,7 +288,7 @@ body.header_fix #header {
 
 #header_slider .caption {
     position: absolute !important;
-    top: 50% !important;
+    top: 42% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
     z-index: 5 !important;
@@ -306,29 +306,28 @@ body.header_fix #header {
     opacity: 1 !important;
 }
 
-#header_slider .caption::before {
-    content: "— GYOSEI MEDICAL NETWORK —";
-    display: block;
-    font-family: var(--gm-latin);
-    font-size: 11px;
-    letter-spacing: .38em;
-    color: var(--gm-gold-soft);
-    margin: 0 0 12px !important;
-    font-weight: 500;
+/* Breathing room between hero slider and the search dropdown panel */
+#index_header_search {
+    margin-top: 36px !important;
+    padding: 28px 20px !important;
 }
 
-#header_slider .caption .fimage {
-    margin: 0 0 14px !important;
+/* Eyebrow and logo image in caption — hidden per request */
+#header_slider .caption::before { content: none !important; display: none !important; }
+
+#header_slider .caption .fimage,
+#header_slider .caption .fimage img,
+#header_slider .caption p.fimage {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden;
 }
 
-#header_slider .caption .fimage img {
-    filter: brightness(0) invert(1) drop-shadow(0 4px 20px rgba(0, 0, 0, .3));
-    max-width: 260px !important;
-    width: 70% !important;
-    height: auto !important;
-    margin: 0 auto !important;
-    display: block;
-}
+/* legacy .fimage styling no longer applied */
 
 #header_slider .caption .headline,
 #header_slider .caption h2.headline,
@@ -451,8 +450,9 @@ body.header_fix #header {
     padding-right: 14px;
 }
 
-/* お知らせ一覧 archive link — align flush right, unify with black bar */
-#index_news .archive_link {
+/* お知らせ一覧 / 病院一覧 archive link — flat dark button, no outline */
+#index_news .archive_link,
+.cb_content-blog_list .archive_link {
     flex: 0 0 auto !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -463,15 +463,15 @@ body.header_fix #header {
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
-    background: #000 !important;
+    background: var(--gm-navy) !important;
     color: var(--gm-ivory) !important;
     font-family: var(--gm-sans) !important;
     font-size: 11px !important;
     font-weight: 500 !important;
     letter-spacing: .22em !important;
     text-transform: uppercase;
-    padding: 10px 24px !important;
-    border: 1px solid var(--gm-gold) !important;
+    padding: 12px 26px !important;
+    border: none !important;
     border-radius: 0 !important;
     line-height: 1 !important;
     white-space: nowrap;
@@ -482,8 +482,8 @@ body.header_fix #header {
 
 #index_news .archive_link a:hover,
 .cb_content-blog_list .archive_link a:hover {
-    background: var(--gm-gold) !important;
-    color: #000 !important;
+    background: var(--gm-tiffany) !important;
+    color: #fff !important;
     transform: none !important;
 }
 
@@ -1663,6 +1663,25 @@ a[href=""]:hover {
     transition: transform .25s ease, background .25s ease;
     color: var(--gm-tiffany) !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+    overflow: hidden;
+}
+
+/* Kill parent TCD icon font ::before (both on li and on a) so only my SVG ::after shows */
+#footer_social_link li::before,
+#footer_social_link li:hover::before,
+#footer_social_link li a::before,
+#footer_social_link li.facebook::before,
+#footer_social_link li.facebook a::before,
+#footer_social_link li.facebook:hover::before,
+#footer_social_link li.insta::before,
+#footer_social_link li.insta a::before,
+#footer_social_link li.insta:hover::before {
+    content: none !important;
+    display: none !important;
+    background: none !important;
+    font-size: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
 }
 
 #footer_social_link li a::after {
@@ -1775,17 +1794,61 @@ a[href=""]:hover {
     color: #fff !important;
 }
 
-/* Return top button — tiffany compatible */
+/* Return top button — small floating icon, no full-width bar */
 #return_top {
-    background: var(--gm-tiffany-deep) !important;
-    color: #fff !important;
-    border: 1px solid #fff !important;
+    position: fixed !important;
+    right: 24px !important;
+    bottom: 24px !important;
+    width: 44px !important;
+    height: 44px !important;
+    background: transparent !important;
+    border: none !important;
+    z-index: 300;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
-#return_top:hover,
+#return_top a {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: var(--gm-tiffany-deep) !important;
+    background-color: var(--gm-tiffany-deep) !important;
+    color: #fff !important;
+    border-radius: 50%;
+    font-size: 0 !important;
+    text-indent: -9999px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .25);
+    transition: transform .25s ease, background .25s ease;
+    position: relative;
+}
+
+#return_top a::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    border-top: 2px solid #fff;
+    border-right: 2px solid #fff;
+    transform: translate(-50%, -30%) rotate(-45deg);
+}
+
+#return_top a span {
+    display: none !important;
+}
+
 #return_top a:hover {
     background: #fff !important;
-    color: var(--gm-tiffany-deep) !important;
+    transform: translateY(-3px);
+}
+
+#return_top a:hover::after {
+    border-top-color: var(--gm-tiffany-deep);
+    border-right-color: var(--gm-tiffany-deep);
 }
 
 /* =========================================================================
