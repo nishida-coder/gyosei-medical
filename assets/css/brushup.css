@@ -359,25 +359,33 @@ a:hover { color: var(--gm-gold-2); }
 /* Clinic list / post list */
 #post_list {
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    margin: 0 auto !important;
+    padding: 0 20px !important;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 28px !important;
+    list-style: none;
 }
 
 #post_list .article,
-#post_list article,
-.cb_content-blog_list .article,
-.cb_content-blog_list article {
+#post_list li.article,
+.cb_content-blog_list .article {
     background: #fff !important;
     border: 1px solid var(--gm-hair) !important;
     border-radius: 2px !important;
     box-shadow: var(--gm-shadow-soft) !important;
-    overflow: hidden;
+    overflow: hidden !important;
     position: relative;
     transition: transform .35s cubic-bezier(.2, .8, .2, 1), box-shadow .35s ease, border-color .35s ease;
+    display: flex !important;
+    flex-direction: column;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: auto !important;
+    float: none !important;
 }
 
-#post_list .article::before,
-.cb_content-blog_list .article::before {
+#post_list .article::before {
     content: "";
     position: absolute;
     top: 0;
@@ -391,70 +399,225 @@ a:hover { color: var(--gm-gold-2); }
     z-index: 2;
 }
 
-#post_list .article:hover,
-.cb_content-blog_list .article:hover {
+#post_list .article:hover {
     transform: translateY(-6px);
     box-shadow: var(--gm-shadow) !important;
     border-color: var(--gm-hair-strong) !important;
 }
 
-#post_list .article:hover::before,
-.cb_content-blog_list .article:hover::before { transform: scaleX(1); }
+#post_list .article:hover::before { transform: scaleX(1); }
 
-#post_list .article .image,
-.cb_content-blog_list .article .image {
+#post_list .article > a {
+    display: block;
+    flex: 1 0 auto;
+}
+
+/* Clinic top icon — constrained aspect ratio */
+#post_list .article .image {
     overflow: hidden;
     position: relative;
-}
-
-#post_list .article .image img,
-.cb_content-blog_list .article .image img {
-    transition: transform .7s cubic-bezier(.2, .8, .2, 1);
     width: 100%;
-    height: auto;
+    aspect-ratio: 16 / 10;
+    background: var(--gm-ivory-2);
 }
 
-#post_list .article:hover .image img,
-.cb_content-blog_list .article:hover .image img {
-    transform: scale(1.05);
+#post_list .article .image img {
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    transition: transform .7s cubic-bezier(.2, .8, .2, 1);
 }
 
-#post_list .article .title,
-.cb_content-blog_list .article .title {
+#post_list .article:hover .image img { transform: scale(1.05); }
+
+/* Clinic name (h3.title) */
+#post_list .article h3.title,
+#post_list .article center h3.title {
     font-family: var(--gm-serif) !important;
-    font-size: 17px !important;
+    font-size: 15px !important;
     font-weight: 600 !important;
     color: var(--gm-navy) !important;
-    line-height: 1.65 !important;
-    letter-spacing: .04em !important;
-    padding: 22px 24px 10px !important;
+    line-height: 1.55 !important;
+    letter-spacing: .02em !important;
+    padding: 18px 16px 6px !important;
+    margin: 0 !important;
+    text-align: center;
+    min-height: auto !important;
+}
+
+#post_list .article h3.title strong {
+    font-weight: 600;
+}
+
+#post_list .article center {
+    display: block;
+    text-align: center;
+}
+
+/* Doctor row (wp-block-columns) — compact portrait + name */
+#post_list .article .wp-block-columns {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 6px 16px 14px !important;
     margin: 0 !important;
 }
 
-#post_list .article .meta,
-.cb_content-blog_list .article .meta {
-    padding: 0 24px 22px !important;
-    font-family: var(--gm-sans) !important;
-    font-size: 12px !important;
-    color: var(--gm-mute) !important;
-    letter-spacing: .06em;
+#post_list .article .wp-block-column {
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
-#post_list .article .cat,
-#post_list .article .cat-category,
-#post_list .article .cat-category2,
-#post_list .article .cat-category3,
-.cb_content-blog_list .cat {
-    display: inline-block;
-    font-family: var(--gm-sans) !important;
-    font-size: 10px !important;
-    letter-spacing: .22em !important;
-    text-transform: uppercase;
-    color: var(--gm-gold-2) !important;
-    background: transparent !important;
-    padding: 4px 10px 4px 0 !important;
-    border: none !important;
+#post_list .article .wp-block-column:first-child {
+    flex: 0 0 62px !important;
+    width: 62px !important;
+}
+
+#post_list .article .wp-block-column:nth-child(2) {
+    flex: 1 1 auto !important;
+    min-width: 0;
+}
+
+#post_list .article .wp-block-column figure {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid var(--gm-hair);
+    box-shadow: 0 2px 8px rgba(10, 31, 61, .12);
+    background: #fff;
+}
+
+#post_list .article .wp-block-column figure img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    display: block;
+}
+
+#post_list .article .wp-block-column p.title {
+    font-family: var(--gm-serif) !important;
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+    letter-spacing: .02em !important;
+    color: var(--gm-navy) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: left !important;
+}
+
+#post_list .article .wp-block-column p.title strong {
     font-weight: 600;
+    font-size: 14px;
+}
+
+#post_list .article .wp-block-column p.title br + *,
+#post_list .article .wp-block-column p.title strong {
+    display: inline;
+}
+
+/* Shrink the "(08年卒)" suffix so it flows with the name */
+#post_list .article .wp-block-column p.title strong {
+    font-size: 14px;
+}
+
+/* Suppress the empty trailing <p class="title"> */
+#post_list .article .wp-block-column p.title:empty,
+#post_list .article .wp-block-column p.title:not(:has(strong)) {
+    display: none !important;
+}
+
+/* =========================================================================
+   Meta / tags — solid color pills, single line, compact
+   ========================================================================= */
+
+#post_list .article ul.meta,
+.cb_content-blog_list ul.meta {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    padding: 10px 14px 16px !important;
+    margin: 0 !important;
+    list-style: none !important;
+    border-top: 1px solid var(--gm-hair);
+    background: linear-gradient(180deg, rgba(250, 247, 241, 0) 0%, var(--gm-ivory) 100%);
+}
+
+#post_list .article ul.meta li.cat,
+.cb_content-blog_list ul.meta li.cat {
+    display: inline-flex !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+    float: none !important;
+    min-width: 0;
+    flex: 0 1 auto;
+}
+
+#post_list .article ul.meta li.cat a,
+.cb_content-blog_list ul.meta li.cat a {
+    display: inline-block !important;
+    padding: 4px 10px !important;
+    font-family: var(--gm-sans) !important;
+    font-size: 10.5px !important;
+    font-weight: 600 !important;
+    letter-spacing: .04em !important;
+    line-height: 1.5 !important;
+    border-radius: 2px !important;
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: filter .25s ease, transform .25s ease;
+    border: none !important;
+}
+
+#post_list .article ul.meta li.cat a span,
+.cb_content-blog_list ul.meta li.cat a span {
+    background: transparent !important;
+    color: inherit !important;
+    padding: 0 !important;
+    border: none !important;
+    font-size: inherit !important;
+    letter-spacing: inherit !important;
+}
+
+#post_list .article ul.meta li.cat a:hover,
+.cb_content-blog_list ul.meta li.cat a:hover {
+    filter: brightness(1.15);
+    transform: translateY(-1px);
+}
+
+/* 科目（診療科） → navy */
+#post_list .article ul.meta li.cat a.cat-category,
+.cb_content-blog_list ul.meta li.cat a.cat-category,
+a.cat-category {
+    background: var(--gm-navy) !important;
+    color: var(--gm-ivory) !important;
+}
+
+/* 地域 → gold */
+#post_list .article ul.meta li.cat a.cat-category2,
+.cb_content-blog_list ul.meta li.cat a.cat-category2,
+a.cat-category2 {
+    background: var(--gm-gold) !important;
+    color: var(--gm-navy) !important;
+}
+
+/* 卒業年代 → forest */
+#post_list .article ul.meta li.cat a.cat-category3,
+.cb_content-blog_list ul.meta li.cat a.cat-category3,
+a.cat-category3 {
+    background: var(--gm-forest) !important;
+    color: var(--gm-ivory) !important;
 }
 
 #post_list .article .entry-date,
