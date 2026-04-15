@@ -1,21 +1,12 @@
 /* =========================================================================
-   GYOSEI MEDICAL — Prestige × Modern Brushup
+   GYOSEI MEDICAL — Prestige × Modern Brushup (GENSEN child)
+   Targets TCD GENSEN theme selectors on gyosei-medical.com
    Palette:
      --gm-navy:    #0A1F3D  (deep academic navy)
-     --gm-navy-2:  #12305A
      --gm-gold:    #B8935A  (muted antique gold)
-     --gm-gold-2:  #8C6E3E
      --gm-forest:  #1F4D3A  (medical forest accent)
      --gm-ivory:   #FAF7F1  (warm background)
-     --gm-ivory-2: #F3ECDC
      --gm-ink:     #141720  (body text)
-     --gm-mute:    #6B6F75  (muted text)
-     --gm-hair:    rgba(184,147,90,.35) (gold hairline)
-     --gm-shadow:  0 20px 60px -30px rgba(10,31,61,.35)
-   Fonts:
-     --gm-serif:   "Shippori Mincho B1", "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif
-     --gm-sans:    "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif
-     --gm-latin:   "Cormorant Garamond", "Shippori Mincho B1", serif
    ========================================================================= */
 
 :root {
@@ -39,33 +30,19 @@
     --gm-latin: "Cormorant Garamond", "Shippori Mincho B1", serif;
 }
 
-/* Override JIN:R color variables where possible */
-:root,
-body {
-    --jinr-main-color: var(--gm-navy);
-    --jinr-sub-color: var(--gm-gold);
-    --jinr-text-color: var(--gm-ink);
-    --jinr-bg-color: var(--gm-ivory);
-    --jinr-bg-color-sub: var(--gm-ivory-2);
-    --jinr-border-color: var(--gm-hair);
-    --jinr-link-color: var(--gm-navy);
-}
-
 /* =========================================================================
    Global foundation
    ========================================================================= */
 
-html {
-    scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body,
-body#wrapper,
 body.home,
 body.page,
 body.single,
 body.archive,
-body.search {
+body.search,
+body.wp-theme-gensen_tcd050 {
     background: var(--gm-ivory) !important;
     color: var(--gm-ink) !important;
     font-family: var(--gm-sans) !important;
@@ -75,7 +52,6 @@ body.search {
     -webkit-font-smoothing: antialiased;
 }
 
-/* Subtle paper texture on ivory base */
 body::before {
     content: "";
     position: fixed;
@@ -87,93 +63,73 @@ body::before {
     z-index: 0;
 }
 
-#wrapper,
-main,
-#mainContent,
-#jinrArticle {
-    position: relative;
-    z-index: 1;
-}
+#header,
+#header_top,
+#main_contents,
+#footer,
+#return_top { position: relative; z-index: 1; }
 
-/* Headings everywhere get the serif treatment */
+/* Headings */
 h1, h2, h3, h4,
-.h1, .h2, .h3, .h4,
-#mainContent h1,
-#mainContent h2,
-#mainContent h3,
-#mainContent h4,
-.entry-title,
-.post-title,
-#jinrArticle h1,
-#jinrArticle h2,
-#jinrArticle h3,
-#jinrPostList h2,
-#jinrPostList h3,
-#commonHeader h1,
-#commonHeader h2,
-.widget_title,
-.widgettitle {
+.rich_font,
+.headline,
+.catchphrase,
+.title,
+#main_contents h2,
+#main_contents h3,
+.cb_content h2,
+.cb_content h3 {
     font-family: var(--gm-serif) !important;
     font-weight: 600;
-    color: var(--gm-navy);
     letter-spacing: .04em;
-    line-height: 1.5;
-}
-
-a {
+    line-height: 1.55;
     color: var(--gm-navy);
-    text-decoration: none;
-    transition: color .25s ease, opacity .25s ease;
 }
 
-a:hover {
-    color: var(--gm-gold-2);
-}
+a { color: var(--gm-navy); text-decoration: none; transition: color .25s ease; }
+a:hover { color: var(--gm-gold-2); }
 
 /* =========================================================================
-   Header / global navigation
+   Header (#header, #header_top)
    ========================================================================= */
 
-#commonHeader,
-#commonHeader.is-pinned,
-body #commonHeader,
-header#commonHeader {
+#header,
+#header_top {
     background: rgba(250, 247, 241, .94) !important;
     backdrop-filter: saturate(140%) blur(14px);
     -webkit-backdrop-filter: saturate(140%) blur(14px);
-    border-bottom: 1px solid var(--gm-hair);
+    border-bottom: 1px solid var(--gm-hair) !important;
     box-shadow: 0 6px 30px -24px rgba(10, 31, 61, .3);
 }
 
-#commonHeader .o--logo a,
-#commonHeader .logo a,
-.jinr-header-logo a,
-.jinr-site-title a {
+#header_logo .logo,
+#header_logo_fix .logo,
+.logo.rich_font,
+.logo_area .logo {
     font-family: var(--gm-latin), var(--gm-serif) !important;
-    font-weight: 600;
     color: var(--gm-navy) !important;
     letter-spacing: .12em;
-    text-transform: uppercase;
 }
 
-/* Global nav typography */
-#globalNav a,
-#globalNav .menu-item a,
-#commonHeader nav a,
-#jinr-g-nav a,
-.g-nav a {
+#header #menu a,
+#header .menu a,
+#header nav a,
+#header_top .menu a,
+#header_top nav a,
+.menu-item > a {
     font-family: var(--gm-sans) !important;
     font-size: 13px !important;
     letter-spacing: .18em;
     color: var(--gm-navy) !important;
     font-weight: 500;
-    padding: 10px 14px !important;
     position: relative;
+    padding: 10px 14px !important;
+    transition: color .3s ease;
 }
 
-#globalNav a::after,
-#jinr-g-nav a::after,
-.g-nav a::after {
+#header .menu a::after,
+#header_top .menu a::after,
+.menu-item > a::after {
     content: "";
     position: absolute;
     left: 14px;
@@ -186,107 +142,79 @@ header#commonHeader {
     transition: transform .35s ease;
 }
 
-#globalNav a:hover::after,
-#jinr-g-nav a:hover::after,
-.g-nav a:hover::after {
-    transform: scaleX(1);
+#header .menu a:hover::after,
+#header_top .menu a:hover::after,
+.menu-item > a:hover::after { transform: scaleX(1); }
+
+/* Header search box */
+#index_header_search,
+.header_search_inputs {
+    background: rgba(255, 255, 255, .92) !important;
+    border: 1px solid var(--gm-hair) !important;
+    border-radius: 0 !important;
+    box-shadow: var(--gm-shadow-soft);
+}
+
+#header_search_submit,
+.header_search_button {
+    background: var(--gm-navy) !important;
+    color: var(--gm-ivory) !important;
+    border: none !important;
+    border-radius: 0 !important;
+    font-family: var(--gm-sans) !important;
+    letter-spacing: .16em !important;
+    text-transform: uppercase;
+    transition: background .3s ease;
+}
+
+#header_search_submit:hover,
+.header_search_button:hover {
+    background: var(--gm-gold) !important;
+    color: var(--gm-navy) !important;
 }
 
 /* =========================================================================
-   Hero / top widget area  (GM-HERO)
+   Hero slider (#header_slider)
    ========================================================================= */
 
-#jinr-posttop-widget-area {
-    background: linear-gradient(180deg, var(--gm-navy) 0%, var(--gm-navy-2) 65%, #0f2850 100%) !important;
-    color: var(--gm-ivory);
-    padding: clamp(90px, 14vw, 180px) 24px clamp(80px, 12vw, 160px);
-    margin: 0 !important;
-    max-width: none !important;
-    width: 100vw;
+#header_slider {
+    position: relative;
+    background: var(--gm-navy);
+}
+
+#header_slider .item {
     position: relative;
     overflow: hidden;
 }
 
-#jinr-posttop-widget-area::before {
+#header_slider .item::after {
     content: "";
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(ellipse at 15% 20%, rgba(184, 147, 90, .16), transparent 55%),
-        radial-gradient(ellipse at 85% 80%, rgba(184, 147, 90, .1), transparent 55%),
-        linear-gradient(135deg, rgba(255, 255, 255, .02) 0%, transparent 50%);
+        linear-gradient(180deg, rgba(10, 31, 61, .35) 0%, rgba(10, 31, 61, .55) 60%, rgba(10, 31, 61, .75) 100%),
+        radial-gradient(ellipse at 20% 20%, rgba(184, 147, 90, .18), transparent 55%);
     pointer-events: none;
+    z-index: 1;
 }
 
-/* Decorative cross motif — subtle medical symbol */
-#jinr-posttop-widget-area::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: -120px;
-    width: 520px;
-    height: 520px;
-    transform: translateY(-50%);
-    background-image:
-        linear-gradient(var(--gm-gold), var(--gm-gold)),
-        linear-gradient(var(--gm-gold), var(--gm-gold));
-    background-size: 2px 520px, 520px 2px;
-    background-position: center, center;
-    background-repeat: no-repeat;
-    opacity: .08;
-    border-radius: 50%;
-    border: 1px solid rgba(184, 147, 90, .22);
-    pointer-events: none;
+#header_slider .item img {
+    filter: saturate(.92) contrast(1.04);
+    transition: transform 8s ease;
 }
 
-#jinr-posttop-widget-area-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 2;
+#header_slider .item.slick-active img,
+#header_slider .item:hover img {
+    transform: scale(1.05);
 }
 
-#jinr-posttop-widget-area h1,
-#jinr-posttop-widget-area h2,
-#jinr-posttop-widget-area h3,
-#jinr-posttop-widget-area p,
-#jinr-posttop-widget-area a {
+#header_slider .caption {
+    z-index: 2 !important;
     color: var(--gm-ivory) !important;
+    text-align: center;
 }
 
-#jinr-posttop-widget-area h1,
-#jinr-posttop-widget-area h2,
-#jinr-posttop-widget-area .widget_title,
-#jinr-posttop-widget-area .widgettitle {
-    font-family: var(--gm-serif) !important;
-    font-size: clamp(28px, 4.4vw, 56px) !important;
-    font-weight: 600 !important;
-    line-height: 1.45 !important;
-    letter-spacing: .08em !important;
-    margin-bottom: .6em !important;
-    text-shadow: 0 2px 30px rgba(0, 0, 0, .25);
-}
-
-#jinr-posttop-widget-area .widget_title::before,
-#jinr-posttop-widget-area h2::before {
-    content: "";
-    display: block;
-    width: 54px;
-    height: 1px;
-    background: var(--gm-gold);
-    margin-bottom: 28px;
-}
-
-#jinr-posttop-widget-area p {
-    font-size: clamp(14px, 1.2vw, 17px);
-    line-height: 2.05;
-    letter-spacing: .08em;
-    max-width: 640px;
-    opacity: .92;
-}
-
-/* Hero prologue mark — GYOSEI MEDICAL eyebrow */
-#jinr-posttop-widget-area-inner::before {
+#header_slider .caption::before {
     content: "— GYOSEI MEDICAL NETWORK —";
     display: block;
     font-family: var(--gm-latin);
@@ -297,63 +225,148 @@ header#commonHeader {
     font-weight: 500;
 }
 
+#header_slider .caption .fimage img {
+    filter: brightness(0) invert(1) drop-shadow(0 4px 20px rgba(0, 0, 0, .3));
+    max-width: 360px !important;
+    width: 90% !important;
+    height: auto !important;
+    margin-bottom: 18px;
+}
+
+#header_slider .caption .headline,
+#header_slider .caption h2.headline {
+    font-family: var(--gm-serif) !important;
+    font-size: clamp(26px, 4vw, 52px) !important;
+    font-weight: 600 !important;
+    color: var(--gm-ivory) !important;
+    line-height: 1.45 !important;
+    letter-spacing: .08em !important;
+    margin-bottom: .5em !important;
+    text-shadow: 0 2px 30px rgba(0, 0, 0, .35);
+}
+
+#header_slider .caption .headline::after {
+    content: "";
+    display: block;
+    width: 54px;
+    height: 1px;
+    background: var(--gm-gold);
+    margin: 24px auto;
+}
+
+#header_slider .caption .catchphrase {
+    font-family: var(--gm-sans) !important;
+    font-size: clamp(13px, 1.2vw, 17px) !important;
+    color: var(--gm-ivory) !important;
+    line-height: 2.05 !important;
+    letter-spacing: .1em !important;
+    opacity: .92;
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+#header_slider .caption .button,
+#header_slider .caption a.button {
+    display: inline-block;
+    margin-top: 32px;
+    padding: 16px 44px !important;
+    background: transparent !important;
+    color: var(--gm-ivory) !important;
+    border: 1px solid var(--gm-gold) !important;
+    font-family: var(--gm-sans) !important;
+    font-size: 13px !important;
+    letter-spacing: .22em !important;
+    text-transform: uppercase;
+    border-radius: 0 !important;
+    transition: all .3s ease;
+}
+
+#header_slider .caption .button:hover {
+    background: var(--gm-gold) !important;
+    color: var(--gm-navy) !important;
+}
+
+/* News ticker */
+#index_news,
+#index_news_mobile {
+    background: var(--gm-ivory-2) !important;
+    border-top: 1px solid var(--gm-hair) !important;
+    border-bottom: 1px solid var(--gm-hair) !important;
+    padding: 14px 0 !important;
+}
+
+.newsticker,
+.newsticker-list,
+.newsticker-item {
+    color: var(--gm-navy) !important;
+    font-family: var(--gm-sans) !important;
+    font-size: 13px;
+    letter-spacing: .06em;
+}
+
+.newsticker-item a {
+    color: var(--gm-navy) !important;
+    transition: color .25s ease;
+}
+
+.newsticker-item a:hover { color: var(--gm-gold-2) !important; }
+
 /* =========================================================================
-   Post list / clinic cards
+   Main contents (#main_contents, #main_col, #post_list)
    ========================================================================= */
 
-#mainContent {
-    padding: clamp(60px, 8vw, 110px) 0 clamp(80px, 10vw, 140px) !important;
-    background:
-        linear-gradient(180deg, var(--gm-ivory) 0%, var(--gm-ivory) 100%);
+#main_contents,
+#main_col {
+    background: var(--gm-ivory) !important;
+    padding-top: clamp(60px, 8vw, 110px) !important;
+    padding-bottom: clamp(80px, 10vw, 140px) !important;
 }
 
-#mainContentInner {
-    max-width: 1180px !important;
+/* Content blocks (cb_content) */
+.cb_content {
+    background: transparent !important;
+    padding: clamp(40px, 6vw, 90px) 20px !important;
 }
 
-/* Section preamble — inject an eyebrow before post list */
-#jinrPostList {
+.cb_content .headline,
+.cb_content h2,
+.cb_content h3 {
+    font-family: var(--gm-serif) !important;
+    color: var(--gm-navy) !important;
+    font-weight: 600;
+    text-align: center;
     position: relative;
-    padding-top: 20px;
+    padding-top: 40px;
+    margin-bottom: 50px;
+    letter-spacing: .08em;
 }
 
-#jinrPostList::before {
-    content: "CLINIC DIRECTORY";
+.cb_content .headline::before,
+.cb_content h2::before {
+    content: "";
     display: block;
-    font-family: var(--gm-latin);
-    font-size: 12px;
-    letter-spacing: .4em;
-    color: var(--gm-gold-2);
-    text-align: center;
-    margin-bottom: 14px;
-    font-weight: 600;
+    width: 40px;
+    height: 1px;
+    background: var(--gm-gold);
+    margin: 0 auto 20px;
 }
 
-#jinrPostList::after {
-    content: "暁星OB医師ネットワーク";
-    display: block;
-    font-family: var(--gm-serif);
-    font-size: clamp(24px, 3vw, 36px);
-    font-weight: 600;
-    color: var(--gm-navy);
-    text-align: center;
-    letter-spacing: .1em;
-    margin: 4px 0 54px;
-    position: absolute;
-    top: 28px;
-    left: 0;
-    right: 0;
+.cb_content .headline::after,
+.cb_content h2::after {
+    content: attr(data-en);
 }
 
-#jinrPostList .o--postlist-inner {
-    margin-top: 120px;
-    gap: 32px !important;
+/* Clinic list / post list */
+#post_list {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
-/* Card — the whole thing */
-.new-post-list-item,
-.o--postlist-inner > article,
-#jinrPostList article {
+#post_list .article,
+#post_list article,
+.cb_content-blog_list .article,
+.cb_content-blog_list article {
     background: #fff !important;
     border: 1px solid var(--gm-hair) !important;
     border-radius: 2px !important;
@@ -363,8 +376,8 @@ header#commonHeader {
     transition: transform .35s cubic-bezier(.2, .8, .2, 1), box-shadow .35s ease, border-color .35s ease;
 }
 
-.new-post-list-item::before,
-#jinrPostList article::before {
+#post_list .article::before,
+.cb_content-blog_list .article::before {
     content: "";
     position: absolute;
     top: 0;
@@ -375,99 +388,141 @@ header#commonHeader {
     transform: scaleX(0);
     transform-origin: left;
     transition: transform .5s ease;
+    z-index: 2;
 }
 
-.new-post-list-item:hover,
-#jinrPostList article:hover {
+#post_list .article:hover,
+.cb_content-blog_list .article:hover {
     transform: translateY(-6px);
     box-shadow: var(--gm-shadow) !important;
     border-color: var(--gm-hair-strong) !important;
 }
 
-.new-post-list-item:hover::before,
-#jinrPostList article:hover::before {
-    transform: scaleX(1);
-}
+#post_list .article:hover::before,
+.cb_content-blog_list .article:hover::before { transform: scaleX(1); }
 
-/* Card thumbnail */
-.new-post-list-item .o--thumb,
-.new-post-list-item figure,
-#jinrPostList article figure,
-#jinrPostList article .o--thumb {
+#post_list .article .image,
+.cb_content-blog_list .article .image {
     overflow: hidden;
     position: relative;
 }
 
-.new-post-list-item img,
-#jinrPostList article img {
+#post_list .article .image img,
+.cb_content-blog_list .article .image img {
     transition: transform .7s cubic-bezier(.2, .8, .2, 1);
+    width: 100%;
+    height: auto;
 }
 
-.new-post-list-item:hover img,
-#jinrPostList article:hover img {
+#post_list .article:hover .image img,
+.cb_content-blog_list .article:hover .image img {
     transform: scale(1.05);
 }
 
-/* Card text block */
-.new-post-list-item .o--postinfo,
-.new-post-list-item .post-info,
-#jinrPostList article .o--postinfo {
-    padding: 28px 28px 32px !important;
-}
-
-.new-post-list-item h2,
-.new-post-list-item h3,
-.new-post-list-item .post-title,
-#jinrPostList article h2,
-#jinrPostList article h3 {
+#post_list .article .title,
+.cb_content-blog_list .article .title {
     font-family: var(--gm-serif) !important;
-    font-size: 18px !important;
+    font-size: 17px !important;
     font-weight: 600 !important;
     color: var(--gm-navy) !important;
-    line-height: 1.6 !important;
+    line-height: 1.65 !important;
     letter-spacing: .04em !important;
-    margin: 0 0 12px !important;
+    padding: 22px 24px 10px !important;
+    margin: 0 !important;
 }
 
-.new-post-list-item .cat,
-.new-post-list-item .category,
-#jinrPostList article .cat {
+#post_list .article .meta,
+.cb_content-blog_list .article .meta {
+    padding: 0 24px 22px !important;
+    font-family: var(--gm-sans) !important;
+    font-size: 12px !important;
+    color: var(--gm-mute) !important;
+    letter-spacing: .06em;
+}
+
+#post_list .article .cat,
+#post_list .article .cat-category,
+#post_list .article .cat-category2,
+#post_list .article .cat-category3,
+.cb_content-blog_list .cat {
     display: inline-block;
-    font-family: var(--gm-sans);
+    font-family: var(--gm-sans) !important;
     font-size: 10px !important;
-    letter-spacing: .22em;
+    letter-spacing: .22em !important;
     text-transform: uppercase;
     color: var(--gm-gold-2) !important;
     background: transparent !important;
-    padding: 0 0 6px !important;
+    padding: 4px 10px 4px 0 !important;
     border: none !important;
-    border-bottom: 1px solid var(--gm-hair);
-    margin-bottom: 14px !important;
     font-weight: 600;
 }
 
-.new-post-list-item .post-date,
-.new-post-list-item time,
-#jinrPostList article time {
+#post_list .article .entry-date,
+.entry-date.updated {
     font-family: var(--gm-latin) !important;
-    font-size: 12px !important;
     color: var(--gm-mute) !important;
     letter-spacing: .1em;
 }
 
-.new-post-list-item p,
-#jinrPostList article p {
-    font-size: 13.5px !important;
-    color: var(--gm-mute) !important;
-    line-height: 1.85 !important;
+/* Custom search form in body */
+.custom_search_form,
+#custom_search_form {
+    background: #fff !important;
+    border: 1px solid var(--gm-hair) !important;
+    padding: clamp(26px, 4vw, 50px) !important;
+    box-shadow: var(--gm-shadow-soft);
+    margin: 30px auto;
+}
+
+.custom_search_form select,
+.custom_search_form input[type="text"],
+#custom_search_form select,
+#custom_search_form input[type="text"] {
+    border: 1px solid var(--gm-hair) !important;
+    border-radius: 0 !important;
+    padding: 14px 18px !important;
+    font-family: var(--gm-sans) !important;
+    color: var(--gm-ink) !important;
+    background: #fff !important;
+}
+
+.custom_search_form input[type="submit"],
+#custom_search_form input[type="submit"],
+.custom_search_form button {
+    background: var(--gm-navy) !important;
+    color: var(--gm-ivory) !important;
+    border: 1px solid var(--gm-navy) !important;
+    border-radius: 0 !important;
+    font-family: var(--gm-sans) !important;
+    font-size: 13px !important;
+    letter-spacing: .22em !important;
+    text-transform: uppercase;
+    padding: 16px 40px !important;
+    transition: all .3s ease;
+}
+
+.custom_search_form input[type="submit"]:hover,
+#custom_search_form input[type="submit"]:hover,
+.custom_search_form button:hover {
+    background: var(--gm-gold) !important;
+    color: var(--gm-navy) !important;
+    border-color: var(--gm-gold) !important;
+}
+
+/* Topics banner */
+.topics_banner {
+    border-top: 1px solid var(--gm-hair);
+    border-bottom: 1px solid var(--gm-hair);
+    background: var(--gm-ivory-2);
+    padding: 50px 20px;
 }
 
 /* =========================================================================
-   Buttons
+   Global buttons
    ========================================================================= */
 
-.jinr-loadmore,
-.a--postlist-more,
+.archive_link,
+.archive_link a,
 button.submit,
 .btn,
 input[type="submit"],
@@ -478,17 +533,17 @@ input[type="submit"],
     font-size: 13px !important;
     font-weight: 500 !important;
     letter-spacing: .22em !important;
-    padding: 18px 48px !important;
+    padding: 16px 44px !important;
     border: 1px solid var(--gm-navy) !important;
     border-radius: 0 !important;
-    position: relative;
-    transition: background .3s ease, color .3s ease, border-color .3s ease, transform .3s ease;
     text-transform: uppercase;
     cursor: pointer;
+    transition: all .3s ease;
+    display: inline-block;
 }
 
-.jinr-loadmore:hover,
-.a--postlist-more:hover,
+.archive_link:hover,
+.archive_link a:hover,
 button.submit:hover,
 .btn:hover,
 input[type="submit"]:hover,
@@ -499,88 +554,19 @@ input[type="submit"]:hover,
     transform: translateY(-2px);
 }
 
-/* Pagination */
-.a--postlist-pagenation a,
-.page-numbers {
-    border: 1px solid var(--gm-hair) !important;
-    color: var(--gm-navy) !important;
-    font-family: var(--gm-latin) !important;
-    font-size: 15px !important;
-    background: #fff !important;
-    border-radius: 0 !important;
-    width: 44px;
-    height: 44px;
-    line-height: 44px !important;
-    transition: all .3s ease;
-}
-
-.a--postlist-pagenation a:hover,
-.page-numbers:hover,
-.page-numbers.current {
-    background: var(--gm-navy) !important;
-    color: var(--gm-ivory) !important;
-    border-color: var(--gm-navy) !important;
-}
-
-/* =========================================================================
-   Sidebar / widgets
-   ========================================================================= */
-
-#sidebar,
-.widget {
-    font-family: var(--gm-sans);
-}
-
-.widget_title,
-.widgettitle {
-    font-family: var(--gm-serif) !important;
-    font-size: 18px !important;
-    color: var(--gm-navy) !important;
-    padding-bottom: 14px !important;
-    margin-bottom: 22px !important;
-    position: relative;
-    border: none !important;
-}
-
-.widget_title::after,
-.widgettitle::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 40px;
-    height: 1px;
-    background: var(--gm-gold);
-}
-
-.widget ul li,
-.widget_categories li,
-.widget_archive li {
-    border-bottom: 1px dashed var(--gm-hair) !important;
-    padding: 12px 0 !important;
-}
-
 /* =========================================================================
    Single / article pages
    ========================================================================= */
 
-.single #mainContent,
-.page #mainContent {
+.single #main_contents,
+.page #main_contents {
     padding-top: 80px !important;
-}
-
-.single #jinrArticle,
-.page #jinrArticle {
-    background: #fff;
-    padding: clamp(40px, 6vw, 80px) clamp(24px, 5vw, 72px);
-    border: 1px solid var(--gm-hair);
-    box-shadow: var(--gm-shadow-soft);
 }
 
 .single .entry-title,
 .page .entry-title,
-.single h1.post-title,
-.page h1.post-title {
+.single h1.title,
+.page h1.title {
     font-family: var(--gm-serif) !important;
     font-size: clamp(26px, 3.6vw, 40px) !important;
     color: var(--gm-navy) !important;
@@ -603,19 +589,19 @@ input[type="submit"]:hover,
 }
 
 /* =========================================================================
-   Footer
+   Footer (#footer, #footer_contents, #copyright)
    ========================================================================= */
 
-#commonFooter,
-footer#commonFooter {
+#footer {
     background: var(--gm-navy) !important;
     color: var(--gm-ivory) !important;
-    padding: 80px 24px 40px !important;
-    border-top: 3px solid var(--gm-gold);
     position: relative;
+    padding-top: 80px !important;
+    padding-bottom: 0 !important;
+    border-top: 3px solid var(--gm-gold);
 }
 
-#commonFooter::before {
+#footer::before {
     content: "";
     position: absolute;
     top: 0;
@@ -625,46 +611,65 @@ footer#commonFooter {
     background: linear-gradient(90deg, transparent 0%, var(--gm-gold) 20%, var(--gm-gold-soft) 50%, var(--gm-gold) 80%, transparent 100%);
 }
 
-#commonFooter *,
-#commonFooter a,
-#commonFooter p,
-#commonFooter h1,
-#commonFooter h2,
-#commonFooter h3,
-#commonFooter .widgettitle,
-#commonFooter .widget_title {
+#footer *,
+#footer a,
+#footer p,
+#footer h1,
+#footer h2,
+#footer h3,
+#footer_contents *,
+#footer_info *,
+#footer_logo *,
+#footer_nav *,
+#footer_bottom_menu * {
     color: var(--gm-ivory) !important;
 }
 
-#commonFooter a {
-    transition: color .25s ease;
-}
+#footer a { transition: color .25s ease; }
+#footer a:hover { color: var(--gm-gold-soft) !important; }
 
-#commonFooter a:hover {
-    color: var(--gm-gold-soft) !important;
-}
-
-#commonFooter .widgettitle,
-#commonFooter .widget_title {
-    font-family: var(--gm-serif) !important;
-    font-size: 15px !important;
+#footer_logo .logo,
+#footer_logo .logo.rich_font {
+    font-family: var(--gm-latin), var(--gm-serif) !important;
     letter-spacing: .14em;
 }
 
-#commonFooter .copyright,
-#commonFooter .footer-copyright {
+#footer_nav {
+    padding: 0 20px !important;
+}
+
+.footer_nav_col {
+    border-left: 1px solid rgba(184, 147, 90, .2) !important;
+    padding-left: 28px !important;
+}
+
+.footer_nav_col:first-child { border-left: none !important; padding-left: 0 !important; }
+
+#footer_social_link .facebook,
+#footer_social_link .insta {
+    color: var(--gm-gold-soft) !important;
+    transition: color .25s ease;
+}
+
+#footer_social_link .facebook:hover,
+#footer_social_link .insta:hover {
+    color: var(--gm-ivory) !important;
+}
+
+#copyright {
+    background: #050F20 !important;
+    color: rgba(250, 247, 241, .72) !important;
     font-family: var(--gm-latin) !important;
     font-size: 11px !important;
     letter-spacing: .22em;
     text-transform: uppercase;
-    opacity: .7;
-    padding-top: 30px;
-    margin-top: 40px;
+    padding: 26px 0 !important;
+    margin-top: 50px;
     border-top: 1px solid rgba(184, 147, 90, .25);
 }
 
 /* =========================================================================
-   Forms
+   Forms (global)
    ========================================================================= */
 
 input[type="text"],
@@ -692,7 +697,25 @@ select:focus {
 }
 
 /* =========================================================================
-   Decorative: scroll reveal (handled by brushup.js)
+   Return to top button
+   ========================================================================= */
+
+#return_top,
+#return_top a {
+    background: var(--gm-navy) !important;
+    color: var(--gm-gold-soft) !important;
+    border: 1px solid var(--gm-gold) !important;
+    transition: all .3s ease;
+}
+
+#return_top:hover,
+#return_top a:hover {
+    background: var(--gm-gold) !important;
+    color: var(--gm-navy) !important;
+}
+
+/* =========================================================================
+   Reveal animation
    ========================================================================= */
 
 .gm-reveal {
@@ -701,42 +724,53 @@ select:focus {
     transition: opacity .9s ease, transform .9s cubic-bezier(.2, .8, .2, 1);
 }
 
-.gm-reveal.is-in {
-    opacity: 1;
-    transform: none;
+.gm-reveal.is-in { opacity: 1; transform: none; }
+
+/* GENSEN's own fade-in class — refine timing */
+.inview-fadein {
+    transition: opacity 1s ease, transform 1s cubic-bezier(.2, .8, .2, 1) !important;
 }
 
 /* =========================================================================
-   Responsive refinements
+   Responsive
    ========================================================================= */
 
 @media (max-width: 900px) {
-    #jinr-posttop-widget-area {
-        padding: 80px 20px 70px;
+    #header_slider .caption .headline {
+        font-size: 26px !important;
+        letter-spacing: .06em !important;
     }
 
-    #jinr-posttop-widget-area-inner::before {
-        font-size: 11px;
+    #header_slider .caption::before {
+        font-size: 10px;
         letter-spacing: .32em;
+        margin-bottom: 14px;
     }
 
-    #jinrPostList::after {
-        font-size: 22px;
-    }
+    #header_slider .caption .fimage img { max-width: 240px !important; }
 
-    #jinrPostList .o--postlist-inner {
-        margin-top: 100px;
-        gap: 22px !important;
+    .cb_content { padding: 50px 16px !important; }
+
+    .footer_nav_col {
+        border-left: none !important;
+        padding-left: 0 !important;
+        border-top: 1px solid rgba(184, 147, 90, .2);
+        padding-top: 20px !important;
+        margin-top: 20px;
     }
 }
 
 @media (max-width: 600px) {
-    body {
-        letter-spacing: .01em;
+    body { letter-spacing: .01em; }
+
+    #post_list .article .title,
+    .cb_content-blog_list .article .title {
+        padding: 18px 18px 8px !important;
+        font-size: 15px !important;
     }
 
-    .new-post-list-item .o--postinfo,
-    #jinrPostList article .o--postinfo {
-        padding: 22px 20px 26px !important;
+    #post_list .article .meta,
+    .cb_content-blog_list .article .meta {
+        padding: 0 18px 18px !important;
     }
 }
