@@ -94,16 +94,79 @@
         });
     }
 
-    // Tag the MEDIA heading div so CSS can extend beige background up through it
-    function unifyMediaSection() {
+    // Wrap each logical section (heading + following content) in alternating
+    // white/beige containers. All section headings get a common class so CSS
+    // can restyle them uniformly (they originally have inline #66B0C1 / Merriweather).
+    function wrapArticleSections() {
         var article = document.getElementById("article");
         if (!article) return;
-        var divs = article.querySelectorAll("div");
-        Array.prototype.forEach.call(divs, function (div) {
-            var p = div.querySelector("p, P");
-            if (!p) return;
-            if (p.textContent && p.textContent.trim() === "MEDIA") {
-                div.classList.add("gm-media-heading");
+
+        // Run after reorderSingleClinic so DOCTOR block is already moved up.
+        var children = Array.prototype.slice.call(article.children);
+
+        // A "section heading" is a direct-child <div> whose first <p>/<P> has color #66B0C1
+        // (TCD's inline style) OR that has the gm-media-heading tag we set elsewhere.
+        function isSectionHeading(el) {
+            if (!el || el.nodeType !== 1) return false;
+            if (el.tagName !== "DIV") return false;
+            if (el.classList && el.classList.contains("gm-section")) return false;
+            var p = el.querySelector("p, P");
+            if (!p) return false;
+            var style = p.getAttribute("style") || "";
+            if (style.indexOf("#66B0C1") !== -1) return true;
+            if (el.classList && el.classList.contains("gm-media-heading")) return true;
+            return false;
+        }
+
+        // Tag section headings with a common class so CSS can unify font + color
+        children.forEach(function (el) {
+            if (isSectionHeading(el)) {
+                el.classList.add("gm-sect-heading");
+            }
+        });
+
+        // Build sections: each section = one heading + all siblings until next heading.
+        // Any children before the first heading go into a "lead" section.
+        var sections = [];
+        var current = null;
+        children.forEach(function (el) {
+            if (el.id === "article_header" || el.id === "post_image") return;
+            if (isSectionHeading(el)) {
+                current = { heading: el, members: [el] };
+                sections.push(current);
+            } else if (current) {
+                current.members.push(el);
+            } else {
+                if (!sections.length || sections[0].heading) {
+                    sections.unshift({ heading: null, members: [] });
+                }
+                sections[0].members.push(el);
+            }
+        });
+
+        // Wrap each section in a div with alternating bg class
+        sections.forEach(function (sec, idx) {
+            if (!sec.members.length) return;
+            var wrap = document.createElement("div");
+            wrap.className = "gm-section " + (idx % 2 === 0 ? "gm-section-white" : "gm-section-beige");
+
+            var first = sec.members[0];
+            first.parentNode.insertBefore(wrap, first);
+            sec.members.forEach(function (m) { wrap.appendChild(m); });
+        });
+
+        // Neutralize inline beige <section> backgrounds inside our wraps
+        var innerSections = article.querySelectorAll(".gm-section section[style*='F3F2E9']");
+        Array.prototype.forEach.call(innerSections, function (s) {
+            s.setAttribute("data-gm-neutralized", "1");
+        });
+
+        // Tag MEDIA heading explicitly (used by CSS for any extras)
+        var all = article.querySelectorAll(".gm-sect-heading p, .gm-sect-heading P");
+        Array.prototype.forEach.call(all, function (p) {
+            var txt = (p.textContent || "").trim();
+            if (txt === "MEDIA") {
+                p.closest(".gm-sect-heading").classList.add("gm-media-heading");
             }
         });
     }
@@ -170,7 +233,7 @@
         survivors.forEach(function (d) { d.classList.add("gm-home-banner-item"); });
 
         // Append CTA if not already present
-        if (!parent.querySelector(".gm-home-cta")) {
+        if (!parent.parentNode.querySelector(".gm-home-cta")) {
             var cta = document.createElement("div");
             cta.className = "gm-home-cta";
             cta.innerHTML =
@@ -180,21 +243,75 @@
                 "</a>";
             parent.parentNode.insertBefore(cta, parent.nextSibling);
         }
+
+        // Relabel each banner with a clear 2-line title / subtitle structure
+        relabelBanner(parent, "GYOSEI-EATS", "GYOSEI EATS", "暁星OB飲食店ポータル");
+        relabelBanner(parent, "GYOSEI-DENTAL", "GYOSEI DENTAL", "暁星OB歯科医師開業情報ポータル");
+        relabelBanner(parent, "2024/05/2-2.png", "LIBUN", "Reputation / webPR");
     }
 
-    // Archive / category pages: enrich each clinic card with doctor photo + name + grad year
+    function relabelBanner(parent, imgMatch, title, subtitle) {
+        var img = parent.querySelector('img[src*="' + imgMatch + '"]');
+        if (!img) return;
+        var card = img;
+        while (card && card.parentNode && !card.classList.contains("gm-home-banner-item")) {
+            card = card.parentNode;
+        }
+        if (!card) return;
+
+        // Collect existing text nodes under the card and remove them (to replace with clean label)
+        var ps = card.querySelectorAll("p");
+        Array.prototype.forEach.call(ps, function (p) {
+            if (p.parentNode) p.parentNode.removeChild(p);
+        });
+        var brs = card.querySelectorAll("br");
+        Array.prototype.forEach.call(brs, function (b) {
+            if (b.parentNode) b.parentNode.removeChild(b);
+        });
+        var centers = card.querySelectorAll("center");
+        Array.prototype.forEach.call(centers, function (c) {
+            // Only remove text-only <center> (keep image center)
+            if (!c.querySelector("img, a")) {
+                if (c.parentNode) c.parentNode.removeChild(c);
+            }
+        });
+
+        // Append clean label block
+        var label = document.createElement("div");
+        label.className = "gm-banner-label";
+        label.innerHTML =
+            '<span class="gm-banner-title">' + escapeHtml(title) + '</span>' +
+            '<span class="gm-banner-sub">' + escapeHtml(subtitle) + '</span>';
+        card.appendChild(label);
+    }
+
+    // Archive / category / search pages: enrich each clinic card with doctor photo + name + grad year
     // by fetching the linked clinic page in parallel and extracting the data.
     function enrichArchiveCards() {
-        var isArchive = /^\/(category|category2|category3|clinic)\//.test(window.location.pathname);
+        // Never run on single clinic pages (they have #post_list2 too, but that's the doctor block)
+        if (document.body.classList.contains("single")) return;
+
+        var path = window.location.pathname;
+        var isArchive = /^\/(category|category2|category3|clinic)(\/|$)/.test(path) ||
+                        document.body.classList.contains("archive");
         if (!isArchive) return;
-        var items = document.querySelectorAll("#post_list li.article");
+
+        // Both #post_list (category archive) and #post_list2 (search results) are used
+        var items = document.querySelectorAll(
+            "#post_list li.article, #post_list2 li.article, " +
+            "#main_col #post_list > li.article, #main_col #post_list2 > li.article"
+        );
         if (!items.length) return;
 
         Array.prototype.forEach.call(items, function (li) {
             var anchor = li.querySelector("a[href]");
             if (!anchor) return;
-            var url = anchor.getAttribute("href");
-            if (!url || url.indexOf("http") !== 0) return;
+            var url = anchor.getAttribute("href") || "";
+            if (!url) return;
+            if (url.indexOf("http") !== 0 && url.charAt(0) === "/") {
+                url = window.location.origin + url;
+            }
+            if (url.indexOf("http") !== 0) return;
 
             // sessionStorage cache to avoid repeated fetches
             var cacheKey = "gm_doctor_" + url;
@@ -203,12 +320,15 @@
 
             function apply(data) {
                 if (!data) return;
+                li.classList.add("gm-archive-enriched-card");
+
                 var imageDiv = li.querySelector(".image");
                 if (imageDiv && data.photo) {
                     var img = imageDiv.querySelector("img");
                     if (img) {
                         img.setAttribute("src", data.photo);
                         img.removeAttribute("srcset");
+                        img.removeAttribute("data-lazy");
                         img.removeAttribute("width");
                         img.removeAttribute("height");
                         img.style.borderRadius = "50%";
@@ -217,13 +337,10 @@
                     }
                     imageDiv.classList.add("gm-archive-doctor");
                 }
+
                 var title = li.querySelector(".title");
+                var clinicName = title ? (title.textContent || "").trim() : "";
                 if (title) {
-                    var clinicName = (title.textContent || "").trim();
-                    var parts = [];
-                    if (data.doctor) parts.push(data.doctor + (data.grad ? "（" + data.grad + "）" : ""));
-                    if (data.specialty) parts.push(data.specialty);
-                    if (clinicName) parts.push(clinicName);
                     title.innerHTML =
                         (data.doctor ? '<span class="gm-archive-doctor-name">' + escapeHtml(data.doctor) +
                             (data.grad ? '<span class="gm-archive-grad">（' + escapeHtml(data.grad) + '）</span>' : "") +
@@ -257,28 +374,55 @@
     function extractDoctorData(doc) {
         var out = { photo: null, doctor: null, grad: null, specialty: null };
 
-        // Doctor photo: first image inside #post_list2 .image
-        var photoImg = doc.querySelector("#post_list2 .image img");
-        if (photoImg) out.photo = photoImg.getAttribute("src");
-
-        // Doctor name + grad year from first p.title strong text
-        var nameEl = doc.querySelector("#post_list2 .wp-block-column p.title, #post_list2 .wp-block-column p strong");
-        if (nameEl) {
-            var raw = (nameEl.innerHTML || nameEl.textContent || "")
-                .replace(/<br\s*\/?>/gi, "|")
-                .replace(/<[^>]+>/g, "");
-            var parts = raw.split("|").map(function (s) { return s.trim(); }).filter(Boolean);
-            if (parts.length >= 1) out.doctor = parts[0];
-            if (parts.length >= 2) {
-                var m = parts[1].match(/(\d{2,4}年?卒)/);
-                if (m) out.grad = m[1];
-                else out.grad = parts[1];
+        // Single clinic page has post_list2 used BOTH for doctor block (first) and media (later).
+        // Doctor block is identified by having .cat-category inside.
+        var allPostList2 = doc.querySelectorAll("#post_list2, ol#post_list2");
+        var doctorOl = null;
+        Array.prototype.forEach.call(allPostList2, function (ol) {
+            if (!doctorOl && ol.querySelector(".cat-category")) {
+                doctorOl = ol;
             }
+        });
+        if (!doctorOl && allPostList2.length) doctorOl = allPostList2[0];
+
+        if (doctorOl) {
+            // Doctor photo: first <img> with .wp-post-image or anything in .image
+            var photoImg =
+                doctorOl.querySelector(".image img") ||
+                doctorOl.querySelector("img[src*='scaled']") ||
+                doctorOl.querySelector("img.wp-post-image") ||
+                doctorOl.querySelector("img");
+            if (photoImg) {
+                out.photo = photoImg.getAttribute("src") ||
+                            photoImg.getAttribute("data-src") ||
+                            photoImg.getAttribute("data-lazy");
+            }
+
+            // Doctor name + grad year from the first <p> that contains a <strong>
+            var nameP = doctorOl.querySelector(".wp-block-column p strong, .wp-block-column p.title strong");
+            if (nameP) {
+                var raw = (nameP.innerHTML || nameP.textContent || "")
+                    .replace(/<br\s*\/?>/gi, "|")
+                    .replace(/<[^>]+>/g, "");
+                var parts = raw.split("|").map(function (s) { return s.trim(); }).filter(Boolean);
+                if (parts.length >= 1) out.doctor = parts[0];
+                if (parts.length >= 2) {
+                    var m = parts[1].match(/\(?(\d{2,4}[^)）]*卒)\)?/);
+                    if (m) out.grad = m[1];
+                    else out.grad = parts[1].replace(/[()（）]/g, "");
+                }
+            }
+
+            // Specialty from first cat-category inside doctor block
+            var catEl = doctorOl.querySelector(".cat-category");
+            if (catEl) out.specialty = (catEl.textContent || "").trim();
         }
 
-        // Specialty from first cat-category tag text
-        var catEl = doc.querySelector("#post_meta_top .cat-category, .meta .cat-category");
-        if (catEl) out.specialty = (catEl.textContent || "").trim();
+        // Fallback: specialty from #post_meta_top anywhere
+        if (!out.specialty) {
+            var fallbackCat = doc.querySelector("#post_meta_top .cat-category, .meta .cat-category");
+            if (fallbackCat) out.specialty = (fallbackCat.textContent || "").trim();
+        }
 
         return out;
     }
