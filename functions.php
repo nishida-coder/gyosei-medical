@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('GYOSEI_CHILD_VERSION', '1.17.0');
+define('GYOSEI_CHILD_VERSION', '1.18.0');
 
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style(
@@ -135,8 +135,10 @@ function gyosei_seo_context() {
 
 /**
  * Inject OGP, Twitter Card, and a meta description.
+ * Suppressed when Rank Math SEO is active to avoid duplicate tags.
  */
 add_action('wp_head', function () {
+    if (defined('RANK_MATH_VERSION')) return;
     $ctx = gyosei_seo_context();
     $title = esc_attr($ctx['title']);
     $desc  = esc_attr($ctx['description']);
@@ -161,18 +163,61 @@ add_action('wp_head', function () {
 
 /**
  * Override the document title for legibility across AI/search engines.
+ * Only when Rank Math is not handling titles.
  */
 add_filter('pre_get_document_title', function ($title) {
+    if (defined('RANK_MATH_VERSION')) return $title;
     $ctx = gyosei_seo_context();
     return $ctx['title'] ?: $title;
 }, 20);
 
 /**
- * Inject JSON-LD structured data (Organization, WebSite, MedicalClinic, BreadcrumbList).
- * Covers both classical SEO and GEO (LLM/Generative Engine) discovery.
+ * Inject JSON-LD structured data for GEO (LLM/Generative Engine) discovery.
+ *
+ * Rank Math already outputs Organization + WebSite + BreadcrumbList, so when
+ * it is active we only add our unique MedicalClinic schema (Rank Math Free
+ * does not emit MedicalClinic). When Rank Math is absent, emit the full set.
  */
 add_action('wp_head', function () {
     $json_flags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
+    $rankmath_active = defined('RANK_MATH_VERSION');
+
+    if ($rankmath_active) {
+        // Rank Math handles Organization / WebSite / BreadcrumbList — only add MedicalClinic here
+        if (is_singular('post')) {
+            $cats = get_the_category();
+            $specialty = !empty($cats) ? $cats[0]->name : null;
+            $area = null;
+            $tax_area = get_the_terms(get_the_ID(), 'category2');
+            if (!is_wp_error($tax_area) && !empty($tax_area)) { $area = $tax_area[0]->name; }
+            $thumb = get_the_post_thumbnail_url(null, 'full');
+
+            $clinic = [
+                '@context'     => 'https://schema.org',
+                '@type'        => 'MedicalClinic',
+                '@id'          => get_permalink() . '#clinic',
+                'name'         => get_the_title(),
+                'url'          => get_permalink(),
+                'description'  => '暁星学園OB医師が開業する' . ($specialty ?: '医療機関') . '。GYOSEI MEDICAL掲載。',
+                'parentOrganization' => [
+                    '@type' => 'Organization',
+                    'name'  => GYOSEI_SITE_NAME,
+                    'url'   => home_url('/'),
+                ],
+            ];
+            if ($thumb) $clinic['image'] = $thumb;
+            if ($specialty) $clinic['medicalSpecialty'] = $specialty;
+            if ($area) {
+                $clinic['areaServed'] = [
+                    '@type' => 'AdministrativeArea',
+                    'name'  => $area,
+                ];
+            }
+            echo "\n<!-- GYOSEI MedicalClinic JSON-LD -->\n";
+            echo '<script type="application/ld+json">' . wp_json_encode($clinic, $json_flags) . '</script>' . "\n";
+        }
+        return;
+    }
 
     // Organization (site-wide)
     $organization = [

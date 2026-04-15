@@ -173,67 +173,58 @@
 
     // Home page: restructure the 4 link banners (EATS / DENTAL / Reputation / OB医師へ)
     // - Remove the OB医師の方へ banner
-    // - Convert layout to 2 columns
+    // - Convert layout to 2 columns via CSS class
     // - Append a CTA button for 掲載申込
+    // - Relabel remaining banners with a clean title + sub structure
     function restructureHomeBanners() {
         if (!document.body.classList.contains("home")) return;
 
-        // Each banner is an unnamed <div class=""> containing <center><a><img></a></center>
-        // with a distinctive image filename we can match on.
-        var bannerImgs = document.querySelectorAll(
-            'img[src*="GYOSEI-EATS"],' +
-            'img[src*="GYOSEI-DENTAL"],' +
-            'img[src*="/2024/05/2-2.png"],' +
-            'img[src*="OB医師の方へバナー"],' +
-            'img[src*="OB%E5%8C%BB%E5%B8%AB"]'
-        );
-        if (!bannerImgs.length) return;
+        // Find the container holding the banners. TCD renders them as direct <div>
+        // children of the "clearfix" inside #cb_1 (cb_content-wysiwyg > inner).
+        var container =
+            document.querySelector(".cb_content-wysiwyg .inner > div.clearfix") ||
+            document.querySelector("#cb_1 .inner > div.clearfix") ||
+            document.querySelector("#cb_1 .inner");
 
-        // Resolve each img to its outer banner wrapper (the direct div child)
-        var banners = [];
-        var parent = null;
-        Array.prototype.forEach.call(bannerImgs, function (img) {
-            var wrapper = img;
-            while (wrapper && wrapper.parentNode) {
-                var p = wrapper.parentNode;
-                if (p && p.children && p.children.length && wrapper.tagName === "DIV" && p !== wrapper) {
-                    // stop at a DIV whose parent is a common banner container
-                    break;
-                }
-                wrapper = p;
-            }
-            // Simpler: walk up to the nearest DIV that is a direct child of its parent
-            // and where the parent has multiple such DIV children.
-            var node = img;
-            while (node && node.tagName !== "DIV") node = node.parentNode;
-            // Climb until the wrapper is an immediate child of a shared parent with siblings
-            while (node && node.parentNode && node.parentNode.children.length === 1) {
+        if (!container) {
+            // Fallback: find any banner image and walk up to a div with 3+ div children
+            var anyImg = document.querySelector(
+                'img[src*="GYOSEI-EATS"], img[src*="GYOSEI-DENTAL"], img[src*="/2024/05/2-2.png"]'
+            );
+            if (!anyImg) return;
+            var node = anyImg;
+            while (node && node.parentNode) {
                 node = node.parentNode;
+                if (node.nodeType === 1 && node.tagName === "DIV") {
+                    var divKids = Array.prototype.filter.call(node.children, function (c) {
+                        return c.tagName === "DIV";
+                    });
+                    if (divKids.length >= 2) { container = node; break; }
+                }
             }
-            if (node && banners.indexOf(node) === -1) banners.push(node);
-            if (node && !parent) parent = node.parentNode;
+        }
+        if (!container) return;
+
+        container.classList.add("gm-home-banners");
+
+        // Remove OB医師 banner (walk each direct div child, remove if contains that image)
+        var directDivs = Array.prototype.filter.call(container.children, function (c) {
+            return c.tagName === "DIV";
+        });
+        directDivs.forEach(function (d) {
+            if (d.querySelector('img[src*="OB医師"], img[src*="OB%E5%8C%BB%E5%B8%AB"]')) {
+                d.parentNode.removeChild(d);
+            }
         });
 
-        if (banners.length < 2 || !parent) return;
-
-        // Remove OB医師 banner
-        banners.forEach(function (b) {
-            var img = b.querySelector('img[src*="OB医師"], img[src*="OB%E5%8C%BB%E5%B8%AB"]');
-            if (img) {
-                b.parentNode.removeChild(b);
-            }
+        // Tag surviving banner items
+        var survivors = Array.prototype.filter.call(container.children, function (c) {
+            return c.tagName === "DIV" && c.querySelector("img");
         });
+        survivors.forEach(function (s) { s.classList.add("gm-home-banner-item"); });
 
-        // Tag parent and surviving banners for CSS styling
-        parent.classList.add("gm-home-banners");
-        var survivors = Array.prototype.filter.call(
-            parent.querySelectorAll(":scope > div"),
-            function (d) { return d.querySelector("img"); }
-        );
-        survivors.forEach(function (d) { d.classList.add("gm-home-banner-item"); });
-
-        // Append CTA if not already present
-        if (!parent.parentNode.querySelector(".gm-home-cta")) {
+        // Append CTA once
+        if (!container.parentNode.querySelector(".gm-home-cta")) {
             var cta = document.createElement("div");
             cta.className = "gm-home-cta";
             cta.innerHTML =
@@ -241,13 +232,13 @@
                 '<span class="gm-home-cta-label">暁星OB医師で掲載をご希望の方はこちら</span>' +
                 '<span class="gm-home-cta-arrow">&rsaquo;</span>' +
                 "</a>";
-            parent.parentNode.insertBefore(cta, parent.nextSibling);
+            container.parentNode.insertBefore(cta, container.nextSibling);
         }
 
-        // Relabel each banner with a clear 2-line title / subtitle structure
-        relabelBanner(parent, "GYOSEI-EATS", "GYOSEI EATS", "暁星OB飲食店ポータル");
-        relabelBanner(parent, "GYOSEI-DENTAL", "GYOSEI DENTAL", "暁星OB歯科医師開業情報ポータル");
-        relabelBanner(parent, "2024/05/2-2.png", "LIBUN", "Reputation / webPR");
+        // Relabel
+        relabelBanner(container, "GYOSEI-EATS", "GYOSEI EATS", "暁星OB飲食店ポータル");
+        relabelBanner(container, "GYOSEI-DENTAL", "GYOSEI DENTAL", "暁星OB歯科医師開業情報ポータル");
+        relabelBanner(container, "2024/05/2-2.png", "LIBUN", "Reputation / webPR");
     }
 
     function relabelBanner(parent, imgMatch, title, subtitle) {
