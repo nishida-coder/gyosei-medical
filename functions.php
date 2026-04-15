@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('GYOSEI_CHILD_VERSION', '1.23.0');
+define('GYOSEI_CHILD_VERSION', '1.24.0');
 
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style(
@@ -431,11 +431,50 @@ function gyosei_force_https_rewrite($html) {
             $html
         );
 
-        // Tag each `<div class="">` banner child with gm-home-banner-item so the
-        // card border/shadow CSS hooks even before the JS relabel runs.
+        // Tag each `<div class="">` banner child with gm-home-banner-item
         $html = preg_replace(
             '#<div class=""(\s+style="padding-bottom:\s*30px[^"]*")?>#u',
             '<div class="gm-home-banner-item"$1>',
+            $html
+        );
+
+        // Rebuild each banner card with clean HTML (image + centered label).
+        // Match from a banner-item div to the next banner-item or cta-card sibling.
+        $banner_labels = [
+            '1-2.png'       => ['title' => 'GYOSEI EATS',   'sub' => '暁星OB飲食店ポータル'],
+            'GYOSEI-DENTAL' => ['title' => 'GYOSEI DENTAL', 'sub' => '暁星OB歯科医師開業情報ポータル'],
+            '2-2.png'       => ['title' => 'LIBUN',         'sub' => 'Reputation / webPR'],
+        ];
+
+        $html = preg_replace_callback(
+            '#<div class="gm-home-banner-item"[^>]*>((?:(?!<div class="gm-home-banner-item"|<div class="gm-home-cta-card).)*?)</div>(?=\s*<div class="(?:gm-home-banner-item|gm-home-cta-card))#us',
+            function ($m) use ($banner_labels) {
+                $content = $m[1];
+                if (!preg_match('#<a\s+href="([^"]+)"[^>]*>\s*<img[^>]+src="([^"]+)"#s', $content, $mm)) {
+                    return $m[0];
+                }
+                $href = $mm[1];
+                $src  = $mm[2];
+
+                $label = null;
+                foreach ($banner_labels as $match => $def) {
+                    if (strpos($src, $match) !== false) { $label = $def; break; }
+                }
+                if (!$label) return $m[0];
+
+                $is_external = (strpos($href, 'gyosei-medical.com') === false);
+                $target_attr = $is_external ? ' target="_blank" rel="noopener"' : '';
+
+                return '<div class="gm-home-banner-item">' .
+                    '<a href="' . htmlspecialchars($href, ENT_QUOTES) . '"' . $target_attr . '>' .
+                    '<img src="' . htmlspecialchars($src, ENT_QUOTES) . '" alt="' . htmlspecialchars($label['title'], ENT_QUOTES) . '">' .
+                    '</a>' .
+                    '<div class="gm-banner-label">' .
+                    '<span class="gm-banner-title">' . $label['title'] . '</span>' .
+                    '<span class="gm-banner-sub">' . $label['sub'] . '</span>' .
+                    '</div>' .
+                    '</div>';
+            },
             $html
         );
 

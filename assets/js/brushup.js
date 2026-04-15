@@ -144,11 +144,21 @@
             }
         });
 
-        // Wrap each section in a div with alternating bg class
+        // Wrap each section in a div with alternating bg class.
+        // Order for a clinic page (after reorderSingleClinic moves DOCTOR up):
+        //   0 DOCTOR → BEIGE
+        //   1 (catch) "全国トップクラス..." → WHITE
+        //   2 WEB → BEIGE
+        //   3 ACCESS → WHITE
+        //   4 診療時間 → BEIGE
+        //   5 電話番号 → WHITE
+        //   6 MEDIA → BEIGE
+        //   7 RELATED → WHITE
+        // Section 0 = beige so the DOCTOR card reads as the primary block.
         sections.forEach(function (sec, idx) {
             if (!sec.members.length) return;
             var wrap = document.createElement("div");
-            wrap.className = "gm-section " + (idx % 2 === 0 ? "gm-section-white" : "gm-section-beige");
+            wrap.className = "gm-section " + (idx % 2 === 0 ? "gm-section-beige" : "gm-section-white");
 
             var first = sec.members[0];
             first.parentNode.insertBefore(wrap, first);

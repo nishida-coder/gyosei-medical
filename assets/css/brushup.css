@@ -2445,43 +2445,49 @@ select:focus {
 #cb_1 .inner .clearfix.gm-home-banners {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-auto-rows: 1fr !important;
     gap: 28px !important;
     max-width: 900px !important;
     margin: 40px auto 10px !important;
     padding: 0 20px !important;
     float: none !important;
+    align-items: stretch !important;
 }
 
 .gm-home-banners > .gm-home-banner-item,
 .gm-home-banners > div.gm-home-banner-item {
     display: flex !important;
     flex-direction: column;
-    padding: 30px 20px !important;
+    padding: 30px 24px !important;
     margin: 0 !important;
     background: #fff !important;
     border: 1px solid var(--gm-hair) !important;
     box-shadow: var(--gm-shadow-soft) !important;
     transition: transform .3s ease, box-shadow .3s ease;
     overflow: hidden;
+    height: 100% !important;
     min-height: 340px;
     align-items: center !important;
     justify-content: center !important;
     text-align: center;
+    box-sizing: border-box;
 }
 
-/* Image (first wrapper that contains the <img>) — compact, sits above label */
+/* Image anchor wrapper — compact, sits above label */
+.gm-home-banners > .gm-home-banner-item > a:first-child,
 .gm-home-banners > .gm-home-banner-item > center:first-of-type,
 .gm-home-banners > .gm-home-banner-item > a:first-of-type {
     flex: 0 0 auto;
     display: block;
     line-height: 0;
-    margin-bottom: 20px;
+    margin: 0 0 22px 0;
     max-width: 100%;
+    text-decoration: none;
 }
 
 .gm-home-banners > .gm-home-banner-item img {
     width: auto !important;
-    height: 110px !important;
+    height: 100px !important;
     max-width: 100% !important;
     object-fit: contain !important;
     object-position: center !important;
