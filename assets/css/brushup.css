@@ -2456,33 +2456,37 @@ select:focus {
 .gm-home-banners > div.gm-home-banner-item {
     display: flex !important;
     flex-direction: column;
-    padding: 0 !important;
+    padding: 30px 20px !important;
     margin: 0 !important;
     background: #fff !important;
     border: 1px solid var(--gm-hair) !important;
     box-shadow: var(--gm-shadow-soft) !important;
     transition: transform .3s ease, box-shadow .3s ease;
     overflow: hidden;
-    min-height: 300px;
-    align-items: stretch;
-    justify-content: flex-start;
+    min-height: 340px;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center;
 }
 
-/* Image (first wrapper that contains the <img>) sits at top, fixed height */
+/* Image (first wrapper that contains the <img>) — compact, sits above label */
 .gm-home-banners > .gm-home-banner-item > center:first-of-type,
 .gm-home-banners > .gm-home-banner-item > a:first-of-type {
     flex: 0 0 auto;
     display: block;
     line-height: 0;
+    margin-bottom: 20px;
+    max-width: 100%;
 }
 
 .gm-home-banners > .gm-home-banner-item img {
-    width: 100% !important;
-    height: 160px !important;
+    width: auto !important;
+    height: 110px !important;
     max-width: 100% !important;
-    object-fit: cover !important;
+    object-fit: contain !important;
     object-position: center !important;
     display: block;
+    margin: 0 auto;
 }
 
 .gm-home-banners > .gm-home-banner-item:hover {
@@ -2514,42 +2518,52 @@ select:focus {
     text-align: center;
 }
 
-/* JS-replaced label block — fills remaining card height and centers its content */
+/* JS-replaced label block */
 .gm-home-banners .gm-banner-label {
-    flex: 1 1 auto !important;
+    flex: 0 0 auto !important;
     display: flex !important;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 20px 16px !important;
-    text-align: center;
-    min-height: 0;
+    gap: 10px;
+    padding: 0 !important;
+    margin: 0 !important;
+    text-align: center !important;
+    width: 100%;
 }
 
 .gm-home-banners .gm-banner-title {
     font-family: var(--gm-serif) !important;
-    font-size: 28px !important;
+    font-size: 32px !important;
     font-weight: 700 !important;
     color: var(--gm-navy) !important;
     letter-spacing: .08em !important;
-    line-height: 1.25;
+    line-height: 1.2;
     display: block;
+    margin: 0;
 }
 
 .gm-home-banners .gm-banner-sub {
     font-family: var(--gm-sans) !important;
-    font-size: 12px !important;
+    font-size: 13px !important;
     color: var(--gm-mute) !important;
     letter-spacing: .08em;
-    line-height: 1.4;
+    line-height: 1.5;
     font-weight: 400 !important;
     display: block;
+    margin: 0;
 }
 
 @media (max-width: 720px) {
     .gm-home-banners .gm-banner-title {
-        font-size: 22px !important;
+        font-size: 24px !important;
+    }
+    .gm-home-banners > .gm-home-banner-item img {
+        height: 90px !important;
+    }
+    .gm-home-banners > .gm-home-banner-item,
+    .gm-home-banners > div.gm-home-banner-item {
+        min-height: 280px;
     }
 }
 
