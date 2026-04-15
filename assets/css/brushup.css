@@ -174,17 +174,29 @@ a:hover { color: var(--gm-gold-2); }
 }
 
 /* =========================================================================
-   Hero slider (#header_slider)
+   Hero slider (#header_slider) — compact prestige banner
    ========================================================================= */
 
-#header_slider {
+#header_slider,
+#header_slider.slider_video,
+#header_slider .slick-slider,
+#header_slider .slick-list,
+#header_slider .slick-track {
     position: relative;
     background: var(--gm-navy);
+    height: clamp(320px, 52vh, 480px) !important;
+    max-height: 480px !important;
+    min-height: 320px !important;
+    overflow: hidden;
 }
 
-#header_slider .item {
+#header_slider .item,
+#header_slider .slick-slide,
+#header_slider .slick-slide > div {
     position: relative;
     overflow: hidden;
+    height: clamp(320px, 52vh, 480px) !important;
+    max-height: 480px !important;
 }
 
 #header_slider .item::after {
@@ -192,13 +204,19 @@ a:hover { color: var(--gm-gold-2); }
     position: absolute;
     inset: 0;
     background:
-        linear-gradient(180deg, rgba(10, 31, 61, .35) 0%, rgba(10, 31, 61, .55) 60%, rgba(10, 31, 61, .75) 100%),
+        linear-gradient(180deg, rgba(10, 31, 61, .4) 0%, rgba(10, 31, 61, .55) 60%, rgba(10, 31, 61, .75) 100%),
         radial-gradient(ellipse at 20% 20%, rgba(184, 147, 90, .18), transparent 55%);
     pointer-events: none;
     z-index: 1;
 }
 
 #header_slider .item img {
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center;
     filter: saturate(.92) contrast(1.04);
     transition: transform 8s ease;
 }
@@ -209,60 +227,79 @@ a:hover { color: var(--gm-gold-2); }
 }
 
 #header_slider .caption {
+    position: absolute !important;
+    inset: 0 !important;
     z-index: 2 !important;
     color: var(--gm-ivory) !important;
     text-align: center;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 40px 20px !important;
+    width: 100% !important;
+    max-width: 900px;
+    margin: 0 auto !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: 0 !important;
 }
 
 #header_slider .caption::before {
     content: "— GYOSEI MEDICAL NETWORK —";
     display: block;
     font-family: var(--gm-latin);
-    font-size: 13px;
-    letter-spacing: .42em;
+    font-size: 11px;
+    letter-spacing: .38em;
     color: var(--gm-gold-soft);
-    margin-bottom: 22px;
+    margin: 0 0 12px !important;
     font-weight: 500;
+}
+
+#header_slider .caption .fimage {
+    margin: 0 0 14px !important;
 }
 
 #header_slider .caption .fimage img {
     filter: brightness(0) invert(1) drop-shadow(0 4px 20px rgba(0, 0, 0, .3));
-    max-width: 360px !important;
-    width: 90% !important;
+    max-width: 260px !important;
+    width: 70% !important;
     height: auto !important;
-    margin-bottom: 18px;
+    margin: 0 auto !important;
+    display: block;
 }
 
 #header_slider .caption .headline,
-#header_slider .caption h2.headline {
+#header_slider .caption h2.headline,
+#header_slider .caption p.headline {
     font-family: var(--gm-serif) !important;
-    font-size: clamp(26px, 4vw, 52px) !important;
+    font-size: clamp(20px, 2.6vw, 32px) !important;
     font-weight: 600 !important;
     color: var(--gm-ivory) !important;
-    line-height: 1.45 !important;
+    line-height: 1.5 !important;
     letter-spacing: .08em !important;
-    margin-bottom: .5em !important;
+    margin: 0 0 14px !important;
     text-shadow: 0 2px 30px rgba(0, 0, 0, .35);
 }
 
 #header_slider .caption .headline::after {
     content: "";
     display: block;
-    width: 54px;
+    width: 44px;
     height: 1px;
     background: var(--gm-gold);
-    margin: 24px auto;
+    margin: 14px auto;
 }
 
 #header_slider .caption .catchphrase {
     font-family: var(--gm-sans) !important;
-    font-size: clamp(13px, 1.2vw, 17px) !important;
+    font-size: clamp(12px, 1vw, 14px) !important;
     color: var(--gm-ivory) !important;
-    line-height: 2.05 !important;
-    letter-spacing: .1em !important;
+    line-height: 1.85 !important;
+    letter-spacing: .08em !important;
     opacity: .92;
     max-width: 680px;
-    margin: 0 auto;
+    margin: 0 auto !important;
 }
 
 #header_slider .caption .button,
@@ -934,18 +971,27 @@ select:focus {
    ========================================================================= */
 
 @media (max-width: 900px) {
+    #header_slider,
+    #header_slider .item,
+    #header_slider .slick-slide,
+    #header_slider .slick-slide > div {
+        height: clamp(260px, 44vh, 360px) !important;
+        max-height: 360px !important;
+        min-height: 260px !important;
+    }
+
     #header_slider .caption .headline {
-        font-size: 26px !important;
+        font-size: 20px !important;
         letter-spacing: .06em !important;
     }
 
     #header_slider .caption::before {
         font-size: 10px;
         letter-spacing: .32em;
-        margin-bottom: 14px;
+        margin-bottom: 10px !important;
     }
 
-    #header_slider .caption .fimage img { max-width: 240px !important; }
+    #header_slider .caption .fimage img { max-width: 200px !important; width: 60% !important; }
 
     .cb_content { padding: 50px 16px !important; }
 
