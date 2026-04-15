@@ -430,26 +430,44 @@
         });
     }
 
+    // Defensive wrapper so a single failing step doesn't kill every later step.
+    function safeRun(name, fn) {
+        try { fn(); } catch (e) {
+            if (window.console && console.warn) {
+                console.warn("[gyosei-brushup] " + name + " failed:", e);
+            }
+        }
+    }
+
     ready(function () {
-        forceHeroVisible();
-        setTimeout(forceHeroVisible, 0);
-        setTimeout(forceHeroVisible, 100);
-        setTimeout(forceHeroVisible, 500);
+        safeRun("forceHeroVisible", forceHeroVisible);
+        setTimeout(function () { safeRun("forceHeroVisible", forceHeroVisible); }, 0);
+        setTimeout(function () { safeRun("forceHeroVisible", forceHeroVisible); }, 100);
+        setTimeout(function () { safeRun("forceHeroVisible", forceHeroVisible); }, 500);
 
-        reorderSingleClinic();
-        unifyMediaSection();
-        patchClinicYouTube();
-        restructureHomeBanners();
-        enrichArchiveCards();
+        safeRun("reorderSingleClinic", reorderSingleClinic);
+        safeRun("wrapArticleSections", wrapArticleSections);
+        safeRun("patchClinicYouTube", patchClinicYouTube);
+        safeRun("restructureHomeBanners", restructureHomeBanners);
+        safeRun("enrichArchiveCards", enrichArchiveCards);
+        safeRun("restoreTitleText", restoreTitleText);
 
-        // Run title restore AFTER TCD's ellipsis plugin (which fires on resize + ready)
-        setTimeout(restoreTitleText, 100);
-        setTimeout(restoreTitleText, 500);
-        setTimeout(restoreTitleText, 1500);
-        setTimeout(restoreTitleText, 3000);
+        setTimeout(function () { safeRun("restoreTitleText", restoreTitleText); }, 100);
+        setTimeout(function () { safeRun("restoreTitleText", restoreTitleText); }, 500);
+        setTimeout(function () { safeRun("restoreTitleText", restoreTitleText); }, 1500);
+        setTimeout(function () { safeRun("restoreTitleText", restoreTitleText); }, 3000);
         window.addEventListener("resize", function () {
-            setTimeout(restoreTitleText, 50);
+            setTimeout(function () { safeRun("restoreTitleText", restoreTitleText); }, 50);
         });
+
+        // Expose for manual debugging
+        window.gmBrushup = {
+            restoreTitleText: restoreTitleText,
+            enrichArchiveCards: enrichArchiveCards,
+            restructureHomeBanners: restructureHomeBanners,
+            wrapArticleSections: wrapArticleSections,
+            reorderSingleClinic: reorderSingleClinic,
+        };
 
         var targets = document.querySelectorAll(
             "#post_list .article, #main_contents h2, #main_contents h3, .widget, #post_list2 .article"

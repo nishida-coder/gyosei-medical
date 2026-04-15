@@ -1287,18 +1287,27 @@ body.search #post_list .article h2.title::before {
     opacity: 1 !important;
 }
 
-/* Explicit text color on inner span per tag type (parent theme's color:#fff leaks in) */
+/* Explicit text color on inner <span> per tag type (parent theme's color:#fff leaks in) */
+ul.meta li.cat a.cat-category span,
+ul.meta li.cat a.cat-category > span,
 #post_list .article ul.meta li.cat a.cat-category span {
     color: #fff !important;
+    background: transparent !important;
 }
 
+ul.meta li.cat a.cat-category2 span,
+ul.meta li.cat a.cat-category2 > span,
 #post_list .article ul.meta li.cat a.cat-category2 span {
     color: var(--gm-navy) !important;
+    background: transparent !important;
 }
 
+ul.meta li.cat a.cat-category3 span,
+ul.meta li.cat a.cat-category3 > span,
 #post_list .article ul.meta li.cat a.cat-category3 span,
 #post_list .article ul.meta li.cat:nth-child(3) a span {
     color: var(--gm-navy) !important;
+    background: transparent !important;
 }
 
 #post_list .article ul.meta li.cat a:hover,
