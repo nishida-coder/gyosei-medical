@@ -103,6 +103,13 @@ a:hover { color: var(--gm-gold-2); }
     box-shadow: 0 6px 30px -24px rgba(0, 0, 0, .6);
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
+    position: relative;
+    z-index: 100;
+}
+
+#header.active,
+body.header_fix #header {
+    z-index: 150;
 }
 
 #header *,
@@ -166,23 +173,55 @@ a:hover { color: var(--gm-gold-2); }
 #header_top .menu a:hover { color: var(--gm-gold-soft) !important; }
 
 /* Header search box */
+#header_search,
 #index_header_search,
 .header_search_inputs {
-    background: rgba(20, 20, 20, .92) !important;
+    background: #141720 !important;
     border: 1px solid rgba(184, 147, 90, .4) !important;
     border-radius: 0 !important;
     box-shadow: 0 6px 20px -10px rgba(0, 0, 0, .6);
     color: var(--gm-ivory) !important;
 }
 
-#index_header_search input[type="text"],
+#header_search {
+    position: relative;
+    z-index: 200;
+}
+
+/* Select dropdowns — must have solid background so options are legible */
+#header_search select,
 #index_header_search select,
-.header_search_inputs input[type="text"],
-.header_search_inputs select {
-    background: transparent !important;
+.header_search_inputs select,
+#header select {
+    background: #141720 !important;
+    background-color: #141720 !important;
     color: var(--gm-ivory) !important;
-    border: none !important;
-    border-bottom: 1px solid rgba(184, 147, 90, .3) !important;
+    border: 1px solid rgba(184, 147, 90, .3) !important;
+    border-radius: 0 !important;
+    padding: 12px 14px !important;
+    font-family: var(--gm-sans) !important;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+
+/* Option elements need solid bg (browser default is transparent) */
+#header_search select option,
+#index_header_search select option,
+.header_search_inputs select option,
+#header select option {
+    background: #fff !important;
+    background-color: #fff !important;
+    color: var(--gm-ink) !important;
+    padding: 8px 12px !important;
+}
+
+#header_search input[type="text"],
+#index_header_search input[type="text"],
+.header_search_inputs input[type="text"] {
+    background: #141720 !important;
+    color: var(--gm-ivory) !important;
+    border: 1px solid rgba(184, 147, 90, .3) !important;
 }
 
 #header_search_submit,
@@ -467,6 +506,116 @@ a:hover { color: var(--gm-gold-2); }
     padding-bottom: clamp(50px, 7vw, 100px) !important;
 }
 
+/* Archive page headline (病院一覧 / カテゴリ一覧) */
+#archive_headline,
+.archive_header .headline {
+    font-family: var(--gm-serif) !important;
+    font-size: clamp(26px, 3.4vw, 40px) !important;
+    font-weight: 600 !important;
+    color: var(--gm-navy) !important;
+    text-align: center !important;
+    letter-spacing: .1em !important;
+    padding: 50px 20px 20px !important;
+    margin: 0 0 40px !important;
+    position: relative;
+    background: transparent !important;
+}
+
+#archive_headline::before,
+.archive_header .headline::before {
+    content: "";
+    display: block;
+    width: 48px;
+    height: 1px;
+    background: var(--gm-gold);
+    margin: 0 auto 22px;
+}
+
+body.archive #post_list,
+body.blog #post_list,
+body.search #post_list {
+    margin-top: 20px !important;
+    margin-bottom: 60px !important;
+}
+
+/* Pagination on archive pages */
+.page_navi,
+.page_navi2 {
+    margin: 60px auto 20px !important;
+    padding: 30px 20px !important;
+    text-align: center !important;
+    border-top: 1px solid var(--gm-hair);
+    max-width: 1200px;
+}
+
+.page_navi ul,
+.page_navi2 ul,
+.page_navi .page-numbers,
+.page_navi2 .page-numbers {
+    display: inline-flex !important;
+    gap: 8px !important;
+    justify-content: center;
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+}
+
+.page_navi li,
+.page_navi2 li {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    float: none !important;
+}
+
+.page_navi a,
+.page_navi span,
+.page_navi2 a,
+.page_navi2 span,
+.page-numbers {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    height: 44px;
+    padding: 0 14px !important;
+    border: 1px solid var(--gm-hair) !important;
+    background: #fff !important;
+    color: var(--gm-navy) !important;
+    font-family: var(--gm-latin) !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    line-height: 1 !important;
+    border-radius: 0 !important;
+    transition: all .25s ease;
+}
+
+.page_navi a:hover,
+.page_navi2 a:hover,
+.page-numbers:hover,
+.page-numbers.current {
+    background: var(--gm-navy) !important;
+    color: var(--gm-ivory) !important;
+    border-color: var(--gm-navy) !important;
+}
+
+.page_navi2 p {
+    font-family: var(--gm-sans) !important;
+    font-size: 12px !important;
+    color: var(--gm-mute) !important;
+    letter-spacing: .08em;
+    margin: 0 0 14px !important;
+    text-align: center;
+}
+
+.page_navi2 .prev.disable,
+.page_navi2 .next.disable,
+.page-numbers.prev.disable,
+.page-numbers.next.disable {
+    opacity: .35;
+    pointer-events: none;
+}
+
 /* Content blocks (cb_content) */
 .cb_content {
     background: transparent !important;
@@ -622,34 +771,61 @@ a:hover { color: var(--gm-gold-2); }
 
 #post_list .article:hover .image img { transform: scale(1.05); }
 
-/* Clinic name (h3.title) — SECONDARY: small, muted, eyebrow-style */
+/* Clinic name (h2/h3.title) — eyebrow caption on home, main title on archive */
 #post_list .article h3.title,
-#post_list .article center h3.title {
+#post_list .article h2.title,
+#post_list .article center h3.title,
+#post_list .article center h2.title,
+#post_list .article .title {
     font-family: var(--gm-sans) !important;
-    font-size: 11px !important;
+    font-size: 12px !important;
     font-weight: 500 !important;
     color: var(--gm-mute) !important;
-    line-height: 1.5 !important;
-    letter-spacing: .14em !important;
-    padding: 14px 18px 0 !important;
+    line-height: 1.6 !important;
+    letter-spacing: .12em !important;
+    padding: 18px 20px 14px !important;
     margin: 0 !important;
     text-align: center;
     text-transform: none;
     min-height: auto !important;
+    word-break: break-word;
 }
 
-#post_list .article h3.title strong {
+#post_list .article h3.title strong,
+#post_list .article h2.title strong {
     font-weight: 500;
 }
 
-#post_list .article h3.title::before {
+#post_list .article h3.title::before,
+#post_list .article h2.title::before,
+#post_list .article .title::before {
     content: "";
     display: block;
     width: 24px;
     height: 1px;
     background: var(--gm-gold);
-    margin: 0 auto 10px;
+    margin: 0 auto 12px;
     opacity: .7;
+}
+
+/* On archive/category pages (no wp-block-columns doctor block) — promote title */
+body.archive #post_list .article h2.title,
+body.blog #post_list .article h2.title,
+body.search #post_list .article h2.title {
+    font-family: var(--gm-serif) !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: var(--gm-navy) !important;
+    letter-spacing: .04em !important;
+    padding: 22px 22px 16px !important;
+}
+
+body.archive #post_list .article h2.title::before,
+body.blog #post_list .article h2.title::before,
+body.search #post_list .article h2.title::before {
+    width: 36px;
+    margin-bottom: 14px;
+    opacity: 1;
 }
 
 #post_list .article center {
@@ -948,7 +1124,68 @@ input[type="submit"]:hover,
 
 .single #main_contents,
 .page #main_contents {
-    padding-top: 80px !important;
+    padding-top: clamp(30px, 4vw, 60px) !important;
+}
+
+.single #main_col,
+.page #main_col {
+    max-width: 1200px;
+    margin: 0 auto !important;
+    padding: 0 20px !important;
+}
+
+.single #left_col,
+.page #left_col {
+    background: #fff;
+    border: 1px solid var(--gm-hair);
+    box-shadow: var(--gm-shadow-soft);
+    padding: 0 !important;
+    margin: 0 0 40px !important;
+}
+
+#article_header {
+    padding: clamp(30px, 4vw, 60px) clamp(20px, 3vw, 50px) 20px !important;
+    text-align: center;
+    border-bottom: 1px solid var(--gm-hair);
+}
+
+#article_header #post_title,
+h2#post_title,
+h2#post_title.rich_font,
+#post_title[style] {
+    font-family: var(--gm-serif) !important;
+    font-size: clamp(22px, 3vw, 36px) !important;
+    font-weight: 600 !important;
+    color: var(--gm-navy) !important;
+    line-height: 1.5 !important;
+    letter-spacing: .08em !important;
+    margin: 0 !important;
+    padding-top: 14px !important;
+    padding-bottom: 0 !important;
+    position: relative;
+    display: block;
+}
+
+#article_header #post_title::before,
+h2#post_title::before {
+    content: "";
+    display: block;
+    width: 44px;
+    height: 1px;
+    background: var(--gm-gold);
+    margin: 0 auto 22px;
+}
+
+#post_image {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 0;
+}
+
+#post_image img {
+    width: 100% !important;
+    height: auto !important;
+    display: block;
 }
 
 .single .entry-title,
@@ -977,15 +1214,50 @@ input[type="submit"]:hover,
 }
 
 /* =========================================================================
-   Footer (#footer, #footer_contents, #copyright)
+   Single page: empty social links (href=" " or blank) — visually disabled
    ========================================================================= */
 
-#footer {
+a[href=" "],
+a[href=""],
+a[href="#"] {
+    opacity: .22 !important;
+    pointer-events: none !important;
+    cursor: default !important;
+    filter: grayscale(100%);
+}
+
+a[href=" "] img,
+a[href=""] img,
+a[href="#"] img {
+    filter: grayscale(100%);
+}
+
+a[href=" "]::after {
+    content: "";
+}
+
+/* Subtle label to indicate disabled */
+a[href=" "]:hover,
+a[href=""]:hover {
+    opacity: .22 !important;
+}
+
+/* =========================================================================
+   Footer (#footer, #footer_contents, #footer_nav, #copyright)
+   ========================================================================= */
+
+#footer,
+#footer_nav,
+#footer_contents,
+#footer .inner {
     background: var(--gm-navy) !important;
+    background-color: var(--gm-navy) !important;
     color: var(--gm-ivory) !important;
+}
+
+#footer {
     position: relative;
-    padding-top: 80px !important;
-    padding-bottom: 0 !important;
+    padding: 0 !important;
     border-top: 3px solid var(--gm-gold);
 }
 
@@ -997,6 +1269,25 @@ input[type="submit"]:hover,
     right: 0;
     height: 3px;
     background: linear-gradient(90deg, transparent 0%, var(--gm-gold) 20%, var(--gm-gold-soft) 50%, var(--gm-gold) 80%, transparent 100%);
+}
+
+#footer_nav {
+    padding: 70px 20px 50px !important;
+    background: var(--gm-navy) !important;
+}
+
+#footer_contents {
+    padding: 0 20px !important;
+    background: #050F20 !important;
+    border-top: 1px solid rgba(184, 147, 90, .2);
+}
+
+#footer_contents .inner {
+    background: transparent !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 50px 0 30px !important;
+    text-align: center;
 }
 
 #footer *,
@@ -1151,30 +1442,143 @@ input[type="submit"]:hover,
     color: var(--gm-ivory) !important;
 }
 
+/* #copyright is a <p> inside #footer_info — not a full-width bar */
 #copyright {
-    background: #000 !important;
-    color: rgba(250, 247, 241, .7) !important;
+    background: transparent !important;
+    color: rgba(250, 247, 241, .55) !important;
     font-family: var(--gm-sans) !important;
     font-size: 11px !important;
-    letter-spacing: .08em !important;
-    text-transform: none;
-    padding: 20px !important;
-    margin: 0 !important;
-    border-top: 1px solid rgba(184, 147, 90, .25);
+    font-weight: 400 !important;
+    letter-spacing: .04em !important;
+    text-transform: none !important;
+    padding: 26px 20px 0 !important;
+    margin: 30px auto 0 !important;
+    border: none !important;
+    border-top: 1px solid rgba(184, 147, 90, .18) !important;
     text-align: center !important;
-    line-height: 1.6 !important;
+    line-height: 1.7 !important;
+    max-width: 960px;
+    display: block;
+    width: auto;
 }
 
-#copyright .inner,
-#copyright p,
-#copyright a {
-    max-width: 1200px;
-    margin: 0 auto !important;
+#copyright a,
+#copyright span {
+    color: rgba(250, 247, 241, .55) !important;
+    text-decoration: none;
+    font-size: inherit !important;
+    letter-spacing: inherit !important;
+}
+
+#copyright a:hover {
+    color: var(--gm-gold-soft) !important;
+}
+
+/* Footer logo (center it) */
+#footer_logo {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+#footer_logo .logo_area {
+    display: inline-block;
+    margin: 0 auto;
+}
+
+#footer_logo .logo_retina {
+    max-width: 200px !important;
+    height: auto !important;
+    filter: brightness(0) invert(1);
+}
+
+/* Footer social links */
+#footer_social_link {
+    display: flex !important;
+    justify-content: center;
+    gap: 18px;
+    padding: 20px 0 !important;
+    margin: 0 !important;
+    list-style: none;
+}
+
+#footer_social_link li {
+    list-style: none !important;
     padding: 0 !important;
+    margin: 0 !important;
+    float: none !important;
 }
 
-#footer_contents {
-    padding-bottom: 50px !important;
+#footer_social_link li a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(184, 147, 90, .5);
+    border-radius: 50%;
+    color: var(--gm-gold-soft) !important;
+    font-size: 0;
+    position: relative;
+    transition: all .25s ease;
+}
+
+#footer_social_link li.facebook a::before,
+#footer_social_link li.insta a::before {
+    font-family: var(--gm-sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .1em;
+}
+
+#footer_social_link li.facebook a::before { content: "FB"; }
+#footer_social_link li.insta a::before { content: "IG"; }
+
+#footer_social_link li a:hover {
+    background: var(--gm-gold);
+    color: #000 !important;
+    border-color: var(--gm-gold);
+}
+
+/* Footer bottom menu */
+#footer_bottom_menu {
+    text-align: center;
+    padding: 20px 0 10px !important;
+    margin: 0 !important;
+    background: transparent !important;
+}
+
+#footer_bottom_menu ul,
+#footer_bottom_menu .menu {
+    display: inline-flex !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 28px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+}
+
+#footer_bottom_menu li {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    float: none !important;
+    border: none !important;
+}
+
+#footer_bottom_menu li a {
+    font-family: var(--gm-sans) !important;
+    font-size: 12px !important;
+    color: var(--gm-ivory) !important;
+    letter-spacing: .14em !important;
+    padding: 6px 0 !important;
+    background: transparent !important;
+    border: none !important;
+    transition: color .25s ease;
+}
+
+#footer_bottom_menu li a:hover {
+    color: var(--gm-gold-soft) !important;
 }
 
 /* =========================================================================

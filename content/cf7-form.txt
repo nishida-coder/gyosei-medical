@@ -1,0 +1,27 @@
+<label>目的（必須）
+[select* your-purpose "掲載申込（ご自身の医療機関）" "情報提供（同窓推薦）" "取材・メディアのご依頼" "ご意見・ご要望" "その他のお問い合わせ"]</label>
+
+<label>お名前（必須）
+[text* your-name autocomplete:name]</label>
+
+<label>メールアドレス（必須）
+[email* your-email autocomplete:email]</label>
+
+<label>お電話番号
+[tel your-tel autocomplete:tel]</label>
+
+<label>暁星ご卒業年度
+[text your-grad-year placeholder "例：2000年卒"]</label>
+
+<label>医療機関名・推薦されるお名前
+[text your-clinic placeholder "掲載申込の場合はクリニック名／情報提供の場合は推薦される先生のお名前"]</label>
+
+<label>件名（必須）
+[text* your-subject]</label>
+
+<label>お問い合わせ内容（必須）
+[textarea* your-message]</label>
+
+[acceptance acceptance-1] プライバシーポリシーに同意します [/acceptance]
+
+[submit "送信する"]
