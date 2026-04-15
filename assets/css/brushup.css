@@ -716,16 +716,25 @@ body.header_fix #header {
     height: auto !important;
     width: auto !important;
     min-width: 160px;
-    transition: background .3s ease;
+    transition: none !important;
     box-sizing: border-box;
 }
 
-/* Single-tone hover: bg changes to gold, text stays white — "entirely gold" feel */
+/* No color change on hover — stays a plain black bar with white text */
 #index_news .archive_link a:hover,
-.cb_content-blog_list .archive_link a:hover {
-    background: var(--gm-gold) !important;
+#index_news .archive_link a:focus,
+#index_news .archive_link a:active,
+.cb_content-blog_list .archive_link a:hover,
+.cb_content-blog_list .archive_link a:focus,
+.cb_content-blog_list .archive_link a:active {
+    background: #000 !important;
+    background-color: #000 !important;
     color: #fff !important;
+    border: none !important;
     transform: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+    transition: none !important;
 }
 
 .cb_content-blog_list #post_list {
@@ -1292,7 +1301,7 @@ li.cat .cat-category2,
     border: none !important;
 }
 
-/* 卒業年代 → forest */
+/* 卒業年代 → cream with navy outline (clearly distinct from navy & gold) */
 a.cat-category3,
 span.cat-category3,
 li.cat .cat-category3,
@@ -1304,16 +1313,17 @@ li.cat .cat-category3,
     display: inline-block !important;
     visibility: visible !important;
     opacity: 1 !important;
-    background: var(--gm-forest) !important;
-    color: #fff !important;
-    padding: 4px 10px !important;
+    background: #fff !important;
+    background-color: #fff !important;
+    color: var(--gm-navy) !important;
+    padding: 3px 10px !important;
     font-family: var(--gm-sans) !important;
     font-size: 10.5px !important;
     font-weight: 600 !important;
     letter-spacing: .04em !important;
     line-height: 1.5 !important;
     border-radius: 2px !important;
-    border: none !important;
+    border: 1px solid var(--gm-navy) !important;
     width: auto !important;
     height: auto !important;
     max-width: none !important;

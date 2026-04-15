@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('GYOSEI_CHILD_VERSION', '1.25.0');
+define('GYOSEI_CHILD_VERSION', '1.26.0');
 
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style(
