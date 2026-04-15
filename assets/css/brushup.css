@@ -131,10 +131,17 @@ body.header_fix #header {
     letter-spacing: .12em;
 }
 
+/* Keep the original logo colors intact in the top bar.
+   If the source logo is too dark for the black bar, consider uploading a white version. */
 #header_logo .logo img,
 #header_logo_fix .logo img,
-.logo_retina img {
-    filter: brightness(0) invert(1);
+#header_logo img.logo_retina,
+#header_logo_fix img.logo_retina {
+    filter: none !important;
+    -webkit-filter: none !important;
+    max-height: 52px !important;
+    width: auto !important;
+    height: auto !important;
 }
 
 #header #menu a,
@@ -1119,27 +1126,30 @@ input[type="submit"]:hover,
     padding-top: clamp(30px, 4vw, 60px) !important;
 }
 
-.single #main_col,
-.page #main_col {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 280px !important;
-    gap: 40px !important;
+/* Universal main_col — center, remove parent float */
+#main_col {
+    float: none !important;
+    width: auto !important;
     max-width: 1200px !important;
     margin: 0 auto !important;
     padding: 40px 20px !important;
-    float: none !important;
+    display: block !important;
 }
 
-.single #main_col::before,
-.single #main_col::after,
-.page #main_col::before,
-.page #main_col::after {
+#main_col::before,
+#main_col::after {
     content: none !important;
     display: none !important;
 }
 
-.single #left_col,
-.page #left_col {
+/* Single clinic pages have left + side column — use grid */
+body.single #main_col {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 280px !important;
+    gap: 40px !important;
+}
+
+body.single #left_col {
     background: #fff;
     border: 1px solid var(--gm-hair);
     box-shadow: var(--gm-shadow-soft);
@@ -1151,8 +1161,7 @@ input[type="submit"]:hover,
     grid-column: 1;
 }
 
-.single #side_col,
-.page #side_col {
+body.single #side_col {
     grid-column: 2;
     width: auto !important;
     float: none !important;
@@ -1161,8 +1170,7 @@ input[type="submit"]:hover,
     min-width: 0;
 }
 
-.single #side_col .widget,
-.page #side_col .widget {
+body.single #side_col .widget {
     background: #fff;
     border: 1px solid var(--gm-hair);
     padding: 24px 20px !important;
@@ -1171,19 +1179,13 @@ input[type="submit"]:hover,
 }
 
 @media (max-width: 900px) {
-    .single #main_col,
-    .page #main_col {
+    body.single #main_col {
         grid-template-columns: minmax(0, 1fr) !important;
         gap: 28px !important;
     }
 
-    .single #left_col,
-    .page #left_col {
-        grid-column: 1;
-    }
-
-    .single #side_col,
-    .page #side_col {
+    body.single #left_col,
+    body.single #side_col {
         grid-column: 1;
     }
 }
