@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('GYOSEI_CHILD_VERSION', '1.16.0');
+define('GYOSEI_CHILD_VERSION', '1.17.0');
 
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style(
@@ -324,4 +324,33 @@ add_filter('wp_robots', function ($robots) {
     $robots['max-video-preview'] = -1;
     return $robots;
 });
+
+/**
+ * Force HTTPS on all gyosei-medical.com asset URLs rendered into the page.
+ *
+ * TCD pagebuilder and some legacy post content reference images via
+ * http://gyosei-medical.com/..., which modern browsers block as mixed content
+ * when the page itself is served over HTTPS. That was silently killing the
+ * header logo and all homepage banner images.
+ *
+ * We buffer the full page output and rewrite the host scheme in one pass.
+ */
+add_action('template_redirect', 'gyosei_force_https_buffer', 1);
+function gyosei_force_https_buffer() {
+    if (is_admin()) return;
+    ob_start('gyosei_force_https_rewrite');
+}
+
+function gyosei_force_https_rewrite($html) {
+    if (!is_string($html) || $html === '') return $html;
+    $patterns = [
+        'http://gyosei-medical.com/',
+        'http://www.gyosei-medical.com/',
+    ];
+    $replace = [
+        'https://gyosei-medical.com/',
+        'https://www.gyosei-medical.com/',
+    ];
+    return str_replace($patterns, $replace, $html);
+}
 
