@@ -1,0 +1,742 @@
+/* =========================================================================
+   GYOSEI MEDICAL — Prestige × Modern Brushup
+   Palette:
+     --gm-navy:    #0A1F3D  (deep academic navy)
+     --gm-navy-2:  #12305A
+     --gm-gold:    #B8935A  (muted antique gold)
+     --gm-gold-2:  #8C6E3E
+     --gm-forest:  #1F4D3A  (medical forest accent)
+     --gm-ivory:   #FAF7F1  (warm background)
+     --gm-ivory-2: #F3ECDC
+     --gm-ink:     #141720  (body text)
+     --gm-mute:    #6B6F75  (muted text)
+     --gm-hair:    rgba(184,147,90,.35) (gold hairline)
+     --gm-shadow:  0 20px 60px -30px rgba(10,31,61,.35)
+   Fonts:
+     --gm-serif:   "Shippori Mincho B1", "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif
+     --gm-sans:    "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif
+     --gm-latin:   "Cormorant Garamond", "Shippori Mincho B1", serif
+   ========================================================================= */
+
+:root {
+    --gm-navy: #0A1F3D;
+    --gm-navy-2: #12305A;
+    --gm-navy-soft: #1B3A66;
+    --gm-gold: #B8935A;
+    --gm-gold-2: #8C6E3E;
+    --gm-gold-soft: #D9C18C;
+    --gm-forest: #1F4D3A;
+    --gm-ivory: #FAF7F1;
+    --gm-ivory-2: #F3ECDC;
+    --gm-ink: #141720;
+    --gm-mute: #6B6F75;
+    --gm-hair: rgba(184, 147, 90, .4);
+    --gm-hair-strong: rgba(184, 147, 90, .7);
+    --gm-shadow: 0 22px 60px -32px rgba(10, 31, 61, .38);
+    --gm-shadow-soft: 0 8px 24px -14px rgba(10, 31, 61, .25);
+    --gm-serif: "Shippori Mincho B1", "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+    --gm-sans: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+    --gm-latin: "Cormorant Garamond", "Shippori Mincho B1", serif;
+}
+
+/* Override JIN:R color variables where possible */
+:root,
+body {
+    --jinr-main-color: var(--gm-navy);
+    --jinr-sub-color: var(--gm-gold);
+    --jinr-text-color: var(--gm-ink);
+    --jinr-bg-color: var(--gm-ivory);
+    --jinr-bg-color-sub: var(--gm-ivory-2);
+    --jinr-border-color: var(--gm-hair);
+    --jinr-link-color: var(--gm-navy);
+}
+
+/* =========================================================================
+   Global foundation
+   ========================================================================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body,
+body#wrapper,
+body.home,
+body.page,
+body.single,
+body.archive,
+body.search {
+    background: var(--gm-ivory) !important;
+    color: var(--gm-ink) !important;
+    font-family: var(--gm-sans) !important;
+    font-feature-settings: "palt" 1;
+    letter-spacing: .02em;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle paper texture on ivory base */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+        radial-gradient(circle at 20% 10%, rgba(184, 147, 90, .035) 0, transparent 45%),
+        radial-gradient(circle at 80% 90%, rgba(10, 31, 61, .04) 0, transparent 50%);
+    z-index: 0;
+}
+
+#wrapper,
+main,
+#mainContent,
+#jinrArticle {
+    position: relative;
+    z-index: 1;
+}
+
+/* Headings everywhere get the serif treatment */
+h1, h2, h3, h4,
+.h1, .h2, .h3, .h4,
+#mainContent h1,
+#mainContent h2,
+#mainContent h3,
+#mainContent h4,
+.entry-title,
+.post-title,
+#jinrArticle h1,
+#jinrArticle h2,
+#jinrArticle h3,
+#jinrPostList h2,
+#jinrPostList h3,
+#commonHeader h1,
+#commonHeader h2,
+.widget_title,
+.widgettitle {
+    font-family: var(--gm-serif) !important;
+    font-weight: 600;
+    color: var(--gm-navy);
+    letter-spacing: .04em;
+    line-height: 1.5;
+}
+
+a {
+    color: var(--gm-navy);
+    text-decoration: none;
+    transition: color .25s ease, opacity .25s ease;
+}
+
+a:hover {
+    color: var(--gm-gold-2);
+}
+
+/* =========================================================================
+   Header / global navigation
+   ========================================================================= */
+
+#commonHeader,
+#commonHeader.is-pinned,
+body #commonHeader,
+header#commonHeader {
+    background: rgba(250, 247, 241, .94) !important;
+    backdrop-filter: saturate(140%) blur(14px);
+    -webkit-backdrop-filter: saturate(140%) blur(14px);
+    border-bottom: 1px solid var(--gm-hair);
+    box-shadow: 0 6px 30px -24px rgba(10, 31, 61, .3);
+}
+
+#commonHeader .o--logo a,
+#commonHeader .logo a,
+.jinr-header-logo a,
+.jinr-site-title a {
+    font-family: var(--gm-latin), var(--gm-serif) !important;
+    font-weight: 600;
+    color: var(--gm-navy) !important;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+/* Global nav typography */
+#globalNav a,
+#globalNav .menu-item a,
+#commonHeader nav a,
+#jinr-g-nav a,
+.g-nav a {
+    font-family: var(--gm-sans) !important;
+    font-size: 13px !important;
+    letter-spacing: .18em;
+    color: var(--gm-navy) !important;
+    font-weight: 500;
+    padding: 10px 14px !important;
+    position: relative;
+}
+
+#globalNav a::after,
+#jinr-g-nav a::after,
+.g-nav a::after {
+    content: "";
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: 4px;
+    height: 1px;
+    background: var(--gm-gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .35s ease;
+}
+
+#globalNav a:hover::after,
+#jinr-g-nav a:hover::after,
+.g-nav a:hover::after {
+    transform: scaleX(1);
+}
+
+/* =========================================================================
+   Hero / top widget area  (GM-HERO)
+   ========================================================================= */
+
+#jinr-posttop-widget-area {
+    background: linear-gradient(180deg, var(--gm-navy) 0%, var(--gm-navy-2) 65%, #0f2850 100%) !important;
+    color: var(--gm-ivory);
+    padding: clamp(90px, 14vw, 180px) 24px clamp(80px, 12vw, 160px);
+    margin: 0 !important;
+    max-width: none !important;
+    width: 100vw;
+    position: relative;
+    overflow: hidden;
+}
+
+#jinr-posttop-widget-area::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 15% 20%, rgba(184, 147, 90, .16), transparent 55%),
+        radial-gradient(ellipse at 85% 80%, rgba(184, 147, 90, .1), transparent 55%),
+        linear-gradient(135deg, rgba(255, 255, 255, .02) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* Decorative cross motif — subtle medical symbol */
+#jinr-posttop-widget-area::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -120px;
+    width: 520px;
+    height: 520px;
+    transform: translateY(-50%);
+    background-image:
+        linear-gradient(var(--gm-gold), var(--gm-gold)),
+        linear-gradient(var(--gm-gold), var(--gm-gold));
+    background-size: 2px 520px, 520px 2px;
+    background-position: center, center;
+    background-repeat: no-repeat;
+    opacity: .08;
+    border-radius: 50%;
+    border: 1px solid rgba(184, 147, 90, .22);
+    pointer-events: none;
+}
+
+#jinr-posttop-widget-area-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+#jinr-posttop-widget-area h1,
+#jinr-posttop-widget-area h2,
+#jinr-posttop-widget-area h3,
+#jinr-posttop-widget-area p,
+#jinr-posttop-widget-area a {
+    color: var(--gm-ivory) !important;
+}
+
+#jinr-posttop-widget-area h1,
+#jinr-posttop-widget-area h2,
+#jinr-posttop-widget-area .widget_title,
+#jinr-posttop-widget-area .widgettitle {
+    font-family: var(--gm-serif) !important;
+    font-size: clamp(28px, 4.4vw, 56px) !important;
+    font-weight: 600 !important;
+    line-height: 1.45 !important;
+    letter-spacing: .08em !important;
+    margin-bottom: .6em !important;
+    text-shadow: 0 2px 30px rgba(0, 0, 0, .25);
+}
+
+#jinr-posttop-widget-area .widget_title::before,
+#jinr-posttop-widget-area h2::before {
+    content: "";
+    display: block;
+    width: 54px;
+    height: 1px;
+    background: var(--gm-gold);
+    margin-bottom: 28px;
+}
+
+#jinr-posttop-widget-area p {
+    font-size: clamp(14px, 1.2vw, 17px);
+    line-height: 2.05;
+    letter-spacing: .08em;
+    max-width: 640px;
+    opacity: .92;
+}
+
+/* Hero prologue mark — GYOSEI MEDICAL eyebrow */
+#jinr-posttop-widget-area-inner::before {
+    content: "— GYOSEI MEDICAL NETWORK —";
+    display: block;
+    font-family: var(--gm-latin);
+    font-size: 13px;
+    letter-spacing: .42em;
+    color: var(--gm-gold-soft);
+    margin-bottom: 22px;
+    font-weight: 500;
+}
+
+/* =========================================================================
+   Post list / clinic cards
+   ========================================================================= */
+
+#mainContent {
+    padding: clamp(60px, 8vw, 110px) 0 clamp(80px, 10vw, 140px) !important;
+    background:
+        linear-gradient(180deg, var(--gm-ivory) 0%, var(--gm-ivory) 100%);
+}
+
+#mainContentInner {
+    max-width: 1180px !important;
+}
+
+/* Section preamble — inject an eyebrow before post list */
+#jinrPostList {
+    position: relative;
+    padding-top: 20px;
+}
+
+#jinrPostList::before {
+    content: "CLINIC DIRECTORY";
+    display: block;
+    font-family: var(--gm-latin);
+    font-size: 12px;
+    letter-spacing: .4em;
+    color: var(--gm-gold-2);
+    text-align: center;
+    margin-bottom: 14px;
+    font-weight: 600;
+}
+
+#jinrPostList::after {
+    content: "暁星OB医師ネットワーク";
+    display: block;
+    font-family: var(--gm-serif);
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 600;
+    color: var(--gm-navy);
+    text-align: center;
+    letter-spacing: .1em;
+    margin: 4px 0 54px;
+    position: absolute;
+    top: 28px;
+    left: 0;
+    right: 0;
+}
+
+#jinrPostList .o--postlist-inner {
+    margin-top: 120px;
+    gap: 32px !important;
+}
+
+/* Card — the whole thing */
+.new-post-list-item,
+.o--postlist-inner > article,
+#jinrPostList article {
+    background: #fff !important;
+    border: 1px solid var(--gm-hair) !important;
+    border-radius: 2px !important;
+    box-shadow: var(--gm-shadow-soft) !important;
+    overflow: hidden;
+    position: relative;
+    transition: transform .35s cubic-bezier(.2, .8, .2, 1), box-shadow .35s ease, border-color .35s ease;
+}
+
+.new-post-list-item::before,
+#jinrPostList article::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gm-gold) 0%, var(--gm-gold-soft) 50%, var(--gm-gold) 100%);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .5s ease;
+}
+
+.new-post-list-item:hover,
+#jinrPostList article:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--gm-shadow) !important;
+    border-color: var(--gm-hair-strong) !important;
+}
+
+.new-post-list-item:hover::before,
+#jinrPostList article:hover::before {
+    transform: scaleX(1);
+}
+
+/* Card thumbnail */
+.new-post-list-item .o--thumb,
+.new-post-list-item figure,
+#jinrPostList article figure,
+#jinrPostList article .o--thumb {
+    overflow: hidden;
+    position: relative;
+}
+
+.new-post-list-item img,
+#jinrPostList article img {
+    transition: transform .7s cubic-bezier(.2, .8, .2, 1);
+}
+
+.new-post-list-item:hover img,
+#jinrPostList article:hover img {
+    transform: scale(1.05);
+}
+
+/* Card text block */
+.new-post-list-item .o--postinfo,
+.new-post-list-item .post-info,
+#jinrPostList article .o--postinfo {
+    padding: 28px 28px 32px !important;
+}
+
+.new-post-list-item h2,
+.new-post-list-item h3,
+.new-post-list-item .post-title,
+#jinrPostList article h2,
+#jinrPostList article h3 {
+    font-family: var(--gm-serif) !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: var(--gm-navy) !important;
+    line-height: 1.6 !important;
+    letter-spacing: .04em !important;
+    margin: 0 0 12px !important;
+}
+
+.new-post-list-item .cat,
+.new-post-list-item .category,
+#jinrPostList article .cat {
+    display: inline-block;
+    font-family: var(--gm-sans);
+    font-size: 10px !important;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--gm-gold-2) !important;
+    background: transparent !important;
+    padding: 0 0 6px !important;
+    border: none !important;
+    border-bottom: 1px solid var(--gm-hair);
+    margin-bottom: 14px !important;
+    font-weight: 600;
+}
+
+.new-post-list-item .post-date,
+.new-post-list-item time,
+#jinrPostList article time {
+    font-family: var(--gm-latin) !important;
+    font-size: 12px !important;
+    color: var(--gm-mute) !important;
+    letter-spacing: .1em;
+}
+
+.new-post-list-item p,
+#jinrPostList article p {
+    font-size: 13.5px !important;
+    color: var(--gm-mute) !important;
+    line-height: 1.85 !important;
+}
+
+/* =========================================================================
+   Buttons
+   ========================================================================= */
+
+.jinr-loadmore,
+.a--postlist-more,
+button.submit,
+.btn,
+input[type="submit"],
+.wp-block-button__link {
+    background: var(--gm-navy) !important;
+    color: var(--gm-ivory) !important;
+    font-family: var(--gm-sans) !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    letter-spacing: .22em !important;
+    padding: 18px 48px !important;
+    border: 1px solid var(--gm-navy) !important;
+    border-radius: 0 !important;
+    position: relative;
+    transition: background .3s ease, color .3s ease, border-color .3s ease, transform .3s ease;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.jinr-loadmore:hover,
+.a--postlist-more:hover,
+button.submit:hover,
+.btn:hover,
+input[type="submit"]:hover,
+.wp-block-button__link:hover {
+    background: var(--gm-gold) !important;
+    color: var(--gm-navy) !important;
+    border-color: var(--gm-gold) !important;
+    transform: translateY(-2px);
+}
+
+/* Pagination */
+.a--postlist-pagenation a,
+.page-numbers {
+    border: 1px solid var(--gm-hair) !important;
+    color: var(--gm-navy) !important;
+    font-family: var(--gm-latin) !important;
+    font-size: 15px !important;
+    background: #fff !important;
+    border-radius: 0 !important;
+    width: 44px;
+    height: 44px;
+    line-height: 44px !important;
+    transition: all .3s ease;
+}
+
+.a--postlist-pagenation a:hover,
+.page-numbers:hover,
+.page-numbers.current {
+    background: var(--gm-navy) !important;
+    color: var(--gm-ivory) !important;
+    border-color: var(--gm-navy) !important;
+}
+
+/* =========================================================================
+   Sidebar / widgets
+   ========================================================================= */
+
+#sidebar,
+.widget {
+    font-family: var(--gm-sans);
+}
+
+.widget_title,
+.widgettitle {
+    font-family: var(--gm-serif) !important;
+    font-size: 18px !important;
+    color: var(--gm-navy) !important;
+    padding-bottom: 14px !important;
+    margin-bottom: 22px !important;
+    position: relative;
+    border: none !important;
+}
+
+.widget_title::after,
+.widgettitle::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 1px;
+    background: var(--gm-gold);
+}
+
+.widget ul li,
+.widget_categories li,
+.widget_archive li {
+    border-bottom: 1px dashed var(--gm-hair) !important;
+    padding: 12px 0 !important;
+}
+
+/* =========================================================================
+   Single / article pages
+   ========================================================================= */
+
+.single #mainContent,
+.page #mainContent {
+    padding-top: 80px !important;
+}
+
+.single #jinrArticle,
+.page #jinrArticle {
+    background: #fff;
+    padding: clamp(40px, 6vw, 80px) clamp(24px, 5vw, 72px);
+    border: 1px solid var(--gm-hair);
+    box-shadow: var(--gm-shadow-soft);
+}
+
+.single .entry-title,
+.page .entry-title,
+.single h1.post-title,
+.page h1.post-title {
+    font-family: var(--gm-serif) !important;
+    font-size: clamp(26px, 3.6vw, 40px) !important;
+    color: var(--gm-navy) !important;
+    line-height: 1.55 !important;
+    letter-spacing: .06em;
+    padding-bottom: 28px;
+    margin-bottom: 34px;
+    border-bottom: 1px solid var(--gm-hair);
+    position: relative;
+}
+
+.single .entry-title::before,
+.page .entry-title::before {
+    content: "";
+    display: block;
+    width: 44px;
+    height: 1px;
+    background: var(--gm-gold);
+    margin-bottom: 20px;
+}
+
+/* =========================================================================
+   Footer
+   ========================================================================= */
+
+#commonFooter,
+footer#commonFooter {
+    background: var(--gm-navy) !important;
+    color: var(--gm-ivory) !important;
+    padding: 80px 24px 40px !important;
+    border-top: 3px solid var(--gm-gold);
+    position: relative;
+}
+
+#commonFooter::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent 0%, var(--gm-gold) 20%, var(--gm-gold-soft) 50%, var(--gm-gold) 80%, transparent 100%);
+}
+
+#commonFooter *,
+#commonFooter a,
+#commonFooter p,
+#commonFooter h1,
+#commonFooter h2,
+#commonFooter h3,
+#commonFooter .widgettitle,
+#commonFooter .widget_title {
+    color: var(--gm-ivory) !important;
+}
+
+#commonFooter a {
+    transition: color .25s ease;
+}
+
+#commonFooter a:hover {
+    color: var(--gm-gold-soft) !important;
+}
+
+#commonFooter .widgettitle,
+#commonFooter .widget_title {
+    font-family: var(--gm-serif) !important;
+    font-size: 15px !important;
+    letter-spacing: .14em;
+}
+
+#commonFooter .copyright,
+#commonFooter .footer-copyright {
+    font-family: var(--gm-latin) !important;
+    font-size: 11px !important;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    opacity: .7;
+    padding-top: 30px;
+    margin-top: 40px;
+    border-top: 1px solid rgba(184, 147, 90, .25);
+}
+
+/* =========================================================================
+   Forms
+   ========================================================================= */
+
+input[type="text"],
+input[type="email"],
+input[type="search"],
+textarea,
+select {
+    background: #fff !important;
+    border: 1px solid var(--gm-hair) !important;
+    border-radius: 0 !important;
+    padding: 14px 18px !important;
+    font-family: var(--gm-sans) !important;
+    color: var(--gm-ink) !important;
+    transition: border-color .25s ease, box-shadow .25s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="search"]:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--gm-gold) !important;
+    box-shadow: 0 0 0 3px rgba(184, 147, 90, .14) !important;
+    outline: none !important;
+}
+
+/* =========================================================================
+   Decorative: scroll reveal (handled by brushup.js)
+   ========================================================================= */
+
+.gm-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .9s ease, transform .9s cubic-bezier(.2, .8, .2, 1);
+}
+
+.gm-reveal.is-in {
+    opacity: 1;
+    transform: none;
+}
+
+/* =========================================================================
+   Responsive refinements
+   ========================================================================= */
+
+@media (max-width: 900px) {
+    #jinr-posttop-widget-area {
+        padding: 80px 20px 70px;
+    }
+
+    #jinr-posttop-widget-area-inner::before {
+        font-size: 11px;
+        letter-spacing: .32em;
+    }
+
+    #jinrPostList::after {
+        font-size: 22px;
+    }
+
+    #jinrPostList .o--postlist-inner {
+        margin-top: 100px;
+        gap: 22px !important;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        letter-spacing: .01em;
+    }
+
+    .new-post-list-item .o--postinfo,
+    #jinrPostList article .o--postinfo {
+        padding: 22px 20px 26px !important;
+    }
+}
