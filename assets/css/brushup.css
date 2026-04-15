@@ -90,16 +90,26 @@ a { color: var(--gm-navy); text-decoration: none; transition: color .25s ease; }
 a:hover { color: var(--gm-gold-2); }
 
 /* =========================================================================
-   Header (#header, #header_top)
+   Header (#header, #header_top) — black top bar
    ========================================================================= */
 
 #header,
-#header_top {
-    background: rgba(250, 247, 241, .94) !important;
-    backdrop-filter: saturate(140%) blur(14px);
-    -webkit-backdrop-filter: saturate(140%) blur(14px);
-    border-bottom: 1px solid var(--gm-hair) !important;
-    box-shadow: 0 6px 30px -24px rgba(10, 31, 61, .3);
+#header_top,
+#header_logo,
+#header_logo_fix {
+    background: #000 !important;
+    background-color: #000 !important;
+    border-bottom: 1px solid rgba(184, 147, 90, .5) !important;
+    box-shadow: 0 6px 30px -24px rgba(0, 0, 0, .6);
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+#header *,
+#header_top *,
+#header_logo *,
+#header_logo_fix * {
+    color: var(--gm-ivory) !important;
 }
 
 #header_logo .logo,
@@ -107,8 +117,14 @@ a:hover { color: var(--gm-gold-2); }
 .logo.rich_font,
 .logo_area .logo {
     font-family: var(--gm-latin), var(--gm-serif) !important;
-    color: var(--gm-navy) !important;
+    color: var(--gm-ivory) !important;
     letter-spacing: .12em;
+}
+
+#header_logo .logo img,
+#header_logo_fix .logo img,
+.logo_retina img {
+    filter: brightness(0) invert(1);
 }
 
 #header #menu a,
@@ -116,11 +132,11 @@ a:hover { color: var(--gm-gold-2); }
 #header nav a,
 #header_top .menu a,
 #header_top nav a,
-.menu-item > a {
+#header .menu-item > a {
     font-family: var(--gm-sans) !important;
     font-size: 13px !important;
     letter-spacing: .18em;
-    color: var(--gm-navy) !important;
+    color: var(--gm-ivory) !important;
     font-weight: 500;
     position: relative;
     padding: 10px 14px !important;
@@ -129,7 +145,7 @@ a:hover { color: var(--gm-gold-2); }
 
 #header .menu a::after,
 #header_top .menu a::after,
-.menu-item > a::after {
+#header .menu-item > a::after {
     content: "";
     position: absolute;
     left: 14px;
@@ -144,21 +160,35 @@ a:hover { color: var(--gm-gold-2); }
 
 #header .menu a:hover::after,
 #header_top .menu a:hover::after,
-.menu-item > a:hover::after { transform: scaleX(1); }
+#header .menu-item > a:hover::after { transform: scaleX(1); }
+
+#header .menu a:hover,
+#header_top .menu a:hover { color: var(--gm-gold-soft) !important; }
 
 /* Header search box */
 #index_header_search,
 .header_search_inputs {
-    background: rgba(255, 255, 255, .92) !important;
-    border: 1px solid var(--gm-hair) !important;
+    background: rgba(20, 20, 20, .92) !important;
+    border: 1px solid rgba(184, 147, 90, .4) !important;
     border-radius: 0 !important;
-    box-shadow: var(--gm-shadow-soft);
+    box-shadow: 0 6px 20px -10px rgba(0, 0, 0, .6);
+    color: var(--gm-ivory) !important;
+}
+
+#index_header_search input[type="text"],
+#index_header_search select,
+.header_search_inputs input[type="text"],
+.header_search_inputs select {
+    background: transparent !important;
+    color: var(--gm-ivory) !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(184, 147, 90, .3) !important;
 }
 
 #header_search_submit,
 .header_search_button {
-    background: var(--gm-navy) !important;
-    color: var(--gm-ivory) !important;
+    background: var(--gm-gold) !important;
+    color: #000 !important;
     border: none !important;
     border-radius: 0 !important;
     font-family: var(--gm-sans) !important;
@@ -169,8 +199,8 @@ a:hover { color: var(--gm-gold-2); }
 
 #header_search_submit:hover,
 .header_search_button:hover {
-    background: var(--gm-gold) !important;
-    color: var(--gm-navy) !important;
+    background: var(--gm-gold-soft) !important;
+    color: #000 !important;
 }
 
 /* =========================================================================
@@ -332,21 +362,99 @@ a:hover { color: var(--gm-gold-2); }
     padding: 14px 0 !important;
 }
 
-.newsticker,
-.newsticker-list,
-.newsticker-item {
+#index_news .inner,
+#index_news_mobile .inner {
+    display: flex !important;
+    align-items: center !important;
+    gap: 24px !important;
+    max-width: 1200px;
+    margin: 0 auto !important;
+    padding: 0 20px !important;
+}
+
+#index_news .newsticker,
+#index_news_mobile .newsticker {
+    flex: 1 1 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 18px !important;
+    min-width: 0;
     color: var(--gm-navy) !important;
     font-family: var(--gm-sans) !important;
     font-size: 13px;
     letter-spacing: .06em;
+    margin: 0 !important;
+}
+
+#index_news .newsticker-list {
+    flex: 1 1 auto !important;
+    min-width: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+}
+
+.newsticker-item {
+    list-style: none !important;
+    padding: 2px 0 !important;
 }
 
 .newsticker-item a {
     color: var(--gm-navy) !important;
     transition: color .25s ease;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
 }
 
 .newsticker-item a:hover { color: var(--gm-gold-2) !important; }
+
+.newsticker-item .entry-date {
+    flex: 0 0 auto;
+    font-family: var(--gm-latin) !important;
+    font-size: 12px !important;
+    color: var(--gm-gold-2) !important;
+    letter-spacing: .08em !important;
+    border-right: 1px solid var(--gm-hair);
+    padding-right: 14px;
+}
+
+/* お知らせ一覧 archive link — align flush right, unify with black bar */
+#index_news .archive_link {
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#index_news .archive_link a,
+.cb_content-blog_list .archive_link a {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    background: #000 !important;
+    color: var(--gm-ivory) !important;
+    font-family: var(--gm-sans) !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    letter-spacing: .22em !important;
+    text-transform: uppercase;
+    padding: 10px 24px !important;
+    border: 1px solid var(--gm-gold) !important;
+    border-radius: 0 !important;
+    line-height: 1 !important;
+    white-space: nowrap;
+    height: auto !important;
+    width: auto !important;
+    transition: background .3s ease, color .3s ease;
+}
+
+#index_news .archive_link a:hover,
+.cb_content-blog_list .archive_link a:hover {
+    background: var(--gm-gold) !important;
+    color: #000 !important;
+    transform: none !important;
+}
 
 /* =========================================================================
    Main contents (#main_contents, #main_col, #post_list)
@@ -870,15 +978,122 @@ input[type="submit"]:hover,
 }
 
 #footer_nav {
-    padding: 0 20px !important;
+    padding: 20px !important;
+    max-width: 1200px;
+    margin: 0 auto !important;
+}
+
+#footer_nav .inner {
+    padding: 0 !important;
+    max-width: none !important;
+}
+
+.footer_nav_cols {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 40px !important;
 }
 
 .footer_nav_col {
-    border-left: 1px solid rgba(184, 147, 90, .2) !important;
-    padding-left: 28px !important;
+    flex: 1 1 380px !important;
+    border-left: none !important;
+    padding-left: 0 !important;
+    min-width: 0;
 }
 
 .footer_nav_col:first-child { border-left: none !important; padding-left: 0 !important; }
+
+/* Section headlines (診療科目 / エリア) — override inline TCD backgrounds */
+.footer_nav_col .headline,
+.footer_nav_col > .headline[style] {
+    background: transparent !important;
+    color: var(--gm-ivory) !important;
+    font-family: var(--gm-serif) !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    letter-spacing: .14em !important;
+    padding: 0 0 14px 0 !important;
+    margin: 0 0 20px !important;
+    border-bottom: 1px solid rgba(184, 147, 90, .35) !important;
+    position: relative;
+    text-align: left !important;
+}
+
+.footer_nav_col .headline::before {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--gm-gold);
+    vertical-align: middle;
+    margin-right: 12px;
+}
+
+/* Category / area item lists — pill tags */
+.footer_nav_col ul,
+.footer_nav_col ul.clearfix {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 8px 8px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+}
+
+.footer_nav_col ul li {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    float: none !important;
+    border: none !important;
+    display: inline-flex;
+}
+
+.footer_nav_col ul li a {
+    display: inline-block !important;
+    padding: 7px 14px !important;
+    font-family: var(--gm-sans) !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    letter-spacing: .04em !important;
+    line-height: 1.5 !important;
+    color: var(--gm-ivory) !important;
+    background: transparent !important;
+    border: 1px solid rgba(184, 147, 90, .55) !important;
+    border-radius: 2px !important;
+    transition: background .25s ease, color .25s ease, border-color .25s ease, transform .25s ease;
+    white-space: nowrap;
+}
+
+.footer_nav_col ul li a:hover {
+    background: var(--gm-gold) !important;
+    color: #000 !important;
+    border-color: var(--gm-gold) !important;
+    transform: translateY(-1px);
+}
+
+/* 診療科目 (footer_nav_category) → navy-tinted pills */
+.footer_nav_category ul li a {
+    background: rgba(27, 58, 102, .35) !important;
+    border-color: rgba(184, 147, 90, .45) !important;
+}
+
+.footer_nav_category ul li a:hover {
+    background: var(--gm-gold) !important;
+    border-color: var(--gm-gold) !important;
+}
+
+/* エリア (footer_nav_category2) → gold outline */
+.footer_nav_category2 ul li a {
+    background: transparent !important;
+    border-color: var(--gm-gold) !important;
+    color: var(--gm-gold-soft) !important;
+}
+
+.footer_nav_category2 ul li a:hover {
+    background: var(--gm-gold) !important;
+    color: #000 !important;
+}
 
 #footer_social_link .facebook,
 #footer_social_link .insta {
@@ -892,15 +1107,29 @@ input[type="submit"]:hover,
 }
 
 #copyright {
-    background: #050F20 !important;
-    color: rgba(250, 247, 241, .72) !important;
-    font-family: var(--gm-latin) !important;
+    background: #000 !important;
+    color: rgba(250, 247, 241, .7) !important;
+    font-family: var(--gm-sans) !important;
     font-size: 11px !important;
-    letter-spacing: .22em;
-    text-transform: uppercase;
-    padding: 26px 0 !important;
-    margin-top: 50px;
+    letter-spacing: .08em !important;
+    text-transform: none;
+    padding: 20px !important;
+    margin: 0 !important;
     border-top: 1px solid rgba(184, 147, 90, .25);
+    text-align: center !important;
+    line-height: 1.6 !important;
+}
+
+#copyright .inner,
+#copyright p,
+#copyright a {
+    max-width: 1200px;
+    margin: 0 auto !important;
+    padding: 0 !important;
+}
+
+#footer_contents {
+    padding-bottom: 50px !important;
 }
 
 /* =========================================================================
