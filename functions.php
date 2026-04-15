@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('GYOSEI_CHILD_VERSION', '1.20.0');
+define('GYOSEI_CHILD_VERSION', '1.21.0');
 
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style(
@@ -428,6 +428,14 @@ function gyosei_force_https_rewrite($html) {
         $html = preg_replace(
             '#(<div id="cb_1"[^>]*cb_content-wysiwyg[^>]*>\s*<div class="inner">\s*<div class=")(\s*clearfix)(")#u',
             '$1$2 gm-home-banners$3',
+            $html
+        );
+
+        // Tag each `<div class="">` banner child with gm-home-banner-item so the
+        // card border/shadow CSS hooks even before the JS relabel runs.
+        $html = preg_replace(
+            '#<div class=""(\s+style="padding-bottom:\s*30px[^"]*")?>#u',
+            '<div class="gm-home-banner-item"$1>',
             $html
         );
 

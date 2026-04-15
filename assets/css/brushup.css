@@ -957,7 +957,7 @@ body.search #post_list {
     border: 1px solid var(--gm-hair) !important;
     border-radius: 2px !important;
     box-shadow: var(--gm-shadow-soft) !important;
-    overflow: hidden !important;
+    overflow: visible !important;
     position: relative;
     transition: transform .35s cubic-bezier(.2, .8, .2, 1), box-shadow .35s ease, border-color .35s ease;
     display: flex !important;
@@ -966,6 +966,12 @@ body.search #post_list {
     padding: 0 !important;
     width: auto !important;
     float: none !important;
+    min-height: 0;
+}
+
+#post_list .article > .image,
+#post_list li.article > .image {
+    overflow: hidden;
 }
 
 #post_list .article::before {
@@ -1292,8 +1298,12 @@ span.cat-category3,
 li.cat .cat-category3,
 #post_list .article .cat-category3,
 #post_list2 .article .cat-category3,
-.cb_content-blog_list .cat-category3 {
+.cb_content-blog_list .cat-category3,
+#post_list .article ul.meta li.cat a.cat-category3,
+#post_list .article ul.meta li.cat:nth-child(3) a {
     display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
     background: var(--gm-forest) !important;
     color: #fff !important;
     padding: 4px 10px !important;
@@ -1304,6 +1314,23 @@ li.cat .cat-category3,
     line-height: 1.5 !important;
     border-radius: 2px !important;
     border: none !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: none !important;
+    max-height: none !important;
+    position: static !important;
+    clip: auto !important;
+    clip-path: none !important;
+}
+
+#post_list .article ul.meta li.cat a.cat-category3 span,
+#post_list .article ul.meta li.cat:nth-child(3) a span {
+    display: inline !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: #fff !important;
+    font-size: 10.5px !important;
+    font-family: var(--gm-sans) !important;
 }
 
 #post_list .article .entry-date,
@@ -2425,14 +2452,18 @@ select:focus {
     float: none !important;
 }
 
-.gm-home-banners > .gm-home-banner-item {
-    display: block !important;
+.gm-home-banners > .gm-home-banner-item,
+.gm-home-banners > div.gm-home-banner-item {
+    display: flex !important;
+    flex-direction: column;
     padding: 0 !important;
     margin: 0 !important;
-    background: #fff;
-    border: 1px solid var(--gm-hair);
-    box-shadow: var(--gm-shadow-soft);
+    background: #fff !important;
+    border: 1px solid var(--gm-hair) !important;
+    box-shadow: var(--gm-shadow-soft) !important;
     transition: transform .3s ease, box-shadow .3s ease;
+    overflow: hidden;
+    min-height: 220px;
 }
 
 .gm-home-banners > .gm-home-banner-item:hover {
