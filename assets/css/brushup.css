@@ -1159,16 +1159,29 @@ body.search #post_list .article h2.title::before {
     transform: scale(1.06);
 }
 
-#post_list .article .wp-block-column p.title {
+#post_list .article .wp-block-column p.title,
+#post_list .article .wp-block-column p.title.js-ellipsis {
     font-family: var(--gm-serif) !important;
     font-size: 22px !important;
-    line-height: 1.4 !important;
+    line-height: 1.45 !important;
     letter-spacing: .05em !important;
     color: var(--gm-navy) !important;
     margin: 0 !important;
     padding: 0 !important;
     text-align: center !important;
     font-weight: 600;
+    white-space: normal !important;
+    text-overflow: clip !important;
+    overflow: visible !important;
+    max-height: none !important;
+    -webkit-line-clamp: unset !important;
+    line-clamp: unset !important;
+    display: block !important;
+    visibility: visible !important;
+}
+
+#post_list .article .wp-block-column p.title br {
+    display: block !important;
 }
 
 #post_list .article .wp-block-column p.title strong {
@@ -1248,11 +1261,33 @@ body.search #post_list .article h2.title::before {
 #post_list .article ul.meta li.cat a span,
 .cb_content-blog_list ul.meta li.cat a span {
     background: transparent !important;
+    background-color: transparent !important;
     color: inherit !important;
     padding: 0 !important;
+    margin: 0 !important;
     border: none !important;
     font-size: inherit !important;
     letter-spacing: inherit !important;
+    min-width: 0 !important;
+    width: auto !important;
+    line-height: inherit !important;
+    display: inline !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Explicit text color on inner span per tag type (parent theme's color:#fff leaks in) */
+#post_list .article ul.meta li.cat a.cat-category span {
+    color: #fff !important;
+}
+
+#post_list .article ul.meta li.cat a.cat-category2 span {
+    color: var(--gm-navy) !important;
+}
+
+#post_list .article ul.meta li.cat a.cat-category3 span,
+#post_list .article ul.meta li.cat:nth-child(3) a span {
+    color: var(--gm-navy) !important;
 }
 
 #post_list .article ul.meta li.cat a:hover,

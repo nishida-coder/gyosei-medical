@@ -409,6 +409,27 @@
         });
     }
 
+    // TCD's jquery.textOverflowEllipsis.js plugin strips <br> content out of
+    // .title.js-ellipsis and replaces innerHTML with truncated text, keeping the
+    // original in a data-original attribute. For #post_list clinic cards we NEED
+    // the full name + "(08年卒)" line — so restore from data-original and strip
+    // the js-ellipsis hook class.
+    function restoreTitleText() {
+        var titles = document.querySelectorAll("#post_list .article p.title, #post_list .article h2.title, #post_list .article h3.title");
+        Array.prototype.forEach.call(titles, function (p) {
+            var orig = p.getAttribute("data-original");
+            if (orig && (!p.innerHTML || p.innerHTML.length < orig.length)) {
+                p.innerHTML = orig;
+            }
+            p.classList.remove("js-ellipsis");
+            p.style.whiteSpace = "normal";
+            p.style.textOverflow = "clip";
+            p.style.overflow = "visible";
+            p.style.maxHeight = "none";
+            p.style.webkitLineClamp = "unset";
+        });
+    }
+
     ready(function () {
         forceHeroVisible();
         setTimeout(forceHeroVisible, 0);
@@ -420,6 +441,15 @@
         patchClinicYouTube();
         restructureHomeBanners();
         enrichArchiveCards();
+
+        // Run title restore AFTER TCD's ellipsis plugin (which fires on resize + ready)
+        setTimeout(restoreTitleText, 100);
+        setTimeout(restoreTitleText, 500);
+        setTimeout(restoreTitleText, 1500);
+        setTimeout(restoreTitleText, 3000);
+        window.addEventListener("resize", function () {
+            setTimeout(restoreTitleText, 50);
+        });
 
         var targets = document.querySelectorAll(
             "#post_list .article, #main_contents h2, #main_contents h3, .widget, #post_list2 .article"

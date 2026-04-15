@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('GYOSEI_CHILD_VERSION', '1.26.0');
+define('GYOSEI_CHILD_VERSION', '1.27.0');
 
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style(
@@ -399,6 +399,13 @@ function gyosei_force_https_rewrite($html) {
         'https://www.gyosei-medical.com/',
     ];
     $html = str_replace($patterns, $replace, $html);
+
+    // 1.5) Hero headline: insert line break after "、" for mobile legibility
+    $html = str_replace(
+        '暁星からつながる、安心の医療ネットワーク',
+        '暁星からつながる、<br>安心の医療ネットワーク',
+        $html
+    );
 
     // 2) On the homepage, restructure the bottom banner strip:
     //    - remove the "OB医師の方へ" banner entirely
