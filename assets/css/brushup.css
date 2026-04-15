@@ -1160,11 +1160,13 @@ body.search #post_list .article h2.title::before {
 }
 
 #post_list .article .wp-block-column p.title,
-#post_list .article .wp-block-column p.title.js-ellipsis {
+#post_list .article .wp-block-column p.title.js-ellipsis,
+#post_list .article .wp-block-column p.title.gm-preserve,
+#post_list .article .wp-block-column p.gm-preserve {
     font-family: var(--gm-serif) !important;
-    font-size: 22px !important;
+    font-size: 20px !important;
     line-height: 1.45 !important;
-    letter-spacing: .05em !important;
+    letter-spacing: .04em !important;
     color: var(--gm-navy) !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -1180,8 +1182,17 @@ body.search #post_list .article h2.title::before {
     visibility: visible !important;
 }
 
-#post_list .article .wp-block-column p.title br {
+#post_list .article .wp-block-column p.title br,
+#post_list .article .wp-block-column p.gm-preserve br {
     display: block !important;
+    content: " ";
+    margin: 2px 0;
+}
+
+/* The "(XX年卒)" tail line slightly smaller and muted */
+#post_list .article .wp-block-column p.gm-preserve strong {
+    font-weight: 600 !important;
+    display: inline;
 }
 
 #post_list .article .wp-block-column p.title strong {
@@ -1442,8 +1453,6 @@ li.cat .cat-category3,
    Global buttons
    ========================================================================= */
 
-.archive_link,
-.archive_link a,
 button.submit,
 .btn,
 input[type="submit"],
@@ -1463,8 +1472,6 @@ input[type="submit"],
     display: inline-block;
 }
 
-.archive_link:hover,
-.archive_link a:hover,
 button.submit:hover,
 .btn:hover,
 input[type="submit"]:hover,

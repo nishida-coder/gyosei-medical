@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('GYOSEI_CHILD_VERSION', '1.27.0');
+define('GYOSEI_CHILD_VERSION', '1.28.0');
 
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style(
@@ -404,6 +404,26 @@ function gyosei_force_https_rewrite($html) {
     $html = str_replace(
         '暁星からつながる、安心の医療ネットワーク',
         '暁星からつながる、<br>安心の医療ネットワーク',
+        $html
+    );
+
+    // 1.6) Strip `js-ellipsis` class from clinic-card doctor-name <p> so TCD's
+    //      jquery.textOverflowEllipsis.js plugin cannot touch them. The plugin
+    //      hooks on `.js-ellipsis` and replaces innerHTML with a truncated
+    //      version (losing the `<br>(XX年卒)` line). By renaming the class
+    //      server-side, the plugin's selector finds nothing to chew on.
+    $html = preg_replace_callback(
+        '#<p class="title js-ellipsis"([^>]*)>(.*?)</p>#us',
+        function ($m) {
+            $inner = $m[2];
+            // Only rename if the content looks like a doctor-name line (contains
+            // 年卒 or has a <br>). Clinic name titles don't contain these so
+            // TCD's ellipsis on those long names is left untouched.
+            if (strpos($inner, '年卒') !== false || preg_match('#<br\s*/?>#', $inner)) {
+                return '<p class="title gm-preserve"' . $m[1] . '>' . $inner . '</p>';
+            }
+            return $m[0];
+        },
         $html
     );
 
