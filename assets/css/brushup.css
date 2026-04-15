@@ -455,8 +455,8 @@ body.header_fix #header {
     position: absolute;
     inset: 0;
     background:
-        linear-gradient(180deg, rgba(10, 31, 61, .25) 0%, rgba(10, 31, 61, .45) 60%, rgba(10, 31, 61, .62) 100%),
-        radial-gradient(ellipse at 20% 20%, rgba(184, 147, 90, .14), transparent 55%);
+        linear-gradient(180deg, rgba(10, 31, 61, .45) 0%, rgba(10, 31, 61, .6) 50%, rgba(10, 31, 61, .75) 100%),
+        radial-gradient(ellipse at center, rgba(0, 0, 0, .2) 0%, rgba(0, 0, 0, .4) 80%);
     pointer-events: none;
     z-index: 1;
 }
@@ -537,33 +537,43 @@ body.header_fix #header {
 #header_slider .caption h2.headline,
 #header_slider .caption p.headline {
     font-family: var(--gm-serif) !important;
-    font-size: clamp(20px, 2.6vw, 32px) !important;
-    font-weight: 600 !important;
-    color: var(--gm-ivory) !important;
+    font-size: clamp(22px, 2.8vw, 34px) !important;
+    font-weight: 700 !important;
+    color: #fff !important;
     line-height: 1.5 !important;
-    letter-spacing: .08em !important;
+    letter-spacing: .06em !important;
     margin: 0 0 14px !important;
-    text-shadow: 0 2px 30px rgba(0, 0, 0, .35);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, .85), 0 0 18px rgba(0, 0, 0, .45);
+    opacity: 1 !important;
+    filter: none !important;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
 #header_slider .caption .headline::after {
     content: "";
     display: block;
-    width: 44px;
-    height: 1px;
+    width: 52px;
+    height: 2px;
     background: var(--gm-gold);
-    margin: 14px auto;
+    margin: 16px auto;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .5);
 }
 
 #header_slider .caption .catchphrase {
     font-family: var(--gm-sans) !important;
-    font-size: clamp(12px, 1vw, 14px) !important;
-    color: var(--gm-ivory) !important;
-    line-height: 1.85 !important;
-    letter-spacing: .08em !important;
-    opacity: .92;
-    max-width: 680px;
+    font-size: clamp(13px, 1.1vw, 15px) !important;
+    color: #fff !important;
+    line-height: 1.9 !important;
+    letter-spacing: .06em !important;
+    font-weight: 500 !important;
+    opacity: 1 !important;
+    max-width: 720px;
     margin: 0 auto !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, .9), 0 0 12px rgba(0, 0, 0, .5);
+    filter: none !important;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
 #header_slider .caption .button,
@@ -662,6 +672,12 @@ body.header_fix #header {
     padding: 0 !important;
 }
 
+.cb_content-blog_list .archive_link {
+    margin-top: 50px !important;
+    padding: 30px 0 10px !important;
+    text-align: center;
+}
+
 #index_news .archive_link a,
 .cb_content-blog_list .archive_link a {
     display: inline-flex !important;
@@ -674,7 +690,7 @@ body.header_fix #header {
     font-weight: 500 !important;
     letter-spacing: .22em !important;
     text-transform: uppercase;
-    padding: 12px 26px !important;
+    padding: 14px 34px !important;
     border: none !important;
     border-radius: 0 !important;
     line-height: 1 !important;
@@ -682,6 +698,10 @@ body.header_fix #header {
     height: auto !important;
     width: auto !important;
     transition: background .3s ease, color .3s ease;
+}
+
+.cb_content-blog_list #post_list {
+    margin-bottom: 24px !important;
 }
 
 #index_news .archive_link a:hover,
@@ -1623,6 +1643,59 @@ a[href=""]:hover {
 }
 
 /* =========================================================================
+   Single page MEDIA section — unified beige background + URL overflow
+   ========================================================================= */
+
+/* JS-added class to wrap MEDIA heading in same beige as section */
+.gm-media-heading {
+    background: #F3F2E9 !important;
+    padding: 30px 25px 10px !important;
+    margin: 0 !important;
+    text-align: center !important;
+}
+
+.gm-media-heading p,
+.gm-media-heading P {
+    margin: 0 !important;
+    text-align: center !important;
+    color: var(--gm-navy) !important;
+    font-family: var(--gm-serif) !important;
+    letter-spacing: .12em !important;
+    font-size: 22px !important;
+}
+
+/* Section wrapping MEDIA items — extend beige consistently */
+#article > section[style*="F3F2E9"] {
+    padding: 30px 25px 40px !important;
+    margin: 0 !important;
+}
+
+/* MEDIA items — prevent URL overflow in the subtitle */
+#post_list2 .article .wp-block-column p,
+#post_list2 .article p.title,
+#post_list2 .article p {
+    word-break: break-all !important;
+    overflow-wrap: anywhere !important;
+    white-space: normal !important;
+}
+
+#post_list2 .article a {
+    word-break: break-all !important;
+    overflow-wrap: anywhere !important;
+    max-width: 100%;
+    display: inline-block;
+}
+
+#post_list2 .article .wp-block-column a p {
+    font-size: 12px !important;
+    color: var(--gm-gold-2) !important;
+    line-height: 1.6 !important;
+    margin: 6px 0 0 !important;
+    text-decoration: underline;
+    letter-spacing: 0 !important;
+}
+
+/* =========================================================================
    Sidebar / side_col widgets — ensure dropdowns and inputs are readable
    ========================================================================= */
 
@@ -2164,6 +2237,209 @@ select:focus {
 /* GENSEN's own fade-in class — refine timing */
 .inview-fadein {
     transition: opacity 1s ease, transform 1s cubic-bezier(.2, .8, .2, 1) !important;
+}
+
+/* =========================================================================
+   Home banners — 2 column layout (after JS restructure)
+   ========================================================================= */
+
+.gm-home-banners {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 28px !important;
+    max-width: 900px !important;
+    margin: 40px auto 10px !important;
+    padding: 0 20px !important;
+}
+
+.gm-home-banners > .gm-home-banner-item {
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #fff;
+    border: 1px solid var(--gm-hair);
+    box-shadow: var(--gm-shadow-soft);
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.gm-home-banners > .gm-home-banner-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--gm-shadow);
+}
+
+.gm-home-banners > .gm-home-banner-item center,
+.gm-home-banners > .gm-home-banner-item > * {
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+
+.gm-home-banners > .gm-home-banner-item a {
+    display: block;
+    line-height: 0;
+}
+
+.gm-home-banners > .gm-home-banner-item img {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    display: block;
+}
+
+.gm-home-banners > .gm-home-banner-item p {
+    font-family: var(--gm-serif) !important;
+    font-size: 14px !important;
+    color: var(--gm-navy) !important;
+    line-height: 1.6 !important;
+    padding: 14px 16px 4px !important;
+    margin: 0 !important;
+    text-align: center;
+    letter-spacing: .08em;
+}
+
+/* CTA button under banners */
+.gm-home-cta {
+    display: flex;
+    justify-content: center;
+    margin: 30px auto 60px;
+    padding: 0 20px;
+}
+
+.gm-home-cta-btn {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 18px;
+    padding: 22px 48px !important;
+    background: var(--gm-navy) !important;
+    color: #fff !important;
+    font-family: var(--gm-serif) !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    letter-spacing: .14em !important;
+    text-decoration: none !important;
+    border: 1px solid var(--gm-gold) !important;
+    border-radius: 0 !important;
+    transition: background .3s ease, transform .3s ease, color .3s ease;
+    box-shadow: 0 12px 30px -14px rgba(10, 31, 61, .35);
+    max-width: 640px;
+}
+
+.gm-home-cta-btn:hover {
+    background: var(--gm-gold) !important;
+    color: var(--gm-navy) !important;
+    transform: translateY(-3px);
+}
+
+.gm-home-cta-arrow {
+    font-size: 22px;
+    line-height: 1;
+    font-family: var(--gm-latin);
+    transition: transform .3s ease;
+}
+
+.gm-home-cta-btn:hover .gm-home-cta-arrow {
+    transform: translateX(6px);
+}
+
+@media (max-width: 720px) {
+    .gm-home-banners {
+        grid-template-columns: 1fr !important;
+        gap: 18px !important;
+    }
+
+    .gm-home-cta-btn {
+        font-size: 14px !important;
+        padding: 18px 24px !important;
+        letter-spacing: .1em !important;
+        width: 100%;
+    }
+}
+
+/* =========================================================================
+   Archive page cards — doctor-enriched view (JS injects photo + info)
+   ========================================================================= */
+
+body.archive #post_list .article .image.gm-archive-doctor,
+body.blog #post_list .article .image.gm-archive-doctor,
+body.search #post_list .article .image.gm-archive-doctor {
+    aspect-ratio: 1 / 1 !important;
+    background: var(--gm-ivory-2);
+    padding: 24px !important;
+    box-sizing: border-box;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+body.archive #post_list .article .image.gm-archive-doctor img,
+body.blog #post_list .article .image.gm-archive-doctor img,
+body.search #post_list .article .image.gm-archive-doctor img {
+    width: 75% !important;
+    height: 75% !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    border: 3px solid var(--gm-gold);
+    box-shadow: 0 10px 28px rgba(10, 31, 61, .22);
+    position: relative !important;
+    inset: auto !important;
+}
+
+body.archive #post_list .article h2.title.gm-archive-enriched,
+body.blog #post_list .article h2.title.gm-archive-enriched,
+body.search #post_list .article h2.title.gm-archive-enriched {
+    padding: 18px 20px 22px !important;
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column;
+    gap: 4px;
+    font-family: var(--gm-serif) !important;
+}
+
+body.archive #post_list .article h2.title.gm-archive-enriched::before,
+body.blog #post_list .article h2.title.gm-archive-enriched::before,
+body.search #post_list .article h2.title.gm-archive-enriched::before {
+    content: none !important;
+    display: none !important;
+}
+
+.gm-archive-doctor-name {
+    display: block;
+    font-family: var(--gm-serif) !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: var(--gm-navy) !important;
+    letter-spacing: .04em;
+    line-height: 1.4;
+}
+
+.gm-archive-grad {
+    font-size: 12px !important;
+    color: var(--gm-gold-2) !important;
+    letter-spacing: .02em;
+    font-weight: 500;
+}
+
+.gm-archive-specialty {
+    display: inline-block;
+    margin: 8px auto 4px !important;
+    padding: 4px 12px !important;
+    background: var(--gm-navy) !important;
+    color: #fff !important;
+    font-family: var(--gm-sans) !important;
+    font-size: 10px !important;
+    font-weight: 600;
+    letter-spacing: .08em;
+    border-radius: 2px;
+    align-self: center;
+}
+
+.gm-archive-clinic {
+    display: block;
+    font-family: var(--gm-sans) !important;
+    font-size: 11px !important;
+    color: var(--gm-mute) !important;
+    letter-spacing: .06em;
+    margin-top: 4px;
 }
 
 /* =========================================================================
