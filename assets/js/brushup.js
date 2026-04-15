@@ -253,36 +253,37 @@
     function relabelBanner(parent, imgMatch, title, subtitle) {
         var img = parent.querySelector('img[src*="' + imgMatch + '"]');
         if (!img) return;
-        var card = img;
-        while (card && card.parentNode && !card.classList.contains("gm-home-banner-item")) {
-            card = card.parentNode;
-        }
+        var card = img.closest
+            ? img.closest(".gm-home-banner-item")
+            : (function (el) {
+                while (el && el.nodeType === 1 && !el.classList.contains("gm-home-banner-item")) el = el.parentNode;
+                return el && el.nodeType === 1 ? el : null;
+            })(img);
         if (!card) return;
+        if (card.dataset && card.dataset.gmRelabeled === "1") return;
 
-        // Collect existing text nodes under the card and remove them (to replace with clean label)
-        var ps = card.querySelectorAll("p");
-        Array.prototype.forEach.call(ps, function (p) {
-            if (p.parentNode) p.parentNode.removeChild(p);
+        // IMPORTANT: only remove TEXT elements that do NOT contain the banner image/link.
+        // Browser auto-correction around TCD's malformed HTML can nest <img> inside <p>,
+        // so naive removal of all <p> would drop the image too.
+        var toRemove = [];
+        var textLikeSelectors = "p, P, br, center";
+        var all = card.querySelectorAll(textLikeSelectors);
+        Array.prototype.forEach.call(all, function (el) {
+            if (el.tagName === "BR") { toRemove.push(el); return; }
+            if (!el.querySelector("img, a")) toRemove.push(el);
         });
-        var brs = card.querySelectorAll("br");
-        Array.prototype.forEach.call(brs, function (b) {
-            if (b.parentNode) b.parentNode.removeChild(b);
-        });
-        var centers = card.querySelectorAll("center");
-        Array.prototype.forEach.call(centers, function (c) {
-            // Only remove text-only <center> (keep image center)
-            if (!c.querySelector("img, a")) {
-                if (c.parentNode) c.parentNode.removeChild(c);
-            }
+        toRemove.forEach(function (el) {
+            if (el.parentNode) el.parentNode.removeChild(el);
         });
 
-        // Append clean label block
+        // Append clean label block below the image
         var label = document.createElement("div");
         label.className = "gm-banner-label";
         label.innerHTML =
-            '<span class="gm-banner-title">' + escapeHtml(title) + '</span>' +
-            '<span class="gm-banner-sub">' + escapeHtml(subtitle) + '</span>';
+            '<span class="gm-banner-title">' + escapeHtml(title) + "</span>" +
+            '<span class="gm-banner-sub">' + escapeHtml(subtitle) + "</span>";
         card.appendChild(label);
+        if (card.dataset) card.dataset.gmRelabeled = "1";
     }
 
     // Archive / category / search pages: enrich each clinic card with doctor photo + name + grad year

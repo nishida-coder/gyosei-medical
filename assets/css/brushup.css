@@ -690,31 +690,34 @@ body.header_fix #header {
 }
 
 .cb_content-blog_list .archive_link {
-    margin-top: 50px !important;
-    padding: 30px 0 10px !important;
-    text-align: center;
+    margin-top: 40px !important;
+    padding: 20px 0 !important;
+    text-align: center !important;
+    display: block !important;
+    width: 100%;
 }
 
 #index_news .archive_link a,
 .cb_content-blog_list .archive_link a {
-    display: inline-flex !important;
-    align-items: center;
-    justify-content: center;
-    background: var(--gm-navy) !important;
-    color: var(--gm-ivory) !important;
+    display: inline-block !important;
+    background: #000 !important;
+    color: #fff !important;
     font-family: var(--gm-sans) !important;
-    font-size: 11px !important;
+    font-size: 12px !important;
     font-weight: 500 !important;
-    letter-spacing: .22em !important;
-    text-transform: uppercase;
-    padding: 14px 34px !important;
+    letter-spacing: .16em !important;
+    text-transform: none !important;
+    padding: 14px 36px !important;
     border: none !important;
     border-radius: 0 !important;
-    line-height: 1 !important;
+    line-height: 1.5 !important;
+    text-align: center !important;
     white-space: nowrap;
     height: auto !important;
     width: auto !important;
+    min-width: 160px;
     transition: background .3s ease, color .3s ease;
+    box-sizing: border-box;
 }
 
 .cb_content-blog_list #post_list {

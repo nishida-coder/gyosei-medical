@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('GYOSEI_CHILD_VERSION', '1.15.0');
+define('GYOSEI_CHILD_VERSION', '1.16.0');
 
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style(
@@ -47,3 +47,281 @@ add_action('wp_enqueue_scripts', function () {
         true
     );
 }, 20);
+
+/* =========================================================================
+ * SEO / GEO enhancements
+ * ========================================================================= */
+
+define('GYOSEI_SITE_NAME', 'GYOSEI MEDICAL');
+define('GYOSEI_SITE_TAGLINE', '暁星卒業生OB医師の病院・クリニック開業情報サイト');
+define('GYOSEI_SITE_DESC', '暁星学園を卒業され病院およびクリニックを開業されているOB医師の情報ポータル。診療科目、エリア、卒業年代から信頼できる医療機関を探せる暁星OB医師ネットワーク。');
+define('GYOSEI_OGP_IMAGE', 'https://gyosei-medical.com/wp-content/uploads/2025/03/GYOSEI-MEDICAL-logo_perfect-2.png');
+define('GYOSEI_CONTACT_EMAIL', 'info@gyosei-medical.com');
+
+/**
+ * Strip empty meta description tags output by the parent theme,
+ * then our own richer tags run later via wp_head hook.
+ */
+add_action('wp_head', function () { ob_start(); }, 0);
+add_action('wp_head', function () {
+    $head = ob_get_clean();
+    if (is_string($head) && $head !== '') {
+        $head = preg_replace(
+            '/<meta\s+name=["\']description["\']\s+content=["\']\s*["\']\s*\/?>\s*/i',
+            '',
+            $head
+        );
+        echo $head;
+    }
+}, PHP_INT_MAX);
+
+/**
+ * Build title/description/image/url context for the current page.
+ */
+function gyosei_seo_context() {
+    $ctx = [
+        'title'       => GYOSEI_SITE_NAME . ' | ' . GYOSEI_SITE_TAGLINE,
+        'description' => GYOSEI_SITE_DESC,
+        'image'       => GYOSEI_OGP_IMAGE,
+        'url'         => home_url('/'),
+        'type'        => 'website',
+    ];
+
+    if (is_front_page() || is_home()) {
+        // defaults above
+    } elseif (is_singular('post')) {
+        $clinic_title = get_the_title();
+        $cats = get_the_category();
+        $specialty = !empty($cats) ? $cats[0]->name : null;
+        $area = null;
+        $grad = null;
+        // Custom taxonomies for area + graduation year (TCD uses separate category taxonomies)
+        $tax_area = get_the_terms(get_the_ID(), 'category2');
+        if (!is_wp_error($tax_area) && !empty($tax_area)) { $area = $tax_area[0]->name; }
+        $tax_grad = get_the_terms(get_the_ID(), 'category3');
+        if (!is_wp_error($tax_grad) && !empty($tax_grad)) { $grad = $tax_grad[0]->name; }
+
+        $desc_parts = ['暁星学園OB医師が開業する「' . $clinic_title . '」の情報。'];
+        if ($specialty) $desc_parts[] = '診療科目：' . $specialty . '。';
+        if ($area) $desc_parts[] = 'エリア：' . $area . '。';
+        if ($grad) $desc_parts[] = '院長暁星卒業年代：' . $grad . '。';
+        $desc_parts[] = 'GYOSEI MEDICALは暁星卒業生OB医師の病院・クリニックを集約する情報サイトです。';
+
+        $ctx['title']       = $clinic_title . ' | ' . GYOSEI_SITE_NAME;
+        $ctx['description'] = mb_substr(implode('', $desc_parts), 0, 160);
+        $thumb = get_the_post_thumbnail_url(null, 'full');
+        if ($thumb) $ctx['image'] = $thumb;
+        $ctx['url']  = get_permalink();
+        $ctx['type'] = 'article';
+    } elseif (is_page()) {
+        $ctx['title']       = get_the_title() . ' | ' . GYOSEI_SITE_NAME;
+        $ctx['description'] = wp_strip_all_tags(get_the_excerpt()) ?: GYOSEI_SITE_DESC;
+        $ctx['description'] = mb_substr($ctx['description'], 0, 160);
+        $ctx['url']         = get_permalink();
+        $ctx['type']        = 'article';
+    } elseif (is_category() || is_tax() || is_archive()) {
+        $obj = get_queried_object();
+        $name = is_object($obj) && !empty($obj->name) ? $obj->name : '一覧';
+        $ctx['title']       = $name . ' | ' . GYOSEI_SITE_NAME;
+        $ctx['description'] = $name . 'に該当する暁星OB医師の病院・クリニック一覧。診療科目、エリア、卒業年代から検索できる暁星OB医師ネットワーク。';
+        $ctx['url']         = is_object($obj) ? get_term_link($obj) : home_url('/');
+    } elseif (is_search()) {
+        $q = get_search_query();
+        $ctx['title']       = '「' . $q . '」の検索結果 | ' . GYOSEI_SITE_NAME;
+        $ctx['description'] = '「' . $q . '」に該当する暁星OB医師の病院・クリニック検索結果。';
+    }
+    return $ctx;
+}
+
+/**
+ * Inject OGP, Twitter Card, and a meta description.
+ */
+add_action('wp_head', function () {
+    $ctx = gyosei_seo_context();
+    $title = esc_attr($ctx['title']);
+    $desc  = esc_attr($ctx['description']);
+    $image = esc_url($ctx['image']);
+    $url   = esc_url($ctx['url']);
+    $type  = esc_attr($ctx['type']);
+
+    echo "\n<!-- GYOSEI MEDICAL SEO -->\n";
+    echo '<meta name="description" content="' . $desc . '">' . "\n";
+    echo '<meta property="og:type" content="' . $type . '">' . "\n";
+    echo '<meta property="og:title" content="' . $title . '">' . "\n";
+    echo '<meta property="og:description" content="' . $desc . '">' . "\n";
+    echo '<meta property="og:url" content="' . $url . '">' . "\n";
+    echo '<meta property="og:image" content="' . $image . '">' . "\n";
+    echo '<meta property="og:site_name" content="' . esc_attr(GYOSEI_SITE_NAME) . '">' . "\n";
+    echo '<meta property="og:locale" content="ja_JP">' . "\n";
+    echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
+    echo '<meta name="twitter:title" content="' . $title . '">' . "\n";
+    echo '<meta name="twitter:description" content="' . $desc . '">' . "\n";
+    echo '<meta name="twitter:image" content="' . $image . '">' . "\n";
+}, 2);
+
+/**
+ * Override the document title for legibility across AI/search engines.
+ */
+add_filter('pre_get_document_title', function ($title) {
+    $ctx = gyosei_seo_context();
+    return $ctx['title'] ?: $title;
+}, 20);
+
+/**
+ * Inject JSON-LD structured data (Organization, WebSite, MedicalClinic, BreadcrumbList).
+ * Covers both classical SEO and GEO (LLM/Generative Engine) discovery.
+ */
+add_action('wp_head', function () {
+    $json_flags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
+
+    // Organization (site-wide)
+    $organization = [
+        '@context'     => 'https://schema.org',
+        '@type'        => 'Organization',
+        '@id'          => home_url('/#organization'),
+        'name'         => GYOSEI_SITE_NAME,
+        'alternateName'=> '暁星OB医師ネットワーク',
+        'url'          => home_url('/'),
+        'logo'         => [
+            '@type'  => 'ImageObject',
+            'url'    => GYOSEI_OGP_IMAGE,
+            'width'  => 800,
+            'height' => 200,
+        ],
+        'description'  => GYOSEI_SITE_DESC,
+        'email'        => GYOSEI_CONTACT_EMAIL,
+        'sameAs'       => [
+            'https://www.facebook.com/profile.php?id=61559697644215',
+            'https://www.instagram.com/gyosei_medical/',
+        ],
+    ];
+
+    // WebSite + SearchAction
+    $website = [
+        '@context'         => 'https://schema.org',
+        '@type'            => 'WebSite',
+        '@id'              => home_url('/#website'),
+        'name'             => GYOSEI_SITE_NAME,
+        'alternateName'    => '暁星OB医師の病院・クリニック情報サイト',
+        'url'              => home_url('/'),
+        'description'      => GYOSEI_SITE_DESC,
+        'inLanguage'       => 'ja',
+        'publisher'        => ['@id' => home_url('/#organization')],
+        'potentialAction'  => [
+            '@type'       => 'SearchAction',
+            'target'      => [
+                '@type'       => 'EntryPoint',
+                'urlTemplate' => home_url('/clinic/?search_cat1={search_term_string}'),
+            ],
+            'query-input' => 'required name=search_term_string',
+        ],
+    ];
+
+    echo "\n<!-- GYOSEI MEDICAL JSON-LD -->\n";
+    echo '<script type="application/ld+json">' . wp_json_encode($organization, $json_flags) . '</script>' . "\n";
+    echo '<script type="application/ld+json">' . wp_json_encode($website, $json_flags) . '</script>' . "\n";
+
+    // MedicalClinic per individual clinic page
+    if (is_singular('post')) {
+        $cats = get_the_category();
+        $specialty = !empty($cats) ? $cats[0]->name : null;
+
+        $area = null;
+        $tax_area = get_the_terms(get_the_ID(), 'category2');
+        if (!is_wp_error($tax_area) && !empty($tax_area)) { $area = $tax_area[0]->name; }
+
+        $thumb = get_the_post_thumbnail_url(null, 'full');
+
+        $clinic = [
+            '@context'         => 'https://schema.org',
+            '@type'            => 'MedicalClinic',
+            '@id'              => get_permalink() . '#clinic',
+            'name'             => get_the_title(),
+            'url'              => get_permalink(),
+            'description'      => '暁星学園OB医師が開業する' . ($specialty ?: '医療機関') . '。GYOSEI MEDICAL掲載。',
+            'parentOrganization' => [
+                '@type' => 'Organization',
+                'name'  => GYOSEI_SITE_NAME,
+                'url'   => home_url('/'),
+            ],
+            'isPartOf'         => ['@id' => home_url('/#website')],
+        ];
+        if ($thumb) {
+            $clinic['image'] = $thumb;
+        }
+        if ($specialty) {
+            $clinic['medicalSpecialty'] = $specialty;
+        }
+        if ($area) {
+            $clinic['areaServed'] = [
+                '@type' => 'AdministrativeArea',
+                'name'  => $area,
+            ];
+        }
+
+        echo '<script type="application/ld+json">' . wp_json_encode($clinic, $json_flags) . '</script>' . "\n";
+    }
+
+    // BreadcrumbList everywhere except the front page
+    if (!is_front_page()) {
+        $items = [
+            [
+                '@type'    => 'ListItem',
+                'position' => 1,
+                'name'     => 'ホーム',
+                'item'     => home_url('/'),
+            ],
+        ];
+        $pos = 2;
+        if (is_singular('post')) {
+            $items[] = [
+                '@type'    => 'ListItem',
+                'position' => $pos++,
+                'name'     => 'クリニック一覧',
+                'item'     => home_url('/clinic/'),
+            ];
+            $items[] = [
+                '@type'    => 'ListItem',
+                'position' => $pos++,
+                'name'     => get_the_title(),
+                'item'     => get_permalink(),
+            ];
+        } elseif (is_category() || is_tax()) {
+            $obj = get_queried_object();
+            if ($obj) {
+                $items[] = [
+                    '@type'    => 'ListItem',
+                    'position' => $pos++,
+                    'name'     => $obj->name,
+                    'item'     => get_term_link($obj),
+                ];
+            }
+        } elseif (is_page()) {
+            $items[] = [
+                '@type'    => 'ListItem',
+                'position' => $pos++,
+                'name'     => get_the_title(),
+                'item'     => get_permalink(),
+            ];
+        }
+
+        $breadcrumb = [
+            '@context'        => 'https://schema.org',
+            '@type'           => 'BreadcrumbList',
+            'itemListElement' => $items,
+        ];
+        echo '<script type="application/ld+json">' . wp_json_encode($breadcrumb, $json_flags) . '</script>' . "\n";
+    }
+}, 3);
+
+/**
+ * Hint AI crawlers explicitly via robots meta (complement robots.txt).
+ * Keeps standard max-image-preview + explicitly allows snippet generation.
+ */
+add_filter('wp_robots', function ($robots) {
+    $robots['max-image-preview'] = 'large';
+    $robots['max-snippet']       = -1;
+    $robots['max-video-preview'] = -1;
+    return $robots;
+});
+
