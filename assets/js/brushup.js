@@ -171,74 +171,26 @@
         });
     }
 
-    // Home page: restructure the 4 link banners (EATS / DENTAL / Reputation / OB医師へ)
-    // - Remove the OB医師の方へ banner
-    // - Convert layout to 2 columns via CSS class
-    // - Append a CTA button for 掲載申込
-    // - Relabel remaining banners with a clean title + sub structure
+    // Banner restructure (OB removal + 2-col class + CTA) is now handled server-side
+    // via functions.php `gyosei_force_https_rewrite`. JS only tags each surviving card
+    // and relabels them with clean title + sub text.
     function restructureHomeBanners() {
         if (!document.body.classList.contains("home")) return;
-
-        // Find the container holding the banners. TCD renders them as direct <div>
-        // children of the "clearfix" inside #cb_1 (cb_content-wysiwyg > inner).
-        var container =
-            document.querySelector(".cb_content-wysiwyg .inner > div.clearfix") ||
-            document.querySelector("#cb_1 .inner > div.clearfix") ||
-            document.querySelector("#cb_1 .inner");
-
-        if (!container) {
-            // Fallback: find any banner image and walk up to a div with 3+ div children
-            var anyImg = document.querySelector(
-                'img[src*="GYOSEI-EATS"], img[src*="GYOSEI-DENTAL"], img[src*="/2024/05/2-2.png"]'
-            );
-            if (!anyImg) return;
-            var node = anyImg;
-            while (node && node.parentNode) {
-                node = node.parentNode;
-                if (node.nodeType === 1 && node.tagName === "DIV") {
-                    var divKids = Array.prototype.filter.call(node.children, function (c) {
-                        return c.tagName === "DIV";
-                    });
-                    if (divKids.length >= 2) { container = node; break; }
-                }
-            }
-        }
+        var container = document.querySelector(".gm-home-banners");
         if (!container) return;
 
-        container.classList.add("gm-home-banners");
-
-        // Remove OB医師 banner (walk each direct div child, remove if contains that image)
-        var directDivs = Array.prototype.filter.call(container.children, function (c) {
-            return c.tagName === "DIV";
-        });
-        directDivs.forEach(function (d) {
-            if (d.querySelector('img[src*="OB医師"], img[src*="OB%E5%8C%BB%E5%B8%AB"]')) {
-                d.parentNode.removeChild(d);
+        // Tag each direct div child that contains an <img> as a banner card
+        var kids = Array.prototype.slice.call(container.children);
+        kids.forEach(function (c) {
+            if (c.tagName === "DIV" && c.querySelector("img")) {
+                c.classList.add("gm-home-banner-item");
             }
         });
 
-        // Tag surviving banner items
-        var survivors = Array.prototype.filter.call(container.children, function (c) {
-            return c.tagName === "DIV" && c.querySelector("img");
-        });
-        survivors.forEach(function (s) { s.classList.add("gm-home-banner-item"); });
-
-        // Append CTA once
-        if (!container.parentNode.querySelector(".gm-home-cta")) {
-            var cta = document.createElement("div");
-            cta.className = "gm-home-cta";
-            cta.innerHTML =
-                '<a href="/join/" class="gm-home-cta-btn">' +
-                '<span class="gm-home-cta-label">暁星OB医師で掲載をご希望の方はこちら</span>' +
-                '<span class="gm-home-cta-arrow">&rsaquo;</span>' +
-                "</a>";
-            container.parentNode.insertBefore(cta, container.nextSibling);
-        }
-
-        // Relabel
-        relabelBanner(container, "GYOSEI-EATS", "GYOSEI EATS", "暁星OB飲食店ポータル");
+        // Relabel using the ACTUAL image file names TCD uses
+        relabelBanner(container, "/2024/05/1-2.png", "GYOSEI EATS", "暁星OB飲食店ポータル");
         relabelBanner(container, "GYOSEI-DENTAL", "GYOSEI DENTAL", "暁星OB歯科医師開業情報ポータル");
-        relabelBanner(container, "2024/05/2-2.png", "LIBUN", "Reputation / webPR");
+        relabelBanner(container, "/2024/05/2-2.png", "LIBUN", "Reputation / webPR");
     }
 
     function relabelBanner(parent, imgMatch, title, subtitle) {

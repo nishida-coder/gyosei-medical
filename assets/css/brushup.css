@@ -2388,16 +2388,19 @@ select:focus {
 }
 
 /* =========================================================================
-   Home banners — 2 column layout (after JS restructure)
+   Home banners — 2 column layout (server-side tagged via functions.php)
    ========================================================================= */
 
-.gm-home-banners {
+.gm-home-banners,
+#cb_1 .inner > div.gm-home-banners,
+#cb_1 .inner .clearfix.gm-home-banners {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 28px !important;
     max-width: 900px !important;
     margin: 40px auto 10px !important;
     padding: 0 20px !important;
+    float: none !important;
 }
 
 .gm-home-banners > .gm-home-banner-item {

@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('GYOSEI_CHILD_VERSION', '1.18.0');
+define('GYOSEI_CHILD_VERSION', '1.19.0');
 
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style(
@@ -388,6 +388,8 @@ function gyosei_force_https_buffer() {
 
 function gyosei_force_https_rewrite($html) {
     if (!is_string($html) || $html === '') return $html;
+
+    // 1) Force HTTPS on gyosei-medical.com asset URLs
     $patterns = [
         'http://gyosei-medical.com/',
         'http://www.gyosei-medical.com/',
@@ -396,6 +398,54 @@ function gyosei_force_https_rewrite($html) {
         'https://gyosei-medical.com/',
         'https://www.gyosei-medical.com/',
     ];
-    return str_replace($patterns, $replace, $html);
+    $html = str_replace($patterns, $replace, $html);
+
+    // 2) On the homepage, restructure the bottom banner strip:
+    //    - remove the "OB医師の方へ" banner entirely
+    //    - add a .gm-home-banners class hook to the clearfix container so CSS grids it
+    //    - inject a single CTA button after the banner strip
+    if (strpos($html, '<!-- END #main_col -->') !== false &&
+        strpos($html, 'cb_content-wysiwyg') !== false &&
+        !strpos($html, 'gm-home-cta-btn')) {
+
+        // Remove the OB医師 banner <div> (non-greedy match, no nested div inside this card)
+        $html = preg_replace(
+            '#<div class=""[^>]*>(?:(?!</div>).)*?OB医師(?:(?!</div>).)*?</div>\s*#us',
+            '',
+            $html
+        );
+        // Also handle URL-encoded variant just in case
+        $html = preg_replace(
+            '#<div class=""[^>]*>(?:(?!</div>).)*?OB%E5%8C%BB%E5%B8%AB(?:(?!</div>).)*?</div>\s*#us',
+            '',
+            $html
+        );
+
+        // Tag the clearfix container so CSS can grid it. TCD renders:
+        //     <div id="cb_1" class="cb_content cb_content-wysiwyg">
+        //         <div class="inner">
+        //             <div class=" clearfix">   <-- we add gm-home-banners here
+        $html = preg_replace(
+            '#(<div id="cb_1"[^>]*cb_content-wysiwyg[^>]*>\s*<div class="inner">\s*<div class=")(\s*clearfix)(")#u',
+            '$1$2 gm-home-banners$3',
+            $html
+        );
+
+        // Inject CTA button right after the #cb_1 wrapper
+        $cta_html =
+            "\n<div class=\"gm-home-cta\">" .
+            '<a href="/join/" class="gm-home-cta-btn">' .
+            '<span class="gm-home-cta-label">暁星OB医師で掲載をご希望の方はこちら</span>' .
+            '<span class="gm-home-cta-arrow">&rsaquo;</span>' .
+            "</a></div>\n";
+        $html = preg_replace(
+            '#(</div>\s*</div>\s*</div>\s*</div>\s*</div>\s*<!-- END \#main_col -->)#u',
+            $cta_html . '$1',
+            $html,
+            1
+        );
+    }
+
+    return $html;
 }
 
