@@ -190,7 +190,7 @@
         // Relabel using the ACTUAL image file names TCD uses
         relabelBanner(container, "/2024/05/1-2.png", "GYOSEI EATS", "暁星OB飲食店ポータル");
         relabelBanner(container, "GYOSEI-DENTAL", "GYOSEI DENTAL", "暁星OB歯科医師開業情報ポータル");
-        relabelBanner(container, "/2024/05/2-2.png", "LIBUN", "Reputation / webPR");
+        relabelBanner(container, "/2024/05/2-2.png", "LIBUN Inc", "Reputation / webPR");
     }
 
     function relabelBanner(parent, imgMatch, title, subtitle) {

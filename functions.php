@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('GYOSEI_CHILD_VERSION', '1.19.0');
+define('GYOSEI_CHILD_VERSION', '1.20.0');
 
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style(
@@ -431,16 +431,23 @@ function gyosei_force_https_rewrite($html) {
             $html
         );
 
-        // Inject CTA button right after the #cb_1 wrapper
-        $cta_html =
-            "\n<div class=\"gm-home-cta\">" .
+        // Inject CTA card as the 4th item INSIDE the gm-home-banners grid.
+        // The 5 closing </div>s at the end of #main_col are, in order:
+        //   1) close last banner card
+        //   2) close .gm-home-banners (clearfix)
+        //   3) close .inner
+        //   4) close #cb_1
+        //   5) close #main_col
+        // We inject the CTA card between 1 and 2 so it lives inside gm-home-banners.
+        $cta_card =
+            '<div class="gm-home-banner-item gm-home-cta-card">' .
             '<a href="/join/" class="gm-home-cta-btn">' .
-            '<span class="gm-home-cta-label">暁星OB医師で掲載をご希望の方はこちら</span>' .
+            '<span class="gm-home-cta-label">掲載をご希望の方はこちら</span>' .
             '<span class="gm-home-cta-arrow">&rsaquo;</span>' .
-            "</a></div>\n";
+            '</a></div>';
         $html = preg_replace(
-            '#(</div>\s*</div>\s*</div>\s*</div>\s*</div>\s*<!-- END \#main_col -->)#u',
-            $cta_html . '$1',
+            '#(</div>)(\s*</div>\s*</div>\s*</div>\s*</div>\s*<!-- END \#main_col -->)#u',
+            '$1' . $cta_card . '$2',
             $html,
             1
         );

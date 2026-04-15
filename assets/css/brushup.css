@@ -716,8 +716,16 @@ body.header_fix #header {
     height: auto !important;
     width: auto !important;
     min-width: 160px;
-    transition: background .3s ease, color .3s ease;
+    transition: background .3s ease;
     box-sizing: border-box;
+}
+
+/* Single-tone hover: bg changes to gold, text stays white — "entirely gold" feel */
+#index_news .archive_link a:hover,
+.cb_content-blog_list .archive_link a:hover {
+    background: var(--gm-gold) !important;
+    color: #fff !important;
+    transform: none !important;
 }
 
 .cb_content-blog_list #post_list {
@@ -1196,7 +1204,10 @@ body.search #post_list .article h2.title::before {
     list-style: none !important;
     float: none !important;
     min-width: 0;
-    flex: 0 1 auto;
+    flex: 0 0 auto !important;
+    flex-shrink: 0 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 #post_list .article ul.meta li.cat a,
@@ -1210,11 +1221,13 @@ body.search #post_list .article h2.title::before {
     line-height: 1.5 !important;
     border-radius: 2px !important;
     white-space: nowrap;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    max-width: none !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
     transition: filter .25s ease, transform .25s ease;
     border: none !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 #post_list .article ul.meta li.cat a span,
@@ -2120,12 +2133,20 @@ a[href=""]:hover {
     background: #fff;
     border-radius: 50%;
     font-size: 0 !important;
-    text-indent: -9999px;
+    text-indent: 0 !important;
     position: relative;
+    z-index: 2;
     transition: transform .25s ease, background .25s ease;
     color: var(--gm-tiffany) !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
-    overflow: hidden;
+    overflow: visible;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+}
+
+#footer_social_link li a * {
+    pointer-events: none !important;
 }
 
 /* Kill parent TCD icon font ::before (both on li and on a) so only my SVG ::after shows */
@@ -2157,6 +2178,7 @@ a[href=""]:hover {
     text-indent: 0;
     font-family: "Arial", sans-serif;
     color: var(--gm-tiffany-deep);
+    pointer-events: none !important;
 }
 
 #footer_social_link li.facebook a::after {
@@ -2499,53 +2521,63 @@ input[type="submit"]:hover,
     border: none !important;
 }
 
-/* CTA button under banners — flat, centered, black → gold on hover */
-.gm-home-cta {
-    display: flex;
-    justify-content: center;
-    margin: 40px auto 60px;
-    padding: 0 20px;
-    max-width: 900px;
+/* CTA card — lives inside .gm-home-banners grid as the 4th card */
+.gm-home-cta-card {
+    background: #000 !important;
+    border: 1px solid var(--gm-gold) !important;
+    box-shadow: var(--gm-shadow-soft) !important;
+    display: flex !important;
+    flex-direction: column;
+    padding: 0 !important;
+    margin: 0 !important;
+    min-height: 220px;
+    transition: background .3s ease;
+}
+
+.gm-home-cta-card:hover {
+    background: var(--gm-gold) !important;
+    border-color: var(--gm-gold) !important;
 }
 
 .gm-home-cta-btn {
     display: flex !important;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: 18px;
     width: 100%;
-    max-width: 520px;
-    padding: 20px 32px !important;
-    background: #000 !important;
+    height: 100%;
+    flex: 1 1 auto;
+    padding: 40px 24px !important;
+    background: transparent !important;
     color: #fff !important;
     font-family: var(--gm-serif) !important;
-    font-size: 15px !important;
+    font-size: 16px !important;
     font-weight: 600 !important;
-    letter-spacing: .12em !important;
+    letter-spacing: .1em !important;
     text-decoration: none !important;
     border: none !important;
     border-radius: 0 !important;
-    transition: background .3s ease, color .3s ease;
-    box-shadow: none;
+    transition: color .3s ease;
     text-align: center;
-    line-height: 1.4;
+    line-height: 1.5;
     box-sizing: border-box;
 }
 
+.gm-home-cta-card:hover .gm-home-cta-btn,
 .gm-home-cta-btn:hover {
-    background: var(--gm-gold) !important;
     color: #000 !important;
-    transform: none;
 }
 
 .gm-home-cta-label {
-    flex: 0 1 auto;
+    display: block;
     text-align: center;
+    font-size: 16px;
 }
 
 .gm-home-cta-arrow {
-    flex: 0 0 auto;
-    font-size: 22px;
+    display: inline-block;
+    font-size: 28px;
     line-height: 1;
     font-family: var(--gm-latin);
     color: inherit;
