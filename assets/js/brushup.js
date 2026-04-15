@@ -181,26 +181,11 @@
         });
     }
 
-    // Banner restructure (OB removal + 2-col class + CTA) is now handled server-side
-    // via functions.php `gyosei_force_https_rewrite`. JS only tags each surviving card
-    // and relabels them with clean title + sub text.
+    // Banner restructure is fully handled server-side via PHP
+    // (`gyosei_force_https_rewrite` in functions.php). JS is a no-op to avoid
+    // double-labelling (PHP already wrote gm-banner-label into each card).
     function restructureHomeBanners() {
-        if (!document.body.classList.contains("home")) return;
-        var container = document.querySelector(".gm-home-banners");
-        if (!container) return;
-
-        // Tag each direct div child that contains an <img> as a banner card
-        var kids = Array.prototype.slice.call(container.children);
-        kids.forEach(function (c) {
-            if (c.tagName === "DIV" && c.querySelector("img")) {
-                c.classList.add("gm-home-banner-item");
-            }
-        });
-
-        // Relabel using the ACTUAL image file names TCD uses
-        relabelBanner(container, "/2024/05/1-2.png", "GYOSEI EATS", "暁星OB飲食店ポータル");
-        relabelBanner(container, "GYOSEI-DENTAL", "GYOSEI DENTAL", "暁星OB歯科医師開業情報ポータル");
-        relabelBanner(container, "/2024/05/2-2.png", "LIBUN", "Reputation / webPR");
+        /* intentionally empty — PHP owns banner rewrite */
     }
 
     function relabelBanner(parent, imgMatch, title, subtitle) {
