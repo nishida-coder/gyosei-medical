@@ -432,23 +432,34 @@ a:hover { color: var(--gm-gold-2); }
 
 #post_list .article:hover .image img { transform: scale(1.05); }
 
-/* Clinic name (h3.title) */
+/* Clinic name (h3.title) — SECONDARY: small, muted, eyebrow-style */
 #post_list .article h3.title,
 #post_list .article center h3.title {
-    font-family: var(--gm-serif) !important;
-    font-size: 15px !important;
-    font-weight: 600 !important;
-    color: var(--gm-navy) !important;
-    line-height: 1.55 !important;
-    letter-spacing: .02em !important;
-    padding: 18px 16px 6px !important;
+    font-family: var(--gm-sans) !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    color: var(--gm-mute) !important;
+    line-height: 1.5 !important;
+    letter-spacing: .14em !important;
+    padding: 14px 18px 0 !important;
     margin: 0 !important;
     text-align: center;
+    text-transform: none;
     min-height: auto !important;
 }
 
 #post_list .article h3.title strong {
-    font-weight: 600;
+    font-weight: 500;
+}
+
+#post_list .article h3.title::before {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--gm-gold);
+    margin: 0 auto 10px;
+    opacity: .7;
 }
 
 #post_list .article center {
@@ -456,13 +467,13 @@ a:hover { color: var(--gm-gold-2); }
     text-align: center;
 }
 
-/* Doctor row (wp-block-columns) — compact portrait + name */
+/* Doctor row (wp-block-columns) — PRIMARY: large portrait + name */
 #post_list .article .wp-block-columns {
     display: flex !important;
-    flex-wrap: nowrap !important;
+    flex-direction: column !important;
     align-items: center !important;
-    gap: 10px !important;
-    padding: 6px 16px 14px !important;
+    gap: 14px !important;
+    padding: 18px 18px 16px !important;
     margin: 0 !important;
 }
 
@@ -470,28 +481,43 @@ a:hover { color: var(--gm-gold-2); }
     flex: 0 0 auto !important;
     margin: 0 !important;
     padding: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    text-align: center;
 }
 
 #post_list .article .wp-block-column:first-child {
-    flex: 0 0 62px !important;
-    width: 62px !important;
+    flex: 0 0 auto !important;
+    width: 96px !important;
+    margin: 0 auto !important;
 }
 
 #post_list .article .wp-block-column:nth-child(2) {
     flex: 1 1 auto !important;
     min-width: 0;
+    width: 100% !important;
 }
 
 #post_list .article .wp-block-column figure {
-    margin: 0 !important;
+    margin: 0 auto !important;
     padding: 0 !important;
-    width: 62px;
-    height: 62px;
+    width: 96px;
+    height: 96px;
     border-radius: 50%;
     overflow: hidden;
-    border: 1px solid var(--gm-hair);
-    box-shadow: 0 2px 8px rgba(10, 31, 61, .12);
+    border: 2px solid var(--gm-gold);
+    box-shadow: 0 6px 20px rgba(10, 31, 61, .18);
     background: #fff;
+    position: relative;
+}
+
+#post_list .article .wp-block-column figure::before {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1px solid var(--gm-hair);
+    pointer-events: none;
 }
 
 #post_list .article .wp-block-column figure img {
@@ -501,32 +527,41 @@ a:hover { color: var(--gm-gold-2); }
     border-radius: 50% !important;
     padding: 0 !important;
     display: block;
+    transition: transform .7s cubic-bezier(.2, .8, .2, 1);
+}
+
+#post_list .article:hover .wp-block-column figure img {
+    transform: scale(1.06);
 }
 
 #post_list .article .wp-block-column p.title {
     font-family: var(--gm-serif) !important;
-    font-size: 13px !important;
-    line-height: 1.5 !important;
-    letter-spacing: .02em !important;
+    font-size: 20px !important;
+    line-height: 1.4 !important;
+    letter-spacing: .05em !important;
     color: var(--gm-navy) !important;
     margin: 0 !important;
     padding: 0 !important;
-    text-align: left !important;
+    text-align: center !important;
+    font-weight: 600;
 }
 
 #post_list .article .wp-block-column p.title strong {
     font-weight: 600;
-    font-size: 14px;
-}
-
-#post_list .article .wp-block-column p.title br + *,
-#post_list .article .wp-block-column p.title strong {
+    font-size: 20px;
     display: inline;
 }
 
-/* Shrink the "(08年卒)" suffix so it flows with the name */
-#post_list .article .wp-block-column p.title strong {
-    font-size: 14px;
+/* "(08年卒)" suffix — smaller, placed under the name via <br> */
+#post_list .article .wp-block-column p.title br {
+    display: block;
+    content: "";
+    margin-top: 2px;
+}
+
+/* Suppress the empty trailing <p class="title"> */
+#post_list .article .wp-block-column p.title:empty {
+    display: none !important;
 }
 
 /* Suppress the empty trailing <p class="title"> */
