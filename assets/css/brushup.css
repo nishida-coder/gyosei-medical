@@ -293,7 +293,9 @@ body.header_fix #header {
     transform: scale(1.05);
 }
 
-#header_slider .caption {
+#header_slider .caption,
+#header_slider .item .caption,
+#header_slider .slick-slide .caption {
     position: absolute !important;
     top: 42% !important;
     left: 50% !important;
@@ -311,6 +313,28 @@ body.header_fix #header {
     margin: 0 !important;
     visibility: visible !important;
     opacity: 1 !important;
+    animation: none !important;
+    transition: none !important;
+}
+
+/* Parent theme sets .inview-fadein opacity:0 and animates in — exempt hero */
+#header_slider,
+#header_slider .item,
+#header_slider .slick-slide,
+#header_slider .slick-slide.slick-active,
+#header_slider .item .caption,
+#header_slider .caption .headline,
+#header_slider .caption .catchphrase,
+#header_slider .item1 .caption {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+#header_slider.inview-fadein,
+#header_slider .inview-fadein {
+    opacity: 1 !important;
+    animation: none !important;
+    transition: none !important;
 }
 
 /* Breathing room between hero slider and the search dropdown panel */
