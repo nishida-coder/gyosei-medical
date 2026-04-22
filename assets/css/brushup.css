@@ -2062,6 +2062,40 @@ body.single #side_col .widget {
     }
 
     /* =========================================================================
+       Archive / category / search (#post_list2) — 1 column vertical on mobile
+       ========================================================================= */
+    body:not(.single) ol#post_list2,
+    body.archive ol#post_list2,
+    body.search ol#post_list2,
+    #main_col ol#post_list2 {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+        padding: 0 14px !important;
+        margin: 14px auto 32px !important;
+    }
+
+    body:not(.single) ol#post_list2 > li.article > a,
+    #main_col ol#post_list2 > li.article > a {
+        padding: 28px 20px !important;
+        gap: 14px !important;
+    }
+
+    body:not(.single) ol#post_list2 > li.article > a > .image,
+    #main_col ol#post_list2 > li.article > a > .image {
+        width: 140px !important;
+        height: 140px !important;
+        max-width: 140px !important;
+    }
+
+    .gm-archive-doctor-name {
+        font-size: 20px !important;
+    }
+
+    .gm-archive-clinic {
+        font-size: 12px !important;
+    }
+
+    /* =========================================================================
        Footer category/area pills — always 2+ per row on mobile
        ========================================================================= */
     #footer_nav {
@@ -3786,9 +3820,12 @@ input[type="submit"]:hover,
    Archive page cards — doctor-enriched view (JS injects photo + info)
    ========================================================================= */
 
-/* Search results (#post_list2 on /clinic/?search=...) — grid like home */
-body:not(.single) #main_col > ol#post_list2,
-#main_col > ol#post_list2 {
+/* Search results / category archives (#post_list2) — grid like home */
+body:not(.single) ol#post_list2,
+body.archive ol#post_list2,
+body.search ol#post_list2,
+#main_col > ol#post_list2,
+#main_col ol#post_list2 {
     display: grid !important;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
     gap: 28px !important;
@@ -3798,63 +3835,188 @@ body:not(.single) #main_col > ol#post_list2,
     list-style: none !important;
 }
 
-body:not(.single) #main_col > ol#post_list2 > li.article,
-#main_col > ol#post_list2 > li.article {
+body:not(.single) ol#post_list2 > li.article,
+body.archive ol#post_list2 > li.article,
+body.search ol#post_list2 > li.article,
+#main_col ol#post_list2 > li.article {
     background: #fff !important;
     border: 1px solid var(--gm-hair) !important;
     box-shadow: var(--gm-shadow-soft) !important;
     display: flex !important;
-    flex-direction: column;
+    flex-direction: column !important;
+    align-items: stretch !important;
     margin: 0 !important;
     padding: 0 !important;
     list-style: none !important;
     overflow: hidden;
 }
 
-body:not(.single) #main_col > ol#post_list2 > li.article > a {
+body:not(.single) ol#post_list2 > li.article > a,
+body.archive ol#post_list2 > li.article > a,
+body.search ol#post_list2 > li.article > a,
+#main_col ol#post_list2 > li.article > a {
     display: flex !important;
-    flex-direction: column;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+    padding: 28px 20px !important;
     color: inherit;
     text-decoration: none;
+    gap: 14px;
+    box-sizing: border-box;
 }
 
-body:not(.single) #main_col > ol#post_list2 > li.article .info {
-    padding: 18px 20px 22px !important;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+/* Photo (.image) — circle centered at top */
+body:not(.single) ol#post_list2 > li.article > a > .image,
+body.archive ol#post_list2 > li.article > a > .image,
+body.search ol#post_list2 > li.article > a > .image,
+#main_col ol#post_list2 > li.article > a > .image {
+    width: 160px !important;
+    height: 160px !important;
+    max-width: 160px !important;
+    flex: 0 0 auto !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    order: 1 !important;
+    aspect-ratio: 1 / 1 !important;
+    background: var(--gm-ivory-2);
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--gm-gold);
+    box-shadow: 0 10px 28px rgba(10, 31, 61, .22);
 }
 
-body:not(.single) #main_col > ol#post_list2 > li.article h2.title {
-    font-family: var(--gm-sans) !important;
-    font-size: 12px !important;
-    color: var(--gm-mute) !important;
+body:not(.single) ol#post_list2 > li.article > a > .image img,
+#main_col ol#post_list2 > li.article > a > .image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    border-radius: 50% !important;
+    display: block !important;
+}
+
+/* Info column — full width below photo */
+body:not(.single) ol#post_list2 > li.article > a > .info,
+body.archive ol#post_list2 > li.article > a > .info,
+body.search ol#post_list2 > li.article > a > .info,
+#main_col ol#post_list2 > li.article > a > .info {
+    width: 100% !important;
+    flex: 0 0 auto !important;
+    padding: 0 !important;
     margin: 0 !important;
-    letter-spacing: .08em !important;
-    line-height: 1.6 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 10px !important;
+    order: 2 !important;
+    box-sizing: border-box;
+}
+
+/* Title (doctor name enriched via JS, or plain clinic name fallback) */
+body:not(.single) ol#post_list2 > li.article h2.title,
+body.archive ol#post_list2 > li.article h2.title,
+body.search ol#post_list2 > li.article h2.title,
+#main_col ol#post_list2 > li.article h2.title {
+    font-family: var(--gm-serif) !important;
+    font-size: 16px !important;
+    color: var(--gm-navy) !important;
+    margin: 0 !important;
+    letter-spacing: .04em !important;
+    line-height: 1.45 !important;
     text-align: center;
     padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+    order: 2;
 }
 
-body:not(.single) #main_col > ol#post_list2 > li.article .excerpt {
+body:not(.single) ol#post_list2 > li.article .excerpt,
+#main_col ol#post_list2 > li.article .excerpt {
     display: none !important;
 }
 
-body:not(.single) #main_col > ol#post_list2 > li.article ul.meta {
+/* Meta tags — horizontal wrap centered, order AFTER title visually */
+body:not(.single) ol#post_list2 > li.article ul.meta,
+body.archive ol#post_list2 > li.article ul.meta,
+body.search ol#post_list2 > li.article ul.meta,
+#main_col ol#post_list2 > li.article ul.meta {
     display: flex !important;
-    flex-wrap: wrap;
-    gap: 6px;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
     padding: 0 !important;
     margin: 0 !important;
     list-style: none !important;
-    justify-content: center;
+    justify-content: center !important;
+    width: 100% !important;
+    order: 1;
 }
 
-body:not(.single) #main_col > ol#post_list2 > li.article ul.meta li.cat {
+body:not(.single) ol#post_list2 > li.article ul.meta li.cat,
+#main_col ol#post_list2 > li.article ul.meta li.cat {
     list-style: none !important;
     padding: 0 !important;
     margin: 0 !important;
-    display: inline-flex;
+    display: inline-flex !important;
+    flex: 0 0 auto !important;
+}
+
+/* Tag pills — no wrapping allowed inside */
+body:not(.single) ol#post_list2 > li.article ul.meta li.cat a,
+body:not(.single) ol#post_list2 > li.article ul.meta li.cat span.cat-category,
+body:not(.single) ol#post_list2 > li.article ul.meta li.cat span.cat-category2,
+body:not(.single) ol#post_list2 > li.article ul.meta li.cat span.cat-category3,
+#main_col ol#post_list2 > li.article ul.meta li.cat a,
+#main_col ol#post_list2 > li.article ul.meta li.cat span[class*="cat-"] {
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    padding: 4px 10px !important;
+    font-size: 10.5px !important;
+    display: inline-block !important;
+}
+
+/* Doctor name (enriched) — absolutely no wrap */
+.gm-archive-doctor-name {
+    display: block !important;
+    font-family: var(--gm-serif) !important;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    color: var(--gm-navy) !important;
+    letter-spacing: .04em !important;
+    line-height: 1.3 !important;
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    text-align: center !important;
+    overflow: visible !important;
+}
+
+.gm-archive-grad {
+    display: inline !important;
+    font-family: var(--gm-latin) !important;
+    font-size: 14px !important;
+    color: var(--gm-gold-2) !important;
+    letter-spacing: 0 !important;
+    font-weight: 500 !important;
+    margin-left: 4px;
+    white-space: nowrap !important;
+}
+
+.gm-archive-clinic {
+    display: block !important;
+    font-family: var(--gm-sans) !important;
+    font-size: 13px !important;
+    color: var(--gm-mute) !important;
+    letter-spacing: .04em !important;
+    line-height: 1.5 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 100% !important;
+    text-align: center !important;
+    margin-top: 2px;
 }
 
 /* Enriched card styles (applies to both #post_list and #post_list2 search variants) */

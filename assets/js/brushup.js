@@ -280,11 +280,12 @@
                 var title = li.querySelector(".title");
                 var clinicName = title ? (title.textContent || "").trim() : "";
                 if (title) {
+                    // Doctor name + grad + clinic name. Specialty is NOT repeated here —
+                    // it's already shown in the ul.meta tag pill (avoid duplicate "内科").
                     title.innerHTML =
                         (data.doctor ? '<span class="gm-archive-doctor-name">' + escapeHtml(data.doctor) +
                             (data.grad ? '<span class="gm-archive-grad">（' + escapeHtml(data.grad) + '）</span>' : "") +
                             "</span>" : "") +
-                        (data.specialty ? '<span class="gm-archive-specialty">' + escapeHtml(data.specialty) + "</span>" : "") +
                         (clinicName ? '<span class="gm-archive-clinic">' + escapeHtml(clinicName) + "</span>" : "");
                     title.classList.add("gm-archive-enriched");
                 }
