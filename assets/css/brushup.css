@@ -1589,10 +1589,11 @@ body.single #side_col .widget {
    MOBILE: Clinic card compact layout
    ========================================================================= */
 @media (max-width: 720px) {
-    /* Hero container — no gap between header and slider */
+    /* Hero — small breathing room above */
     #header_slider {
-        margin-top: 0 !important;
+        margin-top: 14px !important;
         margin-bottom: 0 !important;
+        max-height: 320px !important;
     }
 
     body.home #main_contents,
@@ -1601,71 +1602,131 @@ body.single #side_col .widget {
         margin-top: 0 !important;
     }
 
-    /* Reduce index_header_search top gap on mobile */
+    /* Search panel — compact full-width */
     #index_header_search {
         margin-top: 0 !important;
-        padding: 18px 14px !important;
+        padding: 14px 12px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
     }
 
     #index_header_search .inner {
         padding: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box;
     }
 
+    #index_header_search form,
     #index_header_search .columns-4 {
         display: flex !important;
         flex-wrap: wrap !important;
         gap: 8px !important;
         width: 100% !important;
-        box-sizing: border-box;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
-    #index_header_search .header_search_inputs {
+    #index_header_search .header_search_inputs,
+    .header_search_inputs {
         flex: 0 0 100% !important;
         width: 100% !important;
         max-width: 100% !important;
-        box-sizing: border-box;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Chosen.js container — hard full width, never overflow */
+    #index_header_search .chosen-container,
+    .header_search_inputs .chosen-container,
+    #index_header_search .chosen-container.chosen-container-single {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        display: block !important;
+    }
+
+    #index_header_search .chosen-container .chosen-single,
+    .header_search_inputs .chosen-single {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Search submit full-width */
+    #index_header_search .header_search_button,
+    #index_header_search #header_search_submit,
+    #index_header_search input[type="submit"] {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
         margin: 0 !important;
     }
 
-    #index_header_search .chosen-container,
-    .header_search_inputs .chosen-container {
-        width: 100% !important;
-    }
-
-    #index_header_search #header_search_submit,
-    #index_header_search .header_search_button {
-        flex: 0 0 100% !important;
-        width: 100% !important;
-    }
-
-    /* Clinic cards — smaller, tighter */
+    /* =========================================================================
+       DR cards — horizontal layout on mobile: photo LEFT + name+grad RIGHT
+       ========================================================================= */
     #post_list {
-        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important;
-        gap: 16px !important;
-        padding: 0 14px !important;
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+        padding: 0 12px !important;
     }
 
+    /* Hide the generic clinic thumbnail image on mobile to save space */
+    #post_list .article .image {
+        display: none !important;
+    }
+
+    /* Clinic name on top as small caption */
     #post_list .article h3.title,
     #post_list .article h2.title,
     #post_list .article .title {
-        font-size: 14px !important;
-        padding: 12px 14px 6px !important;
-        letter-spacing: .02em !important;
+        font-size: 13px !important;
+        font-weight: 600 !important;
+        padding: 14px 18px 0 !important;
+        letter-spacing: .04em !important;
+        color: var(--gm-mute) !important;
+        font-family: var(--gm-sans) !important;
+        text-align: center !important;
     }
 
+    #post_list .article h3.title::before,
+    #post_list .article h2.title::before,
+    #post_list .article .title::before {
+        display: none !important;
+    }
+
+    /* Doctor row: photo + name horizontal */
     #post_list .article .wp-block-columns {
-        gap: 8px !important;
-        padding: 10px 12px 12px !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 16px !important;
+        padding: 14px 18px 14px !important;
     }
 
     #post_list .article .wp-block-column:first-child {
-        width: 90px !important;
+        flex: 0 0 auto !important;
+        width: 96px !important;
+    }
+
+    #post_list .article .wp-block-column:nth-child(2) {
+        flex: 1 1 auto !important;
+        width: auto !important;
+        text-align: left !important;
+        min-width: 0;
     }
 
     #post_list .article .wp-block-column figure {
-        width: 90px !important;
-        height: 90px !important;
-        border-width: 2px !important;
+        width: 96px !important;
+        height: 96px !important;
+        border-width: 3px !important;
+        margin: 0 !important;
     }
 
     #post_list .article .wp-block-column figure::before {
@@ -1675,17 +1736,56 @@ body.single #side_col .widget {
     #post_list .article .wp-block-column p.title,
     #post_list .article .wp-block-column p.title.js-ellipsis,
     #post_list .article .wp-block-column p.title.gm-preserve {
-        font-size: 17px !important;
+        font-size: 20px !important;
+        text-align: left !important;
+        line-height: 1.35 !important;
     }
 
+    /* Tags below, tight */
     #post_list .article ul.meta {
-        padding: 8px 12px 12px !important;
+        padding: 0 18px 14px !important;
         gap: 4px !important;
+        justify-content: flex-start !important;
     }
 
-    #post_list .article ul.meta li.cat a {
+    #post_list .article ul.meta li.cat a,
+    #post_list .article ul.meta li.cat a.cat-category,
+    #post_list .article ul.meta li.cat a.cat-category2,
+    #post_list .article ul.meta li.cat a.cat-category3 {
         padding: 3px 8px !important;
         font-size: 10px !important;
+    }
+
+    /* =========================================================================
+       Footer category/area pills — tight wrap on mobile
+       ========================================================================= */
+    #footer_nav {
+        padding: 40px 14px 30px !important;
+    }
+
+    .footer_nav_cols {
+        flex-direction: column !important;
+        gap: 28px !important;
+    }
+
+    .footer_nav_col {
+        flex: 1 1 auto !important;
+    }
+
+    .footer_nav_col ul,
+    .footer_nav_col ul.clearfix {
+        gap: 6px !important;
+    }
+
+    .footer_nav_col ul li {
+        flex: 0 0 auto !important;
+    }
+
+    .footer_nav_col ul li a {
+        font-size: 11px !important;
+        padding: 6px 10px !important;
+        letter-spacing: .02em !important;
+        white-space: nowrap !important;
     }
 
     /* Return-to-top button — compact, single circle only */
@@ -2792,13 +2892,18 @@ select:focus {
     margin: 0;
 }
 
-/* Desktop default kept above. Mobile horizontal card layout below. */
+/* Desktop default kept above. Mobile: compact horizontal banners */
 @media (max-width: 720px) {
-    .gm-home-banners {
+    .gm-home-banners,
+    #cb_1 .inner > div.gm-home-banners,
+    #cb_1 .inner .clearfix.gm-home-banners {
         grid-template-columns: 1fr !important;
-        gap: 14px !important;
-        padding: 0 16px !important;
+        grid-auto-rows: auto !important;
+        gap: 10px !important;
+        padding: 0 12px !important;
+        margin: 14px auto 8px !important;
         max-width: 100% !important;
+        align-items: stretch !important;
     }
 
     .gm-home-banners > .gm-home-banner-item,
@@ -2806,25 +2911,27 @@ select:focus {
         flex-direction: row !important;
         align-items: center !important;
         justify-content: flex-start !important;
-        padding: 14px 16px !important;
-        min-height: 92px !important;
+        padding: 10px 14px !important;
+        min-height: 74px !important;
         height: auto !important;
+        max-height: 92px !important;
         text-align: left !important;
-        gap: 16px;
+        gap: 14px !important;
     }
 
     .gm-home-banners > .gm-home-banner-item > a:first-child,
     .gm-home-banners > .gm-home-banner-item > center:first-of-type,
     .gm-home-banners > .gm-home-banner-item > a:first-of-type {
         flex: 0 0 auto !important;
-        width: 64px !important;
+        width: 52px !important;
         margin: 0 !important;
     }
 
     .gm-home-banners > .gm-home-banner-item img {
-        width: 64px !important;
-        height: 64px !important;
-        max-width: 64px !important;
+        width: 52px !important;
+        height: 52px !important;
+        max-width: 52px !important;
+        max-height: 52px !important;
         object-fit: contain !important;
     }
 
@@ -2833,42 +2940,70 @@ select:focus {
         align-items: flex-start !important;
         justify-content: center !important;
         text-align: left !important;
-        gap: 4px !important;
+        gap: 2px !important;
+        min-width: 0;
     }
 
     .gm-home-banners .gm-banner-title {
-        font-size: 18px !important;
+        font-size: 17px !important;
         text-align: left !important;
+        line-height: 1.2 !important;
+        letter-spacing: .04em !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        max-width: 100% !important;
     }
 
     .gm-home-banners .gm-banner-sub {
-        font-size: 11px !important;
+        font-size: 10.5px !important;
         text-align: left !important;
+        line-height: 1.3 !important;
+        letter-spacing: .04em !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        max-width: 100% !important;
     }
 
     /* CTA card horizontal on mobile */
     .gm-home-banners > .gm-home-cta-card {
-        min-height: 92px !important;
+        min-height: 74px !important;
+        max-height: 92px !important;
         flex-direction: row !important;
         align-items: stretch !important;
+        padding: 0 !important;
     }
 
     .gm-home-banners .gm-home-cta-btn {
         flex-direction: row !important;
         justify-content: center !important;
         align-items: center !important;
-        padding: 18px 20px !important;
-        min-height: 92px !important;
-        gap: 12px !important;
-        font-size: 15px !important;
+        padding: 14px 16px !important;
+        min-height: 74px !important;
+        gap: 10px !important;
+        font-size: 14px !important;
     }
 
     .gm-home-banners .gm-home-cta-label {
-        font-size: 15px !important;
+        font-size: 14px !important;
+        letter-spacing: .06em !important;
     }
 
     .gm-home-banners .gm-home-cta-arrow {
-        font-size: 22px !important;
+        font-size: 20px !important;
+    }
+
+    /* Kill CB_1 padding below banners */
+    #cb_1,
+    #cb_1 .inner {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    #cb_1.cb_content,
+    #cb_1.cb_content-wysiwyg {
+        padding: 0 0 20px 0 !important;
     }
 }
 
