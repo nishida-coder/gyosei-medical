@@ -3198,6 +3198,222 @@ select:focus {
 }
 
 /* =========================================================================
+   News archive page — elegant news list layout
+   ========================================================================= */
+
+body.post-type-archive-news #main_col,
+body.post-type-archive-news #left_col {
+    background: var(--gm-ivory) !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+}
+
+body.post-type-archive-news #main_col {
+    max-width: 960px !important;
+    padding: 60px 24px 80px !important;
+}
+
+body.post-type-archive-news #recent_news {
+    background: #fff !important;
+    border: 1px solid var(--gm-hair) !important;
+    box-shadow: var(--gm-shadow-soft) !important;
+    padding: clamp(32px, 5vw, 64px) clamp(24px, 4vw, 56px) !important;
+    margin: 0 !important;
+    position: relative;
+}
+
+/* Page title 「お知らせ」 */
+body.post-type-archive-news #recent_news h1.headline,
+body.post-type-archive-news #recent_news .headline {
+    font-family: var(--gm-serif) !important;
+    font-size: clamp(26px, 3.4vw, 38px) !important;
+    font-weight: 600 !important;
+    color: var(--gm-navy) !important;
+    letter-spacing: .18em !important;
+    text-align: center !important;
+    margin: 0 0 48px !important;
+    padding: 0 0 28px !important;
+    position: relative !important;
+    background: transparent !important;
+    line-height: 1.3 !important;
+}
+
+body.post-type-archive-news #recent_news h1.headline::before,
+body.post-type-archive-news #recent_news .headline::before {
+    content: "NEWS";
+    display: block;
+    font-family: var(--gm-latin);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .4em;
+    color: var(--gm-gold-2);
+    margin-bottom: 14px;
+    line-height: 1;
+}
+
+body.post-type-archive-news #recent_news h1.headline::after,
+body.post-type-archive-news #recent_news .headline::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 48px;
+    height: 1px;
+    background: var(--gm-gold);
+}
+
+/* News list container */
+body.post-type-archive-news ol.show_date {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-top: 1px solid var(--gm-hair);
+}
+
+body.post-type-archive-news ol.show_date li {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-bottom: 1px solid var(--gm-hair);
+    transition: background .25s ease;
+}
+
+body.post-type-archive-news ol.show_date li:hover {
+    background: var(--gm-ivory-2);
+}
+
+body.post-type-archive-news ol.show_date li a {
+    display: flex !important;
+    align-items: center;
+    gap: clamp(20px, 3vw, 40px);
+    padding: 24px 8px !important;
+    color: var(--gm-ink);
+    text-decoration: none;
+    transition: color .25s ease;
+}
+
+body.post-type-archive-news ol.show_date li a:hover {
+    color: var(--gm-gold-2);
+}
+
+body.post-type-archive-news ol.show_date li a .date,
+body.post-type-archive-news ol.show_date li a p.date {
+    flex: 0 0 auto;
+    font-family: var(--gm-latin) !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    color: var(--gm-gold-2) !important;
+    letter-spacing: .08em !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-width: 100px;
+    line-height: 1;
+    border-right: 1px solid var(--gm-hair);
+    padding-right: clamp(16px, 2vw, 28px) !important;
+}
+
+body.post-type-archive-news ol.show_date li a .title,
+body.post-type-archive-news ol.show_date li a h2.title {
+    flex: 1 1 auto;
+    font-family: var(--gm-serif) !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    color: var(--gm-navy) !important;
+    letter-spacing: .04em !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-width: 0;
+}
+
+body.post-type-archive-news ol.show_date li a:hover .title,
+body.post-type-archive-news ol.show_date li a:hover h2.title {
+    color: var(--gm-gold-2) !important;
+}
+
+/* Back to top link */
+body.post-type-archive-news .page_navi {
+    margin: 48px auto 0 !important;
+    padding: 0 !important;
+    text-align: center !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+body.post-type-archive-news .page_navi .back a,
+body.post-type-archive-news .page_navi a {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    background: var(--gm-navy) !important;
+    color: #fff !important;
+    font-family: var(--gm-sans) !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    letter-spacing: .16em !important;
+    padding: 14px 36px !important;
+    border: none !important;
+    border-radius: 0 !important;
+    text-decoration: none !important;
+    min-width: 240px;
+    transition: background .3s ease;
+}
+
+body.post-type-archive-news .page_navi .back a:hover,
+body.post-type-archive-news .page_navi a:hover {
+    background: var(--gm-gold) !important;
+    color: #fff !important;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    body.post-type-archive-news #main_col {
+        padding: 30px 14px 50px !important;
+    }
+
+    body.post-type-archive-news #recent_news {
+        padding: 28px 20px !important;
+    }
+
+    body.post-type-archive-news #recent_news h1.headline,
+    body.post-type-archive-news #recent_news .headline {
+        font-size: 24px !important;
+        margin: 0 0 32px !important;
+        padding: 0 0 20px !important;
+    }
+
+    body.post-type-archive-news ol.show_date li a {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        padding: 18px 4px !important;
+    }
+
+    body.post-type-archive-news ol.show_date li a .date,
+    body.post-type-archive-news ol.show_date li a p.date {
+        border-right: none !important;
+        padding-right: 0 !important;
+        min-width: 0;
+        font-size: 13px !important;
+    }
+
+    body.post-type-archive-news ol.show_date li a .title,
+    body.post-type-archive-news ol.show_date li a h2.title {
+        font-size: 15px !important;
+        line-height: 1.55 !important;
+    }
+
+    body.post-type-archive-news .page_navi .back a,
+    body.post-type-archive-news .page_navi a {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
+/* =========================================================================
    LINK section — distinct beige background to separate from DR list
    ========================================================================= */
 
