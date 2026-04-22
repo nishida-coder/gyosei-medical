@@ -546,7 +546,7 @@ body.header_fix #header {
 #header_slider .item .caption,
 #header_slider .slick-slide .caption {
     position: absolute !important;
-    top: 42% !important;
+    top: 55% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
     z-index: 5 !important;
@@ -557,13 +557,14 @@ body.header_fix #header {
     align-items: center !important;
     justify-content: center !important;
     padding: 20px !important;
-    width: 92% !important;
-    max-width: 900px;
+    width: calc(100% - 40px) !important;
+    max-width: 760px;
     margin: 0 !important;
     visibility: visible !important;
     opacity: 1 !important;
     animation: none !important;
     transition: none !important;
+    box-sizing: border-box;
 }
 
 /* Parent theme sets .inview-fadein opacity:0 and animates in — exempt hero */
@@ -609,15 +610,22 @@ body.header_fix #header {
 
 /* legacy .fimage styling no longer applied */
 
-/* Caption sits on a solid dark plate (no text-shadow, no blur) — calm medical tone */
+/* Caption as a floating card with visible breathing room above, separate from header */
 #header_slider .caption {
     background: rgba(10, 20, 35, .72) !important;
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
     padding: 32px 48px !important;
     border: 1px solid rgba(184, 147, 90, .45);
+    border-radius: 6px !important;
     max-width: 760px !important;
     width: auto !important;
+    box-shadow: 0 10px 32px rgba(0, 0, 0, .3);
+}
+
+/* Header gets a subtle shadow underneath to separate from hero */
+#header {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .25);
 }
 
 #header_slider .caption .headline,
@@ -662,8 +670,11 @@ body.header_fix #header {
 
 @media (max-width: 720px) {
     #header_slider .caption {
-        padding: 22px 24px !important;
-        max-width: 92% !important;
+        padding: 18px 20px !important;
+        max-width: calc(100% - 32px) !important;
+        width: calc(100% - 32px) !important;
+        top: 58% !important;
+        border-radius: 6px !important;
     }
 }
 
