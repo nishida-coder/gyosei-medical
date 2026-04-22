@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('GYOSEI_CHILD_VERSION', '1.31.0');
+define('GYOSEI_CHILD_VERSION', '1.32.0');
 
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style(
@@ -457,6 +457,16 @@ function gyosei_force_https_rewrite($html) {
             '$1$2 gm-home-banners$3',
             $html
         );
+
+        // Inject "LINK" section heading above the banner grid (once)
+        if (strpos($html, 'gm-home-link-heading') === false) {
+            $html = preg_replace(
+                '#(<div id="cb_1"[^>]*cb_content-wysiwyg[^>]*>\s*<div class="inner">)#u',
+                '$1<div class="gm-home-link-heading"><span class="gm-home-link-heading-label">LINK</span><span class="gm-home-link-heading-sub">関連サイト</span></div>',
+                $html,
+                1
+            );
+        }
 
         // Tag each `<div class="">` banner child with gm-home-banner-item
         $html = preg_replace(

@@ -99,13 +99,26 @@ a:hover { color: var(--gm-gold-2); }
 #header,
 #header_top,
 #header_logo,
-#header_logo_fix {
+#header_logo_fix,
+#header.active,
+#header.active #header_top,
+body.header_fix #header,
+body.header_fix #header_top,
+body.mobile_fix_top #header,
+body.mobile_fix_top #header_top,
+body.mobile_fix_top.header_fix #header,
+body.mobile_fix_top.header_fix #header_top {
     background: #000 !important;
     background-color: #000 !important;
+    border: none !important;
     border-bottom: none !important;
-    box-shadow: 0 6px 30px -24px rgba(0, 0, 0, .6);
+    outline: none !important;
+    box-shadow: none !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
+}
+
+#header {
     position: relative;
     z-index: 100;
 }
@@ -113,6 +126,13 @@ a:hover { color: var(--gm-gold-2); }
 #header.active,
 body.header_fix #header {
     z-index: 150;
+}
+
+/* Remove any stray navy borders/lines between header and hero */
+#main_contents,
+#header_slider,
+#index_header_search {
+    border-top: none !important;
 }
 
 #header *,
@@ -1030,19 +1050,19 @@ body.search #post_list {
 
 #post_list .article:hover .image img { transform: scale(1.05); }
 
-/* Clinic name (h2/h3.title) — eyebrow caption on home, main title on archive */
+/* Clinic name (h2/h3.title) — caption on home, main title on archive */
 #post_list .article h3.title,
 #post_list .article h2.title,
 #post_list .article center h3.title,
 #post_list .article center h2.title,
 #post_list .article .title {
-    font-family: var(--gm-sans) !important;
-    font-size: 12px !important;
-    font-weight: 500 !important;
-    color: var(--gm-mute) !important;
-    line-height: 1.6 !important;
-    letter-spacing: .12em !important;
-    padding: 18px 20px 14px !important;
+    font-family: var(--gm-serif) !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    color: var(--gm-navy) !important;
+    line-height: 1.5 !important;
+    letter-spacing: .04em !important;
+    padding: 16px 18px 10px !important;
     margin: 0 !important;
     text-align: center;
     text-transform: none;
@@ -1563,6 +1583,156 @@ body.single #side_col .widget {
     body.single #side_col {
         grid-column: 1;
     }
+}
+
+/* =========================================================================
+   MOBILE: Clinic card compact layout
+   ========================================================================= */
+@media (max-width: 720px) {
+    /* Hero container — no gap between header and slider */
+    #header_slider {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    body.home #main_contents,
+    #main_contents {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+
+    /* Reduce index_header_search top gap on mobile */
+    #index_header_search {
+        margin-top: 0 !important;
+        padding: 18px 14px !important;
+    }
+
+    #index_header_search .inner {
+        padding: 0 !important;
+    }
+
+    #index_header_search .columns-4 {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+
+    #index_header_search .header_search_inputs {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box;
+        margin: 0 !important;
+    }
+
+    #index_header_search .chosen-container,
+    .header_search_inputs .chosen-container {
+        width: 100% !important;
+    }
+
+    #index_header_search #header_search_submit,
+    #index_header_search .header_search_button {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+    }
+
+    /* Clinic cards — smaller, tighter */
+    #post_list {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important;
+        gap: 16px !important;
+        padding: 0 14px !important;
+    }
+
+    #post_list .article h3.title,
+    #post_list .article h2.title,
+    #post_list .article .title {
+        font-size: 14px !important;
+        padding: 12px 14px 6px !important;
+        letter-spacing: .02em !important;
+    }
+
+    #post_list .article .wp-block-columns {
+        gap: 8px !important;
+        padding: 10px 12px 12px !important;
+    }
+
+    #post_list .article .wp-block-column:first-child {
+        width: 90px !important;
+    }
+
+    #post_list .article .wp-block-column figure {
+        width: 90px !important;
+        height: 90px !important;
+        border-width: 2px !important;
+    }
+
+    #post_list .article .wp-block-column figure::before {
+        inset: -5px !important;
+    }
+
+    #post_list .article .wp-block-column p.title,
+    #post_list .article .wp-block-column p.title.js-ellipsis,
+    #post_list .article .wp-block-column p.title.gm-preserve {
+        font-size: 17px !important;
+    }
+
+    #post_list .article ul.meta {
+        padding: 8px 12px 12px !important;
+        gap: 4px !important;
+    }
+
+    #post_list .article ul.meta li.cat a {
+        padding: 3px 8px !important;
+        font-size: 10px !important;
+    }
+
+    /* Return-to-top button — compact, single circle only */
+    #return_top {
+        right: 12px !important;
+        bottom: 12px !important;
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    #return_top a {
+        width: 40px !important;
+        height: 40px !important;
+        background: rgba(10, 31, 61, .85) !important;
+        border: none !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, .3) !important;
+    }
+}
+
+/* =========================================================================
+   Return-to-top: strip all TCD default decoration layers, show only my circle
+   ========================================================================= */
+#return_top,
+#return_top a,
+#return_top a span {
+    box-shadow: none;
+}
+
+#return_top a {
+    background: var(--gm-tiffany-deep) !important;
+    background-image: none !important;
+    color: transparent !important;
+}
+
+#return_top a::before {
+    content: none !important;
+    display: none !important;
+    background: none !important;
+}
+
+#return_top a span {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    font-size: 0 !important;
+    overflow: hidden !important;
 }
 
 #article_header {
@@ -2622,17 +2792,127 @@ select:focus {
     margin: 0;
 }
 
+/* Desktop default kept above. Mobile horizontal card layout below. */
 @media (max-width: 720px) {
-    .gm-home-banners .gm-banner-title {
-        font-size: 24px !important;
+    .gm-home-banners {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+        padding: 0 16px !important;
+        max-width: 100% !important;
     }
-    .gm-home-banners > .gm-home-banner-item img {
-        height: 90px !important;
-    }
+
     .gm-home-banners > .gm-home-banner-item,
     .gm-home-banners > div.gm-home-banner-item {
-        min-height: 280px;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        padding: 14px 16px !important;
+        min-height: 92px !important;
+        height: auto !important;
+        text-align: left !important;
+        gap: 16px;
     }
+
+    .gm-home-banners > .gm-home-banner-item > a:first-child,
+    .gm-home-banners > .gm-home-banner-item > center:first-of-type,
+    .gm-home-banners > .gm-home-banner-item > a:first-of-type {
+        flex: 0 0 auto !important;
+        width: 64px !important;
+        margin: 0 !important;
+    }
+
+    .gm-home-banners > .gm-home-banner-item img {
+        width: 64px !important;
+        height: 64px !important;
+        max-width: 64px !important;
+        object-fit: contain !important;
+    }
+
+    .gm-home-banners .gm-banner-label {
+        flex: 1 1 auto !important;
+        align-items: flex-start !important;
+        justify-content: center !important;
+        text-align: left !important;
+        gap: 4px !important;
+    }
+
+    .gm-home-banners .gm-banner-title {
+        font-size: 18px !important;
+        text-align: left !important;
+    }
+
+    .gm-home-banners .gm-banner-sub {
+        font-size: 11px !important;
+        text-align: left !important;
+    }
+
+    /* CTA card horizontal on mobile */
+    .gm-home-banners > .gm-home-cta-card {
+        min-height: 92px !important;
+        flex-direction: row !important;
+        align-items: stretch !important;
+    }
+
+    .gm-home-banners .gm-home-cta-btn {
+        flex-direction: row !important;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 18px 20px !important;
+        min-height: 92px !important;
+        gap: 12px !important;
+        font-size: 15px !important;
+    }
+
+    .gm-home-banners .gm-home-cta-label {
+        font-size: 15px !important;
+    }
+
+    .gm-home-banners .gm-home-cta-arrow {
+        font-size: 22px !important;
+    }
+}
+
+/* =========================================================================
+   LINK section heading (above banners, injected via PHP)
+   ========================================================================= */
+
+.gm-home-link-heading {
+    text-align: center;
+    padding: 24px 20px 16px;
+    margin: 0 auto;
+    max-width: 900px;
+}
+
+.gm-home-link-heading-label {
+    display: block;
+    font-family: var(--gm-latin), var(--gm-serif);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: .32em;
+    color: var(--gm-navy);
+    line-height: 1.2;
+}
+
+.gm-home-link-heading-label::after {
+    content: "";
+    display: block;
+    width: 36px;
+    height: 1px;
+    background: var(--gm-gold);
+    margin: 12px auto 10px;
+}
+
+.gm-home-link-heading-sub {
+    display: block;
+    font-family: var(--gm-sans);
+    font-size: 11px;
+    letter-spacing: .24em;
+    color: var(--gm-mute);
+}
+
+@media (max-width: 720px) {
+    .gm-home-link-heading { padding: 18px 16px 10px; }
+    .gm-home-link-heading-label { font-size: 18px; letter-spacing: .28em; }
 }
 
 /* Unified hover for archive/news buttons + pagination — black → gold */
