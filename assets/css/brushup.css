@@ -2931,10 +2931,10 @@ select:focus {
         overflow: hidden !important;
     }
 
-    /* Image wrapper — 37% of card width */
-    .gm-home-banners > .gm-home-banner-item > a:first-child,
-    .gm-home-banners > .gm-home-banner-item > center:first-of-type,
-    .gm-home-banners > .gm-home-banner-item > a:first-of-type {
+    /* Image wrapper — 37% of card width (EXCLUDE CTA card whose only child is the btn) */
+    .gm-home-banners > .gm-home-banner-item:not(.gm-home-cta-card) > a:first-child,
+    .gm-home-banners > .gm-home-banner-item:not(.gm-home-cta-card) > center:first-of-type,
+    .gm-home-banners > .gm-home-banner-item:not(.gm-home-cta-card) > a:first-of-type {
         flex: 0 0 37% !important;
         width: 37% !important;
         max-width: 37% !important;
@@ -2993,41 +2993,54 @@ select:focus {
         color: var(--gm-mute) !important;
     }
 
-    /* CTA card — same horizontal shape as banners (black bg, horizontal text) */
+    /* CTA card — full-width single anchor (no image split) */
     .gm-home-banners > .gm-home-cta-card {
+        display: block !important;
         min-height: 130px !important;
         height: 130px !important;
         max-height: 140px !important;
-        flex-direction: row !important;
-        align-items: stretch !important;
-        justify-content: stretch !important;
         padding: 0 !important;
+        overflow: hidden !important;
     }
 
+    .gm-home-banners > .gm-home-cta-card > a.gm-home-cta-btn,
     .gm-home-banners .gm-home-cta-btn {
+        display: flex !important;
         flex-direction: row !important;
         justify-content: center !important;
         align-items: center !important;
-        padding: 0 20px !important;
-        min-height: 130px !important;
-        height: 100% !important;
         width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        height: 130px !important;
+        min-height: 130px !important;
+        padding: 0 24px !important;
+        margin: 0 !important;
         gap: 14px !important;
-        font-size: 16px !important;
+        font-size: 15px !important;
+        background: transparent !important;
+        color: #fff !important;
         writing-mode: horizontal-tb !important;
         text-orientation: mixed !important;
+        box-sizing: border-box !important;
+        flex: none !important;
+        pointer-events: auto !important;
+        cursor: pointer !important;
     }
 
     .gm-home-banners .gm-home-cta-label {
-        font-size: 16px !important;
+        font-size: 15px !important;
         letter-spacing: .08em !important;
         white-space: normal !important;
         text-align: center !important;
         line-height: 1.4 !important;
+        flex: 0 1 auto !important;
+        width: auto !important;
     }
 
     .gm-home-banners .gm-home-cta-arrow {
         font-size: 22px !important;
+        flex: 0 0 auto !important;
     }
 
     /* Kill CB_1 padding below banners */
