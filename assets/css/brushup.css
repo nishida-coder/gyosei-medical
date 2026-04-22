@@ -615,17 +615,29 @@ body.header_fix #header {
     background: rgba(10, 20, 35, .72) !important;
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
-    padding: 32px 48px !important;
+    padding: 36px 48px !important;
     border: 1px solid rgba(184, 147, 90, .45);
     border-radius: 6px !important;
     max-width: 760px !important;
     width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
     box-shadow: 0 10px 32px rgba(0, 0, 0, .3);
 }
 
 /* Header gets a subtle shadow underneath to separate from hero */
 #header {
     box-shadow: 0 4px 12px rgba(0, 0, 0, .25);
+}
+
+/* Clear breathing room between hero and the search panel below */
+#header_slider {
+    margin-bottom: 40px !important;
+}
+
+#index_header_search {
+    margin-top: 0 !important;
 }
 
 #header_slider .caption .headline,
@@ -670,11 +682,15 @@ body.header_fix #header {
 
 @media (max-width: 720px) {
     #header_slider .caption {
-        padding: 18px 20px !important;
+        padding: 28px 22px !important;
         max-width: calc(100% - 32px) !important;
         width: calc(100% - 32px) !important;
-        top: 58% !important;
+        top: 50% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: calc(100% - 60px) !important;
         border-radius: 6px !important;
+        box-sizing: border-box;
     }
 }
 
@@ -1654,16 +1670,26 @@ body.single #side_col .widget {
    MOBILE: Clinic card compact layout
    ========================================================================= */
 @media (max-width: 720px) {
-    /* Hero — flush with top bar, image fills full width, no white gap */
-    #header_slider,
+    /* Hero — taller on mobile so caption fits without clipping, clear gap below */
+    #header_slider {
+        margin: 0 0 32px 0 !important;
+        padding: 0 !important;
+        max-height: 420px !important;
+        min-height: 340px !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+        background: #000 !important;
+        overflow: hidden !important;
+    }
+
     #header_slider .slick-list,
     #header_slider .slick-track,
     #header_slider .item,
     #header_slider .slick-slide {
         margin: 0 !important;
         padding: 0 !important;
-        max-height: 360px !important;
-        min-height: 220px !important;
+        max-height: 420px !important;
+        min-height: 340px !important;
         width: 100% !important;
         max-width: 100vw !important;
         background: #000 !important;
@@ -1673,7 +1699,8 @@ body.single #side_col .widget {
         width: 100% !important;
         max-width: 100% !important;
         height: 100% !important;
-        min-height: 220px !important;
+        min-height: 340px !important;
+        max-height: 420px !important;
         object-fit: cover !important;
         object-position: center !important;
         display: block !important;
