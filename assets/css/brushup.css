@@ -2003,16 +2003,56 @@ body.single #side_col .widget {
     #post_list .article ul.meta li.cat a,
     #post_list .article ul.meta li.cat a.cat-category,
     #post_list .article ul.meta li.cat a.cat-category2,
-    #post_list .article ul.meta li.cat a.cat-category3 {
+    #post_list .article ul.meta li.cat a.cat-category3,
+    #post_list2 .article ul.meta li.cat a,
+    #post_list2 .article ul.meta li.cat span.cat-category,
+    #post_list2 .article ul.meta li.cat span.cat-category2,
+    #post_list2 .article ul.meta li.cat span.cat-category3 {
         padding: 4px 10px !important;
         font-size: 11px !important;
         line-height: 1.5 !important;
         white-space: nowrap !important;
         display: inline-block !important;
+        word-break: keep-all !important;
     }
 
-    #post_list .article ul.meta li.cat a span {
+    #post_list .article ul.meta li.cat a span,
+    #post_list2 .article ul.meta li.cat a span,
+    #post_list2 .article ul.meta li.cat span.cat-category span,
+    ul.meta li.cat a span,
+    ul.meta li.cat span > span {
         white-space: nowrap !important;
+        word-break: keep-all !important;
+    }
+
+    /* Tap target minimum 44px across mobile — navigation links, pill tags, archive buttons */
+    #footer_bottom_menu li a,
+    #footer_nav li a,
+    .footer_nav_col ul li a,
+    body.home #index_news .newsticker-item a,
+    body.home .archive_link a,
+    .cb_content-blog_list .archive_link a,
+    body.post-type-archive-news ol.show_date li a,
+    #side_col a,
+    .widget a,
+    #breadcrumb li a,
+    .page_navi a,
+    .page_navi .back a,
+    a.gm-home-cta-btn,
+    a.cat-category,
+    a.cat-category2,
+    a.cat-category3 {
+        min-height: 44px !important;
+        line-height: 1.5 !important;
+        display: inline-flex !important;
+        align-items: center;
+    }
+
+    /* Pill tags keep their small visual but expand tap target via padding */
+    #post_list .article ul.meta li.cat a,
+    #post_list2 .article ul.meta li.cat a {
+        min-height: 32px !important;
+        padding: 8px 12px !important;
     }
 
     /* Card outer — vertical padding baseline so clinic logo stands alone */

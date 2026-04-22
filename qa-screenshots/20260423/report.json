@@ -1,0 +1,181 @@
+{
+  "inspection": {
+    "date": "2026-04-23",
+    "site": "https://gyosei-medical.com",
+    "rules": "CLAUDE.md rules 6-11",
+    "method": "Chrome DevTools Protocol (puppeteer-core) headless, cache disabled",
+    "chromePath": "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
+    "viewportHeight": 2000,
+    "fullPage": true
+  },
+  "matrix": {
+    "widths": [375, 390, 430, 768, 1024],
+    "pages": [
+      {"slug": "home", "url": "https://gyosei-medical.com/"},
+      {"slug": "category3-2000", "url": "https://gyosei-medical.com/category3/2000/"},
+      {"slug": "kokoromental", "url": "https://gyosei-medical.com/kokoromental/"},
+      {"slug": "news", "url": "https://gyosei-medical.com/news/"},
+      {"slug": "contact", "url": "https://gyosei-medical.com/contact/"}
+    ],
+    "totalScreenshots": 25,
+    "allStatus200": true,
+    "anyHorizontalOverflow": false
+  },
+  "defects": [
+    {
+      "id": "D01",
+      "page": "category3-2000",
+      "width": "375/390/430",
+      "severity": "CRITICAL",
+      "category": "missing-data",
+      "issue": "DR photos missing for 7 of 10 cards (only top 3: 土屋杏平, 瀬川宏晟, 小田原圭 render; Tanaka through Iwa show empty white circle placeholders). Photos either not populated in CPT or image URL 404/lazy-load failing."
+    },
+    {
+      "id": "D02",
+      "page": "category3-2000",
+      "width": "375/390/430",
+      "severity": "HIGH",
+      "category": "layout-spec-violation",
+      "issue": "DR cards on mobile violate gyosei-medical.com rule: spec requires photo 140px top, name centered below, tags centered. Actual: photo left-aligned, tags stack above the name on the right, name is small/right-aligned, overall composition feels PC-style squeezed into mobile rather than 1-col vertical."
+    },
+    {
+      "id": "D03",
+      "page": "category3-2000",
+      "width": "375/390/430",
+      "severity": "HIGH",
+      "category": "element-imbalance",
+      "issue": "Card interior is off-center: photo column (~120-140px) sits against left edge, right column tag cluster + name wraps awkwardly. When photo is missing (D01) the imbalance becomes extreme — left half is blank circle, right half carries all weight."
+    },
+    {
+      "id": "D04",
+      "page": "category3-2000",
+      "width": "375/390/430/768",
+      "severity": "HIGH",
+      "category": "tag-wrapping",
+      "issue": "Multi-line tag text (e.g. 'プライマリ・ケア', '下部消化器・膵大腸', '心療内科・精神科', '整形外科・リハビリ科') breaks inside tags causing 2-line tag pills with awkward line-break in the middle of a word. Tags stacked vertically (not horizontal wrap) making cards visually heavy on right side."
+    },
+    {
+      "id": "D05",
+      "page": "category3-2000",
+      "width": "1024",
+      "severity": "MEDIUM",
+      "category": "pc-leak-to-tablet",
+      "issue": "At 1024px, the 2-button sort filter + grid/list toggle row is right-floated with a huge empty bar on the left — sort buttons lose visual anchor. Pagination bar at bottom (also at 768) is the same — appears as two tiny icons floating at right with vast empty space."
+    },
+    {
+      "id": "D06",
+      "page": "home",
+      "width": "375/390/430",
+      "severity": "HIGH",
+      "category": "missing-data",
+      "issue": "Home DR picks grid: ~8 of 14 featured doctor avatars show empty white circles (Fertility Clinic Tokyo 小田原, 白井篤, 田中勢之, 米谷敬貴, 佐藤昭務, 宮本快身, 寺田智, 松本茂, 呂秀彦 empty). Same root cause as D01 — sitewide CPT doctor_photo population gap."
+    },
+    {
+      "id": "D07",
+      "page": "home",
+      "width": "375/390",
+      "severity": "HIGH",
+      "category": "tap-target",
+      "issue": "Hero news teaser links rendered at 25px tall (w=335, h=25). Entire date+title link is <44px vertical. Fails WCAG 2.5.5 / iOS HIG 44×44 minimum. Affects 'GYOSEI MEDICAL JOURNAL…' and 'WEBサイト開設しました' in news widget."
+    },
+    {
+      "id": "D08",
+      "page": "home",
+      "width": "375/390/430",
+      "severity": "MEDIUM",
+      "category": "tap-target",
+      "issue": "Department pill links (内科, 外科, 小児科, etc.) render at ~55×25–34px — width borderline, height definitively <44px. Secondary navigation affordance on mobile fails tap-target minimum across all 5 widths."
+    },
+    {
+      "id": "D09",
+      "page": "home",
+      "width": "1024",
+      "severity": "MEDIUM",
+      "category": "element-imbalance",
+      "issue": "Hero hero/navigation strip at top: left-side button stack sits against left edge with large central gap, right side shows a single highlighted sponsor/pick tile — overall top band reads as asymmetric with no central anchor or clear hierarchy."
+    },
+    {
+      "id": "D10",
+      "page": "kokoromental",
+      "width": "375/390/430",
+      "severity": "MEDIUM",
+      "category": "tap-target",
+      "issue": "Specialty and area pill links below doctor card (心療内科・精神科 112×27, 千代田区・中央区 112×27) are <44px height. Also 'クリニック一覧' breadcrumb-style link 78×17 is critically small."
+    },
+    {
+      "id": "D11",
+      "page": "kokoromental",
+      "width": "375/390/430",
+      "severity": "LOW",
+      "category": "content-density",
+      "issue": "Long middle-section bullet list ('このようなお悩みをかかえていませんか?') renders as a single dense wall of 14+ bullets with no visual break, grouping, or heading separation. Acceptable but feels unscanned — would benefit from sub-groupings."
+    },
+    {
+      "id": "D12",
+      "page": "news",
+      "width": "375/390/430/768/1024",
+      "severity": "LOW",
+      "category": "content-sparseness",
+      "issue": "News archive shows only 2 items in a thin horizontal-rule card list; large empty vertical expanse before footer. Not a bug but visually unbalanced at all widths — consider pagination placeholder, related news, or reduced section padding."
+    },
+    {
+      "id": "D13",
+      "page": "news",
+      "width": "1024",
+      "severity": "MEDIUM",
+      "category": "pc-layout-weakness",
+      "issue": "At 1024px the 2 news rows span full ~1024px width with the date far-right and title far-left, creating a wide visual gap between them that reads as disconnected. Title-date grouping is lost at wide viewports."
+    },
+    {
+      "id": "D14",
+      "page": "contact",
+      "width": "375/390/430",
+      "severity": "LOW",
+      "category": "cf7-styling",
+      "issue": "CF7 form inputs (name, email, subject, message) render with default light-gray borders and no focus treatment visible in screenshot. Submit button (送信) is present and tap-target OK, but email mailto link 'info@gyosei-medical.com' is plain text without visual affordance."
+    },
+    {
+      "id": "D15",
+      "page": "contact",
+      "width": "375/390/430",
+      "severity": "MEDIUM",
+      "category": "tap-target",
+      "issue": "'掲載申込ページ' link (99×20px) and department pill links in footer CTA area are below 44px minimum — same sitewide footer-nav issue."
+    },
+    {
+      "id": "D16",
+      "page": "home",
+      "width": "430",
+      "severity": "LOW",
+      "category": "spacing",
+      "issue": "At 430px (large phone), doctor card grid tiles show inconsistent bottom padding — some cards have ~40px breathing room below clinic-name text, others ~20px. Rhythm broken."
+    },
+    {
+      "id": "D17",
+      "page": "category3-2000",
+      "width": "768",
+      "severity": "MEDIUM",
+      "category": "tablet-layout",
+      "issue": "At 768px, DR cards switch to horizontal layout (photo left, name+tags right) but 6 of 10 still show empty photo circles. The horizontal layout also places the DR name too close to the tag cluster with insufficient gap — cards read as cluttered right side."
+    }
+  ],
+  "globalObservations": {
+    "positive": [
+      "Zero horizontal overflow detected on any page at any width (docW === winW on all 25).",
+      "All 25 pages returned HTTP 200.",
+      "No console errors surfaced during capture.",
+      "Sitewide color/typography palette (navy + gold-beige + cream + turquoise footer) is consistent across all pages.",
+      "Breadcrumb and footer navigation layout is consistent across all pages."
+    ],
+    "sitewideConcerns": [
+      "Doctor photo population gap is the single biggest defect — affects home, category archive, and likely all individual-archive listings. Root cause investigation: ACF field 'doctor_photo' or equivalent is empty for most seed doctors.",
+      "Tap-target sizing <44px on multiple secondary-nav elements (date/title links, department pills, area pills, breadcrumbs) is a sitewide CSS issue — needs min-height or padding bump in a single shared component.",
+      "The DR card mobile layout does not match the documented gyosei spec (photo top 140px / name centered / tags centered horizontal wrap). Current implementation is a horizontal 2-column layout squeezed into mobile."
+    ]
+  },
+  "artifactIndex": {
+    "screenshotDir": "C:/libunworks/projects/gyosei-medical/qa-screenshots/20260423/",
+    "rawCaptureJson": "_capture-raw.json",
+    "filenamePattern": "[page-slug]_[width]px.png"
+  }
+}

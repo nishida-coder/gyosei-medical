@@ -1,0 +1,852 @@
+[
+  {
+    "page": "home",
+    "url": "https://gyosei-medical.com/",
+    "width": 375,
+    "status": 200,
+    "file": "home_375px.png",
+    "overflow": {
+      "docW": 375,
+      "winW": 375,
+      "hasOverflow": false,
+      "offenders": []
+    },
+    "smallTapTargets": 8,
+    "tapTargetExamples": [
+      {
+        "tag": "a",
+        "text": "2025.07.19\n\nGYOSEI MEDICAL JOU",
+        "w": 335,
+        "h": 25
+      },
+      {
+        "tag": "a",
+        "text": "2024.05.24\n\nGYOSEI MEDICAL WEB",
+        "w": 335,
+        "h": 25
+      },
+      {
+        "tag": "a",
+        "text": "内科",
+        "w": 64,
+        "h": 25
+      }
+    ]
+  },
+  {
+    "page": "home",
+    "url": "https://gyosei-medical.com/",
+    "width": 390,
+    "status": 200,
+    "file": "home_390px.png",
+    "overflow": {
+      "docW": 390,
+      "winW": 390,
+      "hasOverflow": false,
+      "offenders": []
+    },
+    "smallTapTargets": 8,
+    "tapTargetExamples": [
+      {
+        "tag": "a",
+        "text": "2025.07.19\n\nGYOSEI MEDICAL JOU",
+        "w": 350,
+        "h": 25
+      },
+      {
+        "tag": "a",
+        "text": "2024.05.24\n\nGYOSEI MEDICAL WEB",
+        "w": 350,
+        "h": 25
+      },
+      {
+        "tag": "a",
+        "text": "内科",
+        "w": 64,
+        "h": 25
+      }
+    ]
+  },
+  {
+    "page": "home",
+    "url": "https://gyosei-medical.com/",
+    "width": 430,
+    "status": 200,
+    "file": "home_430px.png",
+    "overflow": {
+      "docW": 430,
+      "winW": 430,
+      "hasOverflow": false,
+      "offenders": []
+    },
+    "smallTapTargets": 8,
+    "tapTargetExamples": [
+      {
+        "tag": "a",
+        "text": "2025.07.19\n\nGYOSEI MEDICAL JOU",
+        "w": 390,
+        "h": 25
+      },
+      {
+        "tag": "a",
+        "text": "2024.05.24\n\nGYOSEI MEDICAL WEB",
+        "w": 390,
+        "h": 25
+      },
+      {
+        "tag": "a",
+        "text": "内科",
+        "w": 64,
+        "h": 25
+      }
+    ]
+  },
+  {
+    "page": "home",
+    "url": "https://gyosei-medical.com/",
+    "width": 768,
+    "status": 200,
+    "file": "home_768px.png",
+    "overflow": {
+      "docW": 768,
+      "winW": 768,
+      "hasOverflow": false,
+      "offenders": []
+    },
+    "smallTapTargets": 8,
+    "tapTargetExamples": [
+      {
+        "tag": "a",
+        "text": "2025.07.19\n\nGYOSEI MEDICAL JOU",
+        "w": 728,
+        "h": 25
+      },
+      {
+        "tag": "a",
+        "text": "2024.05.24\n\nGYOSEI MEDICAL WEB",
+        "w": 728,
+        "h": 25
+      },
+      {
+        "tag": "a",
+        "text": "内科",
+        "w": 64,
+        "h": 24
+      }
+    ]
+  },
+  {
+    "page": "home",
+    "url": "https://gyosei-medical.com/",
+    "width": 1024,
+    "status": 200,
+    "file": "home_1024px.png",
+    "overflow": {
+      "docW": 1024,
+      "winW": 1024,
+      "hasOverflow": false,
+      "offenders": []
+    },
+    "smallTapTargets": 8,
+    "tapTargetExamples": [
+      {
+        "tag": "a",
+        "text": "2025.07.19\n\nGYOSEI MEDICAL JOU",
+        "w": 984,
+        "h": 25
+      },
+      {
+        "tag": "a",
+        "text": "2024.05.24\n\nGYOSEI MEDICAL WEB",
+        "w": 984,
+        "h": 25
+      },
+      {
+        "tag": "a",
+        "text": "内科",
+        "w": 64,
+        "h": 24
+      }
+    ]
+  },
+  {
+    "page": "category3-2000",
+    "url": "https://gyosei-medical.com/category3/2000/",
+    "width": 375,
+    "status": 200,
+    "file": "category3-2000_375px.png",
+    "overflow": {
+      "docW": 375,
+      "winW": 375,
+      "hasOverflow": false,
+      "offenders": []
+    },
+    "smallTapTargets": 8,
+    "tapTargetExamples": [
+      {
+        "tag": "a",
+        "text": "クリニック一覧",
+        "w": 78,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "text": "新しい順",
+        "w": 112,
+        "h": 42
+      },
+      {
+        "tag": "a",
+        "text": "古い順",
+        "w": 112,
+        "h": 42
+      }
+    ]
+  },
+  {
+    "page": "category3-2000",
+    "url": "https://gyosei-medical.com/category3/2000/",
+    "width": 390,
+    "status": 200,
+    "file": "category3-2000_390px.png",
+    "overflow": {
+      "docW": 390,
+      "winW": 390,
+      "hasOverflow": false,
+      "offenders": []
+    },
+    "smallTapTargets": 8,
+    "tapTargetExamples": [
+      {
+        "tag": "a",
+        "text": "クリニック一覧",
+        "w": 78,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "text": "新しい順",
+        "w": 117,
+        "h": 42
+      },
+      {
+        "tag": "a",
+        "text": "古い順",
+        "w": 117,
+        "h": 42
+      }
+    ]
+  },
+  {
+    "page": "category3-2000",
+    "url": "https://gyosei-medical.com/category3/2000/",
+    "width": 430,
+    "status": 200,
+    "file": "category3-2000_430px.png",
+    "overflow": {
+      "docW": 430,
+      "winW": 430,
+      "hasOverflow": false,
+      "offenders": []
+    },
+    "smallTapTargets": 8,
+    "tapTargetExamples": [
+      {
+        "tag": "a",
+        "text": "クリニック一覧",
+        "w": 78,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "text": "新しい順",
+        "w": 130,
+        "h": 42
+      },
+      {
+        "tag": "a",
+        "text": "古い順",
+        "w": 130,
+        "h": 42
+      }
+    ]
+  },
+  {
+    "page": "category3-2000",
+    "url": "https://gyosei-medical.com/category3/2000/",
+    "width": 768,
+    "status": 200,
+    "file": "category3-2000_768px.png",
+    "overflow": {
+      "docW": 768,
+      "winW": 768,
+      "hasOverflow": false,
+      "offenders": []
+    },
+    "smallTapTargets": 8,
+    "tapTargetExamples": [
+      {
+        "tag": "a",
+        "text": "クリニック一覧",
+        "w": 78,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "text": "新しい順",
+        "w": 243,
+        "h": 42
+      },
+      {
+        "tag": "a",
+        "text": "古い順",
+        "w": 243,
+        "h": 42
+      }
+    ]
+  },
+  {
+    "page": "category3-2000",
+    "url": "https://gyosei-medical.com/category3/2000/",
+    "width": 1024,
+    "status": 200,
+    "file": "category3-2000_1024px.png",
+    "overflow": {
+      "docW": 1024,
+      "winW": 1024,
+      "hasOverflow": false,
+      "offenders": []
+    },
+    "smallTapTargets": 8,
+    "tapTargetExamples": [
+      {
+        "tag": "a",
+        "text": "クリニック一覧",
+        "w": 78,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "text": "新しい順",
+        "w": 328,
+        "h": 42
+      },
+      {
+        "tag": "a",
+        "text": "古い順",
+        "w": 328,
+        "h": 42
+      }
+    ]
+  },
+  {
+    "page": "kokoromental",
+    "url": "https://gyosei-medical.com/kokoromental/",
+    "width": 375,
+    "status": 200,
+    "file": "kokoromental_375px.png",
+    "overflow": {
+      "docW": 375,
+      "winW": 375,
+      "hasOverflow": false,
+      "offenders": []
+    },
+    "smallTapTargets": 8,
+    "tapTargetExamples": [
+      {
+        "tag": "a",
+        "text": "クリニック一覧",
+        "w": 78,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "text": "心療内科・精神科",
+        "w": 112,
+        "h": 27
+      },
+      {
+        "tag": "a",
+        "text": "千代田区・中央区",
+        "w": 112,
+        "h": 27
+      }
+    ]
+  },
+  {
+    "page": "kokoromental",
+    "url": "https://gyosei-medical.com/kokoromental/",
+    "width": 390,
+    "status": 200,
+    "file": "kokoromental_390px.png",
+    "overflow": {
+      "docW": 390,
+      "winW": 390,
+      "hasOverflow": false,
+      "offenders": []
+    },
+    "smallTapTargets": 8,
+    "tapTargetExamples": [
+      {
+        "tag": "a",
+        "text": "クリニック一覧",
+        "w": 78,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "text": "心療内科・精神科",
+        "w": 112,
+        "h": 27
+      },
+      {
+        "tag": "a",
+        "text": "千代田区・中央区",
+        "w": 112,
+        "h": 27
+      }
+    ]
+  },
+  {
+    "page": "kokoromental",
+    "url": "https://gyosei-medical.com/kokoromental/",
+    "width": 430,
+    "status": 200,
+    "file": "kokoromental_430px.png",
+    "overflow": {
+      "docW": 430,
+      "winW": 430,
+      "hasOverflow": false,
+      "offenders": []
+    },
+    "smallTapTargets": 8,
+    "tapTargetExamples": [
+      {
+        "tag": "a",
+        "text": "クリニック一覧",
+        "w": 78,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "text": "心療内科・精神科",
+        "w": 112,
+        "h": 27
+      },
+      {
+        "tag": "a",
+        "text": "千代田区・中央区",
+        "w": 112,
+        "h": 27
+      }
+    ]
+  },
+  {
+    "page": "kokoromental",
+    "url": "https://gyosei-medical.com/kokoromental/",
+    "width": 768,
+    "status": 200,
+    "file": "kokoromental_768px.png",
+    "overflow": {
+      "docW": 768,
+      "winW": 768,
+      "hasOverflow": false,
+      "offenders": []
+    },
+    "smallTapTargets": 8,
+    "tapTargetExamples": [
+      {
+        "tag": "a",
+        "text": "クリニック一覧",
+        "w": 78,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "text": "心療内科・精神科",
+        "w": 112,
+        "h": 27
+      },
+      {
+        "tag": "a",
+        "text": "千代田区・中央区",
+        "w": 112,
+        "h": 27
+      }
+    ]
+  },
+  {
+    "page": "kokoromental",
+    "url": "https://gyosei-medical.com/kokoromental/",
+    "width": 1024,
+    "status": 200,
+    "file": "kokoromental_1024px.png",
+    "overflow": {
+      "docW": 1024,
+      "winW": 1024,
+      "hasOverflow": false,
+      "offenders": []
+    },
+    "smallTapTargets": 8,
+    "tapTargetExamples": [
+      {
+        "tag": "a",
+        "text": "クリニック一覧",
+        "w": 78,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "text": "心療内科・精神科",
+        "w": 112,
+        "h": 27
+      },
+      {
+        "tag": "a",
+        "text": "千代田区・中央区",
+        "w": 112,
+        "h": 27
+      }
+    ]
+  },
+  {
+    "page": "news",
+    "url": "https://gyosei-medical.com/news/",
+    "width": 375,
+    "status": 200,
+    "file": "news_375px.png",
+    "overflow": {
+      "docW": 375,
+      "winW": 375,
+      "hasOverflow": false,
+      "offenders": []
+    },
+    "smallTapTargets": 8,
+    "tapTargetExamples": [
+      {
+        "tag": "a",
+        "text": "内科",
+        "w": 55,
+        "h": 34
+      },
+      {
+        "tag": "a",
+        "text": "外科",
+        "w": 55,
+        "h": 34
+      },
+      {
+        "tag": "a",
+        "text": "形成外科・美容外科",
+        "w": 136,
+        "h": 34
+      }
+    ]
+  },
+  {
+    "page": "news",
+    "url": "https://gyosei-medical.com/news/",
+    "width": 390,
+    "status": 200,
+    "file": "news_390px.png",
+    "overflow": {
+      "docW": 390,
+      "winW": 390,
+      "hasOverflow": false,
+      "offenders": []
+    },
+    "smallTapTargets": 8,
+    "tapTargetExamples": [
+      {
+        "tag": "a",
+        "text": "内科",
+        "w": 55,
+        "h": 34
+      },
+      {
+        "tag": "a",
+        "text": "外科",
+        "w": 55,
+        "h": 34
+      },
+      {
+        "tag": "a",
+        "text": "形成外科・美容外科",
+        "w": 136,
+        "h": 34
+      }
+    ]
+  },
+  {
+    "page": "news",
+    "url": "https://gyosei-medical.com/news/",
+    "width": 430,
+    "status": 200,
+    "file": "news_430px.png",
+    "overflow": {
+      "docW": 430,
+      "winW": 430,
+      "hasOverflow": false,
+      "offenders": []
+    },
+    "smallTapTargets": 8,
+    "tapTargetExamples": [
+      {
+        "tag": "a",
+        "text": "内科",
+        "w": 55,
+        "h": 34
+      },
+      {
+        "tag": "a",
+        "text": "外科",
+        "w": 55,
+        "h": 34
+      },
+      {
+        "tag": "a",
+        "text": "形成外科・美容外科",
+        "w": 136,
+        "h": 34
+      }
+    ]
+  },
+  {
+    "page": "news",
+    "url": "https://gyosei-medical.com/news/",
+    "width": 768,
+    "status": 200,
+    "file": "news_768px.png",
+    "overflow": {
+      "docW": 768,
+      "winW": 768,
+      "hasOverflow": false,
+      "offenders": []
+    },
+    "smallTapTargets": 8,
+    "tapTargetExamples": [
+      {
+        "tag": "a",
+        "text": "内科",
+        "w": 55,
+        "h": 34
+      },
+      {
+        "tag": "a",
+        "text": "外科",
+        "w": 55,
+        "h": 34
+      },
+      {
+        "tag": "a",
+        "text": "形成外科・美容外科",
+        "w": 136,
+        "h": 34
+      }
+    ]
+  },
+  {
+    "page": "news",
+    "url": "https://gyosei-medical.com/news/",
+    "width": 1024,
+    "status": 200,
+    "file": "news_1024px.png",
+    "overflow": {
+      "docW": 1024,
+      "winW": 1024,
+      "hasOverflow": false,
+      "offenders": []
+    },
+    "smallTapTargets": 8,
+    "tapTargetExamples": [
+      {
+        "tag": "a",
+        "text": "内科",
+        "w": 55,
+        "h": 34
+      },
+      {
+        "tag": "a",
+        "text": "外科",
+        "w": 55,
+        "h": 34
+      },
+      {
+        "tag": "a",
+        "text": "形成外科・美容外科",
+        "w": 136,
+        "h": 34
+      }
+    ]
+  },
+  {
+    "page": "contact",
+    "url": "https://gyosei-medical.com/contact/",
+    "width": 375,
+    "status": 200,
+    "file": "contact_375px.png",
+    "overflow": {
+      "docW": 375,
+      "winW": 375,
+      "hasOverflow": false,
+      "offenders": []
+    },
+    "smallTapTargets": 8,
+    "tapTargetExamples": [
+      {
+        "tag": "a",
+        "text": "掲載申込ページ",
+        "w": 99,
+        "h": 20
+      },
+      {
+        "tag": "a",
+        "text": "内科",
+        "w": 55,
+        "h": 34
+      },
+      {
+        "tag": "a",
+        "text": "外科",
+        "w": 55,
+        "h": 34
+      }
+    ]
+  },
+  {
+    "page": "contact",
+    "url": "https://gyosei-medical.com/contact/",
+    "width": 390,
+    "status": 200,
+    "file": "contact_390px.png",
+    "overflow": {
+      "docW": 390,
+      "winW": 390,
+      "hasOverflow": false,
+      "offenders": []
+    },
+    "smallTapTargets": 8,
+    "tapTargetExamples": [
+      {
+        "tag": "a",
+        "text": "掲載申込ページ",
+        "w": 99,
+        "h": 20
+      },
+      {
+        "tag": "a",
+        "text": "内科",
+        "w": 55,
+        "h": 34
+      },
+      {
+        "tag": "a",
+        "text": "外科",
+        "w": 55,
+        "h": 34
+      }
+    ]
+  },
+  {
+    "page": "contact",
+    "url": "https://gyosei-medical.com/contact/",
+    "width": 430,
+    "status": 200,
+    "file": "contact_430px.png",
+    "overflow": {
+      "docW": 430,
+      "winW": 430,
+      "hasOverflow": false,
+      "offenders": []
+    },
+    "smallTapTargets": 8,
+    "tapTargetExamples": [
+      {
+        "tag": "a",
+        "text": "掲載申込ページ",
+        "w": 99,
+        "h": 20
+      },
+      {
+        "tag": "a",
+        "text": "内科",
+        "w": 55,
+        "h": 34
+      },
+      {
+        "tag": "a",
+        "text": "外科",
+        "w": 55,
+        "h": 34
+      }
+    ]
+  },
+  {
+    "page": "contact",
+    "url": "https://gyosei-medical.com/contact/",
+    "width": 768,
+    "status": 200,
+    "file": "contact_768px.png",
+    "overflow": {
+      "docW": 768,
+      "winW": 768,
+      "hasOverflow": false,
+      "offenders": []
+    },
+    "smallTapTargets": 8,
+    "tapTargetExamples": [
+      {
+        "tag": "a",
+        "text": "掲載申込ページ",
+        "w": 99,
+        "h": 20
+      },
+      {
+        "tag": "a",
+        "text": "内科",
+        "w": 55,
+        "h": 34
+      },
+      {
+        "tag": "a",
+        "text": "外科",
+        "w": 55,
+        "h": 34
+      }
+    ]
+  },
+  {
+    "page": "contact",
+    "url": "https://gyosei-medical.com/contact/",
+    "width": 1024,
+    "status": 200,
+    "file": "contact_1024px.png",
+    "overflow": {
+      "docW": 1024,
+      "winW": 1024,
+      "hasOverflow": false,
+      "offenders": []
+    },
+    "smallTapTargets": 8,
+    "tapTargetExamples": [
+      {
+        "tag": "a",
+        "text": "掲載申込ページ",
+        "w": 99,
+        "h": 20
+      },
+      {
+        "tag": "a",
+        "text": "内科",
+        "w": 55,
+        "h": 34
+      },
+      {
+        "tag": "a",
+        "text": "外科",
+        "w": 55,
+        "h": 34
+      }
+    ]
+  }
+]
