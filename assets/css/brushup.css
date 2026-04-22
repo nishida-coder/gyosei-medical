@@ -1906,17 +1906,18 @@ body.single #side_col .widget {
         image-rendering: crisp-edges;
     }
 
-    /* Clinic name on top as small caption */
+    /* Clinic name — serif, below clinic logo, above doctor block */
     #post_list .article h3.title,
     #post_list .article h2.title,
     #post_list .article .title {
-        font-size: 13px !important;
+        font-size: 14px !important;
         font-weight: 600 !important;
-        padding: 14px 18px 0 !important;
+        padding: 14px 20px 4px !important;
         letter-spacing: .04em !important;
-        color: var(--gm-mute) !important;
-        font-family: var(--gm-sans) !important;
+        color: var(--gm-navy) !important;
+        font-family: var(--gm-serif) !important;
         text-align: center !important;
+        line-height: 1.45 !important;
     }
 
     #post_list .article h3.title::before,
@@ -1925,61 +1926,99 @@ body.single #side_col .widget {
         display: none !important;
     }
 
-    /* Doctor row: photo + name horizontal */
-    #post_list .article .wp-block-columns {
-        flex-direction: row !important;
+    /* Doctor row — VERTICAL 1-column on mobile (photo top, name below, full-width) */
+    #post_list .article .wp-block-columns,
+    #post_list .article .wp-block-columns.is-not-stacked-on-mobile,
+    #post_list .article .wp-block-columns[class*="is-layout-flex"] {
+        display: flex !important;
+        flex-direction: column !important;
         align-items: center !important;
-        justify-content: flex-start !important;
-        gap: 16px !important;
-        padding: 14px 18px 14px !important;
+        justify-content: center !important;
+        gap: 14px !important;
+        padding: 16px 20px 10px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    #post_list .article .wp-block-column,
+    #post_list .article .wp-block-column:nth-child(2) {
+        flex: 0 0 auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        text-align: center !important;
     }
 
     #post_list .article .wp-block-column:first-child {
         flex: 0 0 auto !important;
-        width: 96px !important;
-    }
-
-    #post_list .article .wp-block-column:nth-child(2) {
-        flex: 1 1 auto !important;
-        width: auto !important;
-        text-align: left !important;
-        min-width: 0;
+        width: 140px !important;
+        max-width: 140px !important;
+        margin: 0 auto !important;
     }
 
     #post_list .article .wp-block-column figure {
-        width: 96px !important;
-        height: 96px !important;
+        width: 140px !important;
+        height: 140px !important;
         border-width: 3px !important;
-        margin: 0 !important;
+        margin: 0 auto !important;
     }
 
     #post_list .article .wp-block-column figure::before {
-        inset: -5px !important;
+        inset: -6px !important;
     }
 
     #post_list .article .wp-block-column p.title,
     #post_list .article .wp-block-column p.title.js-ellipsis,
     #post_list .article .wp-block-column p.title.gm-preserve {
         font-size: 20px !important;
-        text-align: left !important;
-        line-height: 1.35 !important;
+        text-align: center !important;
+        line-height: 1.4 !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
-    /* Tags below, with clear separation from doctor row */
+    /* Tags — centered, full-width row, generous gap, no wrap within a pill */
     #post_list .article ul.meta {
-        padding: 14px 18px 16px !important;
-        gap: 5px !important;
-        justify-content: flex-start !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        padding: 14px 20px 18px !important;
+        gap: 8px !important;
+        justify-content: center !important;
+        align-items: center !important;
         border-top: 1px solid var(--gm-hair) !important;
-        margin-top: 6px !important;
+        margin: 12px 0 0 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    #post_list .article ul.meta li.cat {
+        flex: 0 0 auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        list-style: none !important;
     }
 
     #post_list .article ul.meta li.cat a,
     #post_list .article ul.meta li.cat a.cat-category,
     #post_list .article ul.meta li.cat a.cat-category2,
     #post_list .article ul.meta li.cat a.cat-category3 {
-        padding: 3px 8px !important;
-        font-size: 10px !important;
+        padding: 4px 10px !important;
+        font-size: 11px !important;
+        line-height: 1.5 !important;
+        white-space: nowrap !important;
+        display: inline-block !important;
+    }
+
+    #post_list .article ul.meta li.cat a span {
+        white-space: nowrap !important;
+    }
+
+    /* Card outer — vertical padding baseline so clinic logo stands alone */
+    #post_list .article,
+    #post_list li.article {
+        padding-bottom: 0 !important;
     }
 
     /* =========================================================================
