@@ -144,6 +144,33 @@ h1, h2, h3, h4,
 }
 
 a { color: var(--gm-navy); text-decoration: none; transition: color .25s ease; }
+
+/* Body-content text links — override parent theme's pale cyan (#a3e0d8) with navy + underline */
+.post_content a,
+.custom-html-widget a,
+#left_col .post_content a,
+.entry-content a,
+article.page a,
+.single .post_content a,
+.page .post_content a,
+.page .entry-content a {
+    color: var(--gm-navy) !important;
+    text-decoration: underline !important;
+    text-underline-offset: 3px !important;
+    text-decoration-thickness: 1px !important;
+    word-break: break-word;
+}
+
+.post_content a:hover,
+.custom-html-widget a:hover,
+#left_col .post_content a:hover,
+.entry-content a:hover,
+.single .post_content a:hover,
+.page .post_content a:hover,
+.page .entry-content a:hover {
+    color: var(--gm-gold-2) !important;
+    text-decoration-color: var(--gm-gold-2) !important;
+}
 a:hover { color: var(--gm-gold-2); }
 
 /* =========================================================================
@@ -715,13 +742,37 @@ body.header_fix #header {
     color: var(--gm-navy) !important;
 }
 
-/* News ticker */
+/* News ticker (home) + News archive heading — unified brand tone */
 #index_news,
 #index_news_mobile {
     background: var(--gm-ivory-2) !important;
     border-top: 1px solid var(--gm-hair) !important;
     border-bottom: 1px solid var(--gm-hair) !important;
     padding: 14px 0 !important;
+}
+
+/* Force all parent theme's cyan accents to gold/navy brand tone */
+#index_news .entry-date,
+#index_news_mobile .entry-date,
+#recent_news .show_date li .date,
+.entry-date.updated,
+.post-type-archive-news #recent_news .show_date li .date {
+    color: var(--gm-gold-2) !important;
+}
+
+#archive_headline,
+.archive_header .headline,
+.archive_filter_headline,
+#related_post .headline,
+#introduce_header .headline,
+.introduce_list_col .info .title,
+.introduce_archive_banner_link a:hover,
+#recent_news .headline,
+#comment_headline,
+.side_headline,
+.widget_block .wp-block-heading,
+.footer_headline {
+    color: var(--gm-navy) !important;
 }
 
 #index_news .inner,
@@ -754,6 +805,20 @@ body.header_fix #header {
     margin: 0 !important;
     padding: 0 !important;
     list-style: none !important;
+}
+
+/* Subtle "NEWS" eyebrow before the ticker — aligns with /news/ page branding */
+#index_news .inner::before {
+    content: "NEWS";
+    flex: 0 0 auto;
+    font-family: var(--gm-latin), var(--gm-serif);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .32em;
+    color: var(--gm-navy);
+    padding-right: 16px;
+    border-right: 1px solid var(--gm-hair);
+    margin-right: 4px;
 }
 
 .newsticker-item {
@@ -798,7 +863,36 @@ body.header_fix #header {
     width: 100%;
 }
 
-#index_news .archive_link a,
+/* Home "お知らせ一覧" ticker — small inline link (not a CTA) */
+#index_news .archive_link a {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 4px;
+    background: transparent !important;
+    color: var(--gm-navy) !important;
+    font-family: var(--gm-sans) !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: .12em !important;
+    padding: 8px 0 !important;
+    border: none !important;
+    line-height: 1 !important;
+    white-space: nowrap;
+    transition: color .25s ease;
+}
+
+#index_news .archive_link a::after {
+    content: "›";
+    font-size: 14px;
+    line-height: 1;
+    padding-left: 4px;
+}
+
+#index_news .archive_link a:hover {
+    color: var(--gm-gold-2) !important;
+}
+
+/* "病院一覧" CTA under clinic grid — simple black bar, no hover change */
 .cb_content-blog_list .archive_link a {
     display: inline-block !important;
     background: #000 !important;
@@ -821,10 +915,6 @@ body.header_fix #header {
     box-sizing: border-box;
 }
 
-/* No color change on hover — stays a plain black bar with white text */
-#index_news .archive_link a:hover,
-#index_news .archive_link a:focus,
-#index_news .archive_link a:active,
 .cb_content-blog_list .archive_link a:hover,
 .cb_content-blog_list .archive_link a:focus,
 .cb_content-blog_list .archive_link a:active {
@@ -2467,22 +2557,23 @@ a[href=""]:hover {
     background: linear-gradient(90deg, transparent 0%, var(--gm-gold) 20%, var(--gm-gold-soft) 50%, var(--gm-gold) 80%, transparent 100%);
 }
 
+/* Footer vertical rhythm — compact, consistent with other section spacing */
 #footer_nav {
-    padding: 70px 20px 40px !important;
+    padding: 44px 20px 32px !important;
     background: var(--gm-tiffany) !important;
 }
 
 #footer_contents {
     padding: 0 20px !important;
     background: var(--gm-tiffany) !important;
-    border-top: 1px solid rgba(255, 255, 255, .25);
+    border-top: 1px solid rgba(255, 255, 255, .22);
 }
 
 #footer_contents .inner {
     background: transparent !important;
     max-width: 1200px !important;
     margin: 0 auto !important;
-    padding: 50px 0 0 !important;
+    padding: 28px 0 0 !important;
     text-align: center;
 }
 
@@ -2509,21 +2600,16 @@ a[href=""]:hover {
     letter-spacing: .14em;
 }
 
-#footer_nav {
-    padding: 20px !important;
-    max-width: 1200px;
-    margin: 0 auto !important;
-}
-
 #footer_nav .inner {
     padding: 0 !important;
-    max-width: none !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
 }
 
 .footer_nav_cols {
     display: flex !important;
     flex-wrap: wrap;
-    gap: 40px !important;
+    gap: 32px !important;
 }
 
 .footer_nav_col {
