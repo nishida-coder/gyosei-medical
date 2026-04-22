@@ -1643,17 +1643,40 @@ body.single #side_col .widget {
    MOBILE: Clinic card compact layout
    ========================================================================= */
 @media (max-width: 720px) {
-    /* Hero — small breathing room above */
-    #header_slider {
-        margin-top: 14px !important;
-        margin-bottom: 0 !important;
-        max-height: 320px !important;
+    /* Hero — flush with top bar, image fills full width, no white gap */
+    #header_slider,
+    #header_slider .slick-list,
+    #header_slider .slick-track,
+    #header_slider .item,
+    #header_slider .slick-slide {
+        margin: 0 !important;
+        padding: 0 !important;
+        max-height: 360px !important;
+        min-height: 220px !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+        background: #000 !important;
+    }
+
+    #header_slider .item img {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 100% !important;
+        min-height: 220px !important;
+        object-fit: cover !important;
+        object-position: center !important;
+        display: block !important;
     }
 
     body.home #main_contents,
     #main_contents {
         padding-top: 0 !important;
         margin-top: 0 !important;
+        background: var(--gm-ivory) !important;
+    }
+
+    #header {
+        margin-bottom: 0 !important;
     }
 
     /* Search panel — compact full-width */
