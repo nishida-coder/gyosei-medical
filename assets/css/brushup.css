@@ -658,14 +658,19 @@ body.header_fix #header {
     box-shadow: 0 4px 12px rgba(0, 0, 0, .25);
 }
 
-/* Clear breathing room between hero and the search panel below */
+/* Hero and search panel: background continuous, no white band between them */
 #header_slider {
-    margin-bottom: 40px !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
 }
 
 #index_header_search {
     margin-top: 0 !important;
+    padding-top: 20px !important;
 }
+
+/* The visual "breathing" between them comes from the dark search panel's top
+   padding, NOT from a light gap. No #fff strip permitted. */
 
 #header_slider .caption .headline,
 #header_slider .caption h2.headline,
@@ -748,7 +753,57 @@ body.header_fix #header {
     background: var(--gm-ivory-2) !important;
     border-top: 1px solid var(--gm-hair) !important;
     border-bottom: 1px solid var(--gm-hair) !important;
-    padding: 14px 0 !important;
+    padding: 20px !important;
+    margin: 40px 16px !important;
+    border-radius: 4px !important;
+}
+
+#index_news .newsticker,
+#index_news_mobile .newsticker,
+#index_news .newsticker-item a,
+#index_news_mobile .newsticker-item a {
+    word-break: keep-all !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+    line-height: 1.6 !important;
+}
+
+/* Mobile news section — prevent mid-word breaks on titles */
+@media (max-width: 768px) {
+    #index_news,
+    #index_news_mobile {
+        padding: 20px 16px !important;
+        margin: 28px 14px !important;
+    }
+
+    #index_news .inner,
+    #index_news_mobile .inner {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 14px !important;
+        padding: 0 !important;
+    }
+
+    #index_news .inner::before {
+        padding: 0 0 10px 0 !important;
+        border-right: none !important;
+        border-bottom: 1px solid var(--gm-hair);
+        margin: 0 !important;
+        text-align: left;
+    }
+
+    .newsticker-item a {
+        word-break: keep-all !important;
+        overflow-wrap: break-word !important;
+        display: block !important;
+    }
+
+    .newsticker-item .entry-date {
+        display: block !important;
+        margin-bottom: 4px !important;
+        padding: 0 !important;
+        border: none !important;
+    }
 }
 
 /* Force all parent theme's cyan accents to gold/navy brand tone */
@@ -1760,9 +1815,9 @@ body.single #side_col .widget {
    MOBILE: Clinic card compact layout
    ========================================================================= */
 @media (max-width: 720px) {
-    /* Hero — taller on mobile so caption fits without clipping, clear gap below */
+    /* Hero — no white gap between hero and search panel */
     #header_slider {
-        margin: 0 0 32px 0 !important;
+        margin: 0 !important;
         padding: 0 !important;
         max-height: 420px !important;
         min-height: 340px !important;
@@ -2315,45 +2370,59 @@ a[href=""]:hover {
 }
 
 /* =========================================================================
-   Single page doctor block (#post_list2) — medical PORTRAIT PRIMARY
+   Single clinic page — DOCTOR DETAIL CARD (#post_list2 li.article)
+   Vertical stack: photo top 200px → name nowrap → tags 36px unified height
    ========================================================================= */
 
 #post_list2 {
     max-width: 720px;
     margin: 24px auto !important;
-    padding: 0 20px !important;
+    padding: 0 16px !important;
     list-style: none !important;
 }
 
 #post_list2 .article,
 #post_list2 li.article {
     background: #fff !important;
-    border: 1px solid var(--gm-hair) !important;
-    padding: 32px clamp(20px, 3vw, 48px) !important;
+    border: 1px solid var(--gm-gold) !important;
+    border-radius: 4px !important;
+    padding: 32px 20px !important;
     margin: 0 !important;
     list-style: none !important;
     box-shadow: var(--gm-shadow-soft);
     opacity: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 20px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
 }
 
 #post_list2 .article > div {
     display: flex !important;
-    flex-direction: column;
+    flex-direction: column !important;
     align-items: center !important;
-    gap: 18px !important;
+    justify-content: center !important;
+    gap: 20px !important;
     margin: 0 !important;
     padding: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
 }
 
+/* Doctor portrait — large 200px circle (160 on very narrow) */
 #post_list2 .article .image,
 #post_list2 .article .image[style] {
-    width: 170px !important;
-    height: 170px !important;
+    width: 200px !important;
+    height: 200px !important;
+    max-width: 200px !important;
+    max-height: 200px !important;
     padding: 0 !important;
-    margin: 0 !important;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 3px solid var(--gm-gold);
+    margin: 0 auto !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    border: 3px solid var(--gm-gold) !important;
     box-shadow: 0 12px 32px rgba(10, 31, 61, .22);
     background: #fff;
     position: relative;
@@ -2390,35 +2459,53 @@ a[href=""]:hover {
     max-width: none !important;
 }
 
+/* Doctor name — must never wrap (rule 16) */
 #post_list2 .article .wp-block-column p.title,
 #post_list2 .article .wp-block-column p.title[style],
+#post_list2 .article .wp-block-column p.title.gm-preserve,
 #post_list2 .article .wp-block-column p[style]:first-child,
 #post_list2 .article .wp-block-column > p:first-of-type {
     font-family: var(--gm-serif) !important;
-    font-size: clamp(24px, 3vw, 30px) !important;
+    font-size: clamp(22px, 3vw, 28px) !important;
     font-weight: 600 !important;
     color: var(--gm-navy) !important;
-    line-height: 1.5 !important;
-    letter-spacing: .06em !important;
-    margin: 0 0 6px !important;
+    line-height: 1.35 !important;
+    letter-spacing: .05em !important;
+    margin: 0 !important;
     padding: 0 !important;
     text-align: center !important;
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    overflow: visible !important;
 }
 
 #post_list2 .article .wp-block-column p strong {
     font-weight: 600 !important;
     font-size: inherit !important;
+    white-space: nowrap !important;
 }
 
+/* Grad year on same line as name — golden smaller */
+#post_list2 .article .wp-block-column p.title br {
+    display: none !important;
+}
+
+#post_list2 .article .wp-block-column p.title strong::after {
+    content: "";
+}
+
+/* Tag pills unified 36px height, content vertically centered */
 #post_list2 .article ul#post_meta_top,
 #post_list2 .article ul.meta {
     display: flex !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
-    gap: 6px !important;
-    margin: 14px 0 0 !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin: 8px 0 0 !important;
     padding: 0 !important;
     list-style: none !important;
+    width: 100% !important;
 }
 
 #post_list2 .article ul#post_meta_top li.cat,
@@ -2427,18 +2514,30 @@ a[href=""]:hover {
     padding: 0 !important;
     margin: 0 !important;
     float: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    flex: 0 0 auto !important;
 }
 
 #post_list2 .article ul#post_meta_top li.cat a,
-#post_list2 .article ul.meta li.cat a {
-    display: inline-block !important;
-    padding: 5px 12px !important;
+#post_list2 .article ul.meta li.cat a,
+#post_list2 .article ul#post_meta_top li.cat span.cat-category,
+#post_list2 .article ul#post_meta_top li.cat span.cat-category2,
+#post_list2 .article ul#post_meta_top li.cat span.cat-category3 {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 36px !important;
+    padding: 0 16px !important;
     font-family: var(--gm-sans) !important;
-    font-size: 11px !important;
+    font-size: 13px !important;
     font-weight: 600 !important;
-    letter-spacing: .06em !important;
+    letter-spacing: .04em !important;
+    line-height: 1 !important;
     border-radius: 2px !important;
-    white-space: nowrap;
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    box-sizing: border-box !important;
 }
 
 /* Hide the SP duplicate article on desktop, show on mobile */
