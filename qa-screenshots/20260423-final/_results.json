@@ -1,0 +1,152 @@
+[
+  {
+    "slug": "privacy",
+    "w": 375,
+    "check": {
+      "docW": 375,
+      "winW": 375,
+      "overflow": false,
+      "breakAll": 0,
+      "bodyPadL": 0,
+      "bodyPadR": 0,
+      "aPadL": 0,
+      "aPadR": 0,
+      "aBox": null
+    }
+  },
+  {
+    "slug": "privacy",
+    "w": 390,
+    "check": {
+      "docW": 390,
+      "winW": 390,
+      "overflow": false,
+      "breakAll": 0,
+      "bodyPadL": 0,
+      "bodyPadR": 0,
+      "aPadL": 0,
+      "aPadR": 0,
+      "aBox": null
+    }
+  },
+  {
+    "slug": "privacy",
+    "w": 430,
+    "check": {
+      "docW": 430,
+      "winW": 430,
+      "overflow": false,
+      "breakAll": 0,
+      "bodyPadL": 0,
+      "bodyPadR": 0,
+      "aPadL": 0,
+      "aPadR": 0,
+      "aBox": null
+    }
+  },
+  {
+    "slug": "privacy",
+    "w": 768,
+    "check": {
+      "docW": 768,
+      "winW": 768,
+      "overflow": false,
+      "breakAll": 0,
+      "bodyPadL": 0,
+      "bodyPadR": 0,
+      "aPadL": 0,
+      "aPadR": 0,
+      "aBox": null
+    }
+  },
+  {
+    "slug": "privacy",
+    "w": 1024,
+    "check": {
+      "docW": 1024,
+      "winW": 1024,
+      "overflow": false,
+      "breakAll": 0,
+      "bodyPadL": 0,
+      "bodyPadR": 0,
+      "aPadL": 0,
+      "aPadR": 0,
+      "aBox": null
+    }
+  },
+  {
+    "slug": "management",
+    "w": 375,
+    "check": {
+      "docW": 375,
+      "winW": 375,
+      "overflow": false,
+      "breakAll": 0,
+      "bodyPadL": 0,
+      "bodyPadR": 0,
+      "aPadL": 0,
+      "aPadR": 0,
+      "aBox": null
+    }
+  },
+  {
+    "slug": "management",
+    "w": 390,
+    "check": {
+      "docW": 390,
+      "winW": 390,
+      "overflow": false,
+      "breakAll": 0,
+      "bodyPadL": 0,
+      "bodyPadR": 0,
+      "aPadL": 0,
+      "aPadR": 0,
+      "aBox": null
+    }
+  },
+  {
+    "slug": "management",
+    "w": 430,
+    "check": {
+      "docW": 430,
+      "winW": 430,
+      "overflow": false,
+      "breakAll": 0,
+      "bodyPadL": 0,
+      "bodyPadR": 0,
+      "aPadL": 0,
+      "aPadR": 0,
+      "aBox": null
+    }
+  },
+  {
+    "slug": "management",
+    "w": 768,
+    "check": {
+      "docW": 768,
+      "winW": 768,
+      "overflow": false,
+      "breakAll": 0,
+      "bodyPadL": 0,
+      "bodyPadR": 0,
+      "aPadL": 0,
+      "aPadR": 0,
+      "aBox": null
+    }
+  },
+  {
+    "slug": "management",
+    "w": 1024,
+    "check": {
+      "docW": 1024,
+      "winW": 1024,
+      "overflow": false,
+      "breakAll": 0,
+      "bodyPadL": 0,
+      "bodyPadR": 0,
+      "aPadL": 0,
+      "aPadR": 0,
+      "aBox": null
+    }
+  }
+]

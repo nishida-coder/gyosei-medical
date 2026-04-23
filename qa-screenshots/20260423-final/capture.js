@@ -1,50 +1,74 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
+const fs = require('fs');
 const path = require('path');
 
-const OUTPUT_DIR = 'C:/libunworks/projects/gyosei-medical/qa-screenshots/20260423-final';
-const WAIT_MS = 10000;
-const CAPTURE_HEIGHT = 2500;
+const CHROME = 'C:/Users/nishi/.cache/puppeteer/chrome/win64-147.0.7727.56/chrome-win64/chrome.exe';
+const OUT = 'C:/libunworks/projects/gyosei-medical/qa-screenshots/20260423-final';
+const HEIGHT = 2500;
+const WAIT_MS = 6000;
 
-const pages = [
-  { slug: 'dr-class', url: 'https://gyosei-medical.com/class-clinic/' },
-  { slug: 'dr-tsuchiya', url: 'https://gyosei-medical.com/tsuchiya/' },
-  { slug: 'dr-kokoro', url: 'https://gyosei-medical.com/kokoromental/' },
-  { slug: 'news-list', url: 'https://gyosei-medical.com/news/' },
+const jobs = [
+  { slug: 'privacy',    url: 'https://gyosei-medical.com/privacypolicy/' },
+  { slug: 'management', url: 'https://gyosei-medical.com/management/' },
 ];
+const widths = [375, 390, 430, 768, 1024];
 
-const widths = [375, 390, 430];
+const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
 (async () => {
   const browser = await puppeteer.launch({
+    executablePath: CHROME,
     headless: 'new',
-    executablePath: 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    args: ['--no-sandbox', '--disable-dev-shm-usage'],
   });
 
   const results = [];
-  for (const p of pages) {
+  for (const job of jobs) {
     for (const w of widths) {
-      const filename = `${p.slug}_${w}px.png`;
-      const outPath = path.join(OUTPUT_DIR, filename).replace(/\\/g, '/');
-      console.log(`[start] ${filename} -> ${p.url}`);
       const page = await browser.newPage();
+      await page.setCacheEnabled(false);
+      await page.setViewport({ width: w, height: HEIGHT, deviceScaleFactor: 1, isMobile: w < 768 });
       try {
-        await page.setViewport({ width: w, height: CAPTURE_HEIGHT, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
-        await page.setUserAgent('Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1');
-        await page.goto(p.url, { waitUntil: 'networkidle2', timeout: 60000 });
-        await new Promise(r => setTimeout(r, WAIT_MS));
-        await page.screenshot({ path: outPath, clip: { x: 0, y: 0, width: w, height: CAPTURE_HEIGHT } });
-        results.push({ filename, ok: true });
-        console.log(`[done]  ${filename}`);
+        await page.goto(job.url, { waitUntil: 'load', timeout: 60000 });
       } catch (e) {
-        results.push({ filename, ok: false, error: String(e) });
-        console.log(`[fail]  ${filename}: ${e.message}`);
-      } finally {
-        await page.close();
+        console.error(`GOTO FAIL ${job.slug} ${w}: ${e.message}`);
       }
+      await sleep(WAIT_MS);
+
+      const check = await page.evaluate(() => {
+        const docW = document.documentElement.scrollWidth;
+        const winW = window.innerWidth;
+        const overflow = docW > winW + 1;
+        const els = Array.from(document.querySelectorAll('p,h1,h2,h3,h4,li,a,span,div'));
+        let breakAll = 0;
+        for (const el of els) {
+          const cs = getComputedStyle(el);
+          if (cs.wordBreak === 'break-all') breakAll++;
+        }
+        const main = document.querySelector('main') || document.body;
+        const cs = getComputedStyle(main);
+        const bodyPadL = parseFloat(cs.paddingLeft) || 0;
+        const bodyPadR = parseFloat(cs.paddingRight) || 0;
+        const article = document.querySelector('article, .entry-content, .p-entry, .post, .content, main');
+        let aPadL = 0, aPadR = 0, aBox = null;
+        if (article) {
+          const acs = getComputedStyle(article);
+          aPadL = parseFloat(acs.paddingLeft) || 0;
+          aPadR = parseFloat(acs.paddingRight) || 0;
+          const r = article.getBoundingClientRect();
+          aBox = { left: Math.round(r.left), rightGap: Math.round(winW - r.right), width: Math.round(r.width) };
+        }
+        return { docW, winW, overflow, breakAll, bodyPadL, bodyPadR, aPadL, aPadR, aBox };
+      });
+
+      const file = path.join(OUT, `${job.slug}_${w}px.png`);
+      await page.screenshot({ path: file, fullPage: false });
+      console.log(`SAVED ${job.slug} ${w} | ${JSON.stringify(check)}`);
+      results.push({ slug: job.slug, w, check });
+      await page.close();
     }
   }
+  fs.writeFileSync(path.join(OUT, '_results.json'), JSON.stringify(results, null, 2));
   await browser.close();
-  console.log('\n=== SUMMARY ===');
-  for (const r of results) console.log(`${r.ok ? 'OK  ' : 'FAIL'} ${r.filename}${r.error ? ' - ' + r.error : ''}`);
-})();
+  console.log('DONE');
+})().catch(e => { console.error(e); process.exit(1); });
