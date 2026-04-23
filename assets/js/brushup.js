@@ -10,13 +10,28 @@
     }
 
     // Reorder single clinic page so the DOCTOR block appears right after the logo image.
-    // IMPORTANT: #post_list2 is reused by the MEDIA section on the same page, so we must
-    // distinguish the doctor block (has .cat-category tags) from media items (no tags).
+    // Also: hide the SP duplicate of the doctor block outright (TCD renders both PC + SP).
     function reorderSingleClinic() {
         var article = document.getElementById("article");
         if (!article) return;
         var postImage = document.getElementById("post_image");
         if (!postImage) return;
+
+        // Kill SP-variant doctor cards AND their <center> wrappers — we keep only PC
+        var spArticles = article.querySelectorAll("#post_list2 li.article.sp, ol#post_list2 li.article.sp");
+        Array.prototype.forEach.call(spArticles, function (sp) {
+            // Hide SP li
+            sp.style.display = "none";
+            // Also hide parent ol and its center wrapper if they become empty
+            var ol = sp.closest("ol");
+            if (ol && ol.querySelectorAll("li.article:not(.sp)").length === 0) {
+                ol.style.display = "none";
+                var wrapper = ol.closest("center");
+                if (wrapper && !wrapper.querySelector("li.article:not(.sp)")) {
+                    wrapper.style.display = "none";
+                }
+            }
+        });
 
         var movedElements = [];
         var seen = function (el) { return movedElements.indexOf(el) !== -1; };

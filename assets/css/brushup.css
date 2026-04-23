@@ -2540,13 +2540,25 @@ a[href=""]:hover {
     box-sizing: border-box !important;
 }
 
-/* Hide the SP duplicate article on desktop, show on mobile */
-@media (min-width: 768px) {
-    #post_list2 .article.sp { display: none !important; }
+/* Hide the SP duplicate entirely — .article.pc is our styled target at every width.
+   Previously PC/SP were toggled by breakpoint; this caused BOTH to render together on
+   some viewports. Forcing SP off everywhere + making PC work on all widths is cleaner. */
+#post_list2 li.article.sp,
+ol#post_list2 li.article.sp,
+body.single #post_list2 li.article.sp,
+body.single ol#post_list2 li.article.sp {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
-@media (max-width: 767px) {
-    #post_list2 .article.pc { display: none !important; }
+/* Hide the entire <center><ol id="post_list2"><li class="article sp">...</li></ol></center>
+   wrapper when it only contains the SP variant */
+center:has(> ol#post_list2 > li.article.sp:only-child) {
+    display: none !important;
 }
 
 /* =========================================================================
