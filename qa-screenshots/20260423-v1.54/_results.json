@@ -1,0 +1,320 @@
+[
+  {
+    "slug": "home",
+    "check": {
+      "docW": 390,
+      "winW": 390,
+      "docH": 13077,
+      "overflow": false,
+      "slug": "home",
+      "news": {
+        "found": false
+      }
+    }
+  },
+  {
+    "slug": "cat",
+    "check": {
+      "docW": 390,
+      "winW": 390,
+      "docH": 6874,
+      "overflow": false,
+      "slug": "cat",
+      "clinicCards": [
+        {
+          "width": 310,
+          "height": 324,
+          "tag": "LI",
+          "cls": "article gm-reveal is-in gm-archive-enriched-card"
+        },
+        {
+          "width": 310,
+          "height": 330,
+          "tag": "LI",
+          "cls": "article gm-reveal is-in gm-archive-enriched-card"
+        },
+        {
+          "width": 310,
+          "height": 330,
+          "tag": "LI",
+          "cls": "article gm-reveal is-in gm-archive-enriched-card"
+        }
+      ],
+      "catTags": [
+        {
+          "text": "内科",
+          "height": 24,
+          "fontSize": 11,
+          "lineHeight": "10.5px"
+        },
+        {
+          "text": "荒川区・足立区・葛飾区",
+          "height": 24,
+          "fontSize": 11,
+          "lineHeight": "10.5px"
+        },
+        {
+          "text": "2000代卒",
+          "height": 24,
+          "fontSize": 11,
+          "lineHeight": "10.5px"
+        },
+        {
+          "text": "プライマリ・ケア",
+          "height": 24,
+          "fontSize": 11,
+          "lineHeight": "10.5px"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "kokoro",
+    "check": {
+      "docW": 390,
+      "winW": 390,
+      "docH": 8336,
+      "overflow": false,
+      "slug": "kokoro",
+      "doctorCircle": {
+        "width": 180,
+        "height": 180,
+        "borderRadius": "50%"
+      },
+      "photoCardFrame": {
+        "level": 1,
+        "bg": "rgb(255, 255, 255)",
+        "border": "3px solid rgb(184, 147, 90)",
+        "boxShadow": "rgba(10, 31, 61, 0.18) 0px 10px 28px 0px",
+        "width": 186,
+        "tag": "DIV",
+        "cls": "image"
+      },
+      "doctorName": {
+        "fontSize": 22,
+        "fontFamily": "\"Shippori Mincho B1\", \"Noto Serif JP\", \"Hiragino Mincho ProN",
+        "text": "こころの診療所　築地・新富町"
+      },
+      "tags": [
+        {
+          "text": "心療内科・精神科",
+          "height": 28,
+          "fontSize": 11,
+          "lineHeight": "10.5px",
+          "paddingTop": "4px",
+          "paddingBottom": "4px",
+          "bg": "rgb(10, 31, 61)"
+        },
+        {
+          "text": "千代田区・中央区",
+          "height": 28,
+          "fontSize": 11,
+          "lineHeight": "10.5px",
+          "paddingTop": "4px",
+          "paddingBottom": "4px",
+          "bg": "rgb(184, 147, 90)"
+        },
+        {
+          "text": "1990代卒",
+          "height": 28,
+          "fontSize": 11,
+          "lineHeight": "10.5px",
+          "paddingTop": "4px",
+          "paddingBottom": "4px",
+          "bg": "rgb(255, 255, 255)"
+        },
+        {
+          "text": "Facebook",
+          "height": 48,
+          "fontSize": 0,
+          "lineHeight": "0px",
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "bg": "rgb(255, 255, 255)"
+        },
+        {
+          "text": "Instagram",
+          "height": 48,
+          "fontSize": 0,
+          "lineHeight": "0px",
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "bg": "rgb(255, 255, 255)"
+        }
+      ],
+      "media": {
+        "found": true,
+        "height": 473,
+        "itemCount": 4,
+        "firstItemHeight": 271,
+        "firstItemWidth": 280,
+        "firstImgWidth": 180,
+        "firstImgHeight": 180
+      }
+    }
+  },
+  {
+    "slug": "class",
+    "check": {
+      "docW": 390,
+      "winW": 390,
+      "docH": 7885,
+      "overflow": false,
+      "slug": "class",
+      "doctorCircle": {
+        "width": 180,
+        "height": 180,
+        "borderRadius": "50%"
+      },
+      "photoCardFrame": {
+        "level": 1,
+        "bg": "rgb(255, 255, 255)",
+        "border": "3px solid rgb(184, 147, 90)",
+        "boxShadow": "rgba(10, 31, 61, 0.18) 0px 10px 28px 0px",
+        "width": 186,
+        "tag": "DIV",
+        "cls": "image"
+      },
+      "doctorName": {
+        "fontSize": 22,
+        "fontFamily": "\"Shippori Mincho B1\", \"Noto Serif JP\", \"Hiragino Mincho ProN",
+        "text": "CLASS CLINIC"
+      },
+      "tags": [
+        {
+          "text": "形成外科・美容外科",
+          "height": 28,
+          "fontSize": 11,
+          "lineHeight": "10.5px",
+          "paddingTop": "4px",
+          "paddingBottom": "4px",
+          "bg": "rgb(10, 31, 61)"
+        },
+        {
+          "text": "千代田区・中央区",
+          "height": 28,
+          "fontSize": 11,
+          "lineHeight": "10.5px",
+          "paddingTop": "4px",
+          "paddingBottom": "4px",
+          "bg": "rgb(184, 147, 90)"
+        },
+        {
+          "text": "2000代卒",
+          "height": 28,
+          "fontSize": 11,
+          "lineHeight": "10.5px",
+          "paddingTop": "4px",
+          "paddingBottom": "4px",
+          "bg": "rgb(255, 255, 255)"
+        },
+        {
+          "text": "Facebook",
+          "height": 48,
+          "fontSize": 0,
+          "lineHeight": "0px",
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "bg": "rgb(255, 255, 255)"
+        },
+        {
+          "text": "Instagram",
+          "height": 48,
+          "fontSize": 0,
+          "lineHeight": "0px",
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "bg": "rgb(255, 255, 255)"
+        }
+      ],
+      "media": {
+        "found": true,
+        "height": 473,
+        "itemCount": 4,
+        "firstItemHeight": 271,
+        "firstItemWidth": 280,
+        "firstImgWidth": 180,
+        "firstImgHeight": 180
+      }
+    }
+  },
+  {
+    "slug": "mishima",
+    "check": {
+      "docW": 390,
+      "winW": 390,
+      "docH": 7017,
+      "overflow": false,
+      "slug": "mishima",
+      "doctorCircle": {
+        "width": 180,
+        "height": 180,
+        "borderRadius": "50%"
+      },
+      "photoCardFrame": {
+        "level": 1,
+        "bg": "rgb(255, 255, 255)",
+        "border": "3px solid rgb(184, 147, 90)",
+        "boxShadow": "rgba(10, 31, 61, 0.18) 0px 10px 28px 0px",
+        "width": 186,
+        "tag": "DIV",
+        "cls": "image"
+      },
+      "doctorName": {
+        "fontSize": 22,
+        "fontFamily": "\"Shippori Mincho B1\", \"Noto Serif JP\", \"Hiragino Mincho ProN",
+        "text": "みしま痛み＆リハビリクリニック"
+      },
+      "tags": [
+        {
+          "text": "整形外科・リハビリ科",
+          "height": 28,
+          "fontSize": 11,
+          "lineHeight": "10.5px",
+          "paddingTop": "4px",
+          "paddingBottom": "4px",
+          "bg": "rgb(10, 31, 61)"
+        },
+        {
+          "text": "その他地域",
+          "height": 28,
+          "fontSize": 11,
+          "lineHeight": "10.5px",
+          "paddingTop": "4px",
+          "paddingBottom": "4px",
+          "bg": "rgb(184, 147, 90)"
+        },
+        {
+          "text": "2000代卒",
+          "height": 28,
+          "fontSize": 11,
+          "lineHeight": "10.5px",
+          "paddingTop": "4px",
+          "paddingBottom": "4px",
+          "bg": "rgb(255, 255, 255)"
+        },
+        {
+          "text": "Facebook",
+          "height": 48,
+          "fontSize": 0,
+          "lineHeight": "0px",
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "bg": "rgb(255, 255, 255)"
+        },
+        {
+          "text": "Instagram",
+          "height": 48,
+          "fontSize": 0,
+          "lineHeight": "0px",
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "bg": "rgb(255, 255, 255)"
+        }
+      ],
+      "media": {
+        "found": false
+      }
+    }
+  }
+]

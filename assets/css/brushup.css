@@ -747,15 +747,27 @@ body.header_fix #header {
     color: var(--gm-navy) !important;
 }
 
-/* News ticker (home) + News archive heading — unified brand tone */
-#index_news,
-#index_news_mobile {
+/* News ticker (home) — desktop only */
+#index_news {
     background: var(--gm-ivory-2) !important;
     border-top: 1px solid var(--gm-hair) !important;
     border-bottom: 1px solid var(--gm-hair) !important;
     padding: 20px !important;
     margin: 40px 16px !important;
     border-radius: 4px !important;
+}
+
+/* Mobile news variant: force visible (TCD hides #index_news on mobile and shows mobile variant) */
+@media (max-width: 768px) {
+    #index_news {
+        display: none !important;
+    }
+    #index_news_mobile {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: relative !important;
+    }
 }
 
 #index_news .newsticker,
@@ -2682,6 +2694,117 @@ body.single li.article.gm-media-article a p {
     overflow: hidden !important;
 }
 
+/* =========================================================================
+   MEDIA section fallback — when JS hasn't tagged classes, use parent section
+   selector. MEDIA is wrapped in <section style="background-color: #F3F2E9;">
+   ========================================================================= */
+body.single section[style*="F3F2E9"] #post_list2 .article,
+body.single section[style*="F3F2E9"] ol#post_list2 li.article {
+    background: #fff !important;
+    border: 1px solid var(--gm-hair) !important;
+    border-radius: 4px !important;
+    padding: 16px !important;
+    margin: 0 0 12px !important;
+    box-shadow: var(--gm-shadow-soft) !important;
+    display: block !important;
+    width: auto !important;
+    max-width: 100% !important;
+}
+
+body.single section[style*="F3F2E9"] #post_list2 .article > div {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 14px !important;
+    margin: 0 !important;
+}
+
+body.single section[style*="F3F2E9"] #post_list2 .article .image,
+body.single section[style*="F3F2E9"] #post_list2 .article .image[style] {
+    flex: 0 0 80px !important;
+    width: 80px !important;
+    height: 80px !important;
+    max-width: 80px !important;
+    max-height: 80px !important;
+    border-radius: 4px !important;
+    border: 1px solid var(--gm-hair) !important;
+    overflow: hidden !important;
+    background: var(--gm-ivory-2) !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+body.single section[style*="F3F2E9"] #post_list2 .article .image::after {
+    content: none !important;
+    display: none !important;
+}
+
+body.single section[style*="F3F2E9"] #post_list2 .article .image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+body.single section[style*="F3F2E9"] #post_list2 .article .wp-block-column,
+body.single section[style*="F3F2E9"] #post_list2 .article .wp-block-column[style] {
+    flex: 1 1 auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    text-align: left !important;
+}
+
+body.single section[style*="F3F2E9"] #post_list2 .article p.title,
+body.single section[style*="F3F2E9"] #post_list2 .article p.title.gm-preserve,
+body.single section[style*="F3F2E9"] #post_list2 .article p.title.js-ellipsis,
+body.single section[style*="F3F2E9"] #post_list2 .article p.title strong {
+    font-family: var(--gm-serif) !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: var(--gm-navy) !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: left !important;
+    word-break: break-word !important;
+    white-space: normal !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+
+body.single section[style*="F3F2E9"] #post_list2 .article a {
+    display: inline-block !important;
+    margin-top: 6px !important;
+    color: var(--gm-gold-2) !important;
+    font-family: var(--gm-sans) !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: .04em !important;
+    word-break: break-all !important;
+}
+
+body.single section[style*="F3F2E9"] #post_list2 .article a p {
+    font-size: 10.5px !important;
+    color: var(--gm-mute) !important;
+    margin: 4px 0 0 !important;
+    word-break: break-all !important;
+    line-height: 1.4 !important;
+    overflow: hidden !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+}
+
 #post_list2 .article > div {
     display: flex !important;
     flex-direction: column !important;
@@ -2694,9 +2817,10 @@ body.single li.article.gm-media-article a p {
     box-sizing: border-box !important;
 }
 
-/* Doctor portrait — 180px circle (smaller, with breathing room from edges) */
-#post_list2 .article .image,
-#post_list2 .article .image[style] {
+/* Doctor portrait — 180px circle, CLEAN (no white card frame, no outer ring) */
+body.single li.article.gm-doctor-article .image,
+body.single li.article.gm-doctor-article .image[style],
+body.single #post_list2 li.article:not(.gm-media-article) .image {
     width: 180px !important;
     height: 180px !important;
     max-width: 180px !important;
@@ -2706,19 +2830,17 @@ body.single li.article.gm-media-article a p {
     border-radius: 50% !important;
     overflow: hidden !important;
     border: 3px solid var(--gm-gold) !important;
-    box-shadow: 0 10px 28px rgba(10, 31, 61, .18);
-    background: #fff;
+    box-shadow: none !important;
+    background: transparent !important;
     position: relative;
     flex: 0 0 auto !important;
 }
 
-#post_list2 .article .image::after {
-    content: "";
-    position: absolute;
-    inset: -9px;
-    border-radius: 50%;
-    border: 1px solid var(--gm-hair);
-    pointer-events: none;
+/* Remove the outer decorative ring entirely (was making it look like a framed card) */
+body.single li.article.gm-doctor-article .image::after,
+body.single #post_list2 li.article:not(.gm-media-article) .image::after {
+    content: none !important;
+    display: none !important;
 }
 
 #post_list2 .article .image img,
@@ -2742,14 +2864,13 @@ body.single li.article.gm-media-article a p {
     max-width: none !important;
 }
 
-/* Doctor name — large bold serif, never wraps (rule 16) */
-#post_list2 .article .wp-block-column p.title,
-#post_list2 .article .wp-block-column p.title[style],
-#post_list2 .article .wp-block-column p.title.gm-preserve,
-#post_list2 .article .wp-block-column p[style]:first-child,
-#post_list2 .article .wp-block-column > p:first-of-type,
-body.single #post_list2 li.article .wp-block-column p.title,
-body.single #post_list2 li.article .wp-block-column p.title.gm-preserve {
+/* Doctor name — only on DOCTOR articles, not MEDIA. 28px serif bold */
+body.single li.article.gm-doctor-article .wp-block-column p.title,
+body.single li.article.gm-doctor-article .wp-block-column p.title.gm-preserve,
+body.single li.article.gm-doctor-article .wp-block-column p[style]:first-child,
+body.single li.article.gm-doctor-article .wp-block-column > p:first-of-type,
+body.single #post_list2 li.article:not(.gm-media-article) .wp-block-column p.title,
+body.single #post_list2 li.article:not(.gm-media-article) .wp-block-column p.title.gm-preserve {
     font-family: var(--gm-serif) !important;
     font-size: 28px !important;
     font-weight: 700 !important;
@@ -2764,11 +2885,10 @@ body.single #post_list2 li.article .wp-block-column p.title.gm-preserve {
     overflow: visible !important;
 }
 
-/* The <strong> inside also needs the larger size */
-#post_list2 .article .wp-block-column p.title strong,
-#post_list2 .article .wp-block-column p.title.gm-preserve strong,
-body.single #post_list2 li.article .wp-block-column p.title strong,
-body.single #post_list2 li.article .wp-block-column p.title.gm-preserve strong {
+body.single li.article.gm-doctor-article .wp-block-column p.title strong,
+body.single li.article.gm-doctor-article .wp-block-column p.title.gm-preserve strong,
+body.single #post_list2 li.article:not(.gm-media-article) .wp-block-column p.title strong,
+body.single #post_list2 li.article:not(.gm-media-article) .wp-block-column p.title.gm-preserve strong {
     font-family: var(--gm-serif) !important;
     font-size: 28px !important;
     font-weight: 700 !important;
@@ -2780,11 +2900,11 @@ body.single #post_list2 li.article .wp-block-column p.title.gm-preserve strong {
 }
 
 @media (max-width: 768px) {
-    #post_list2 .article .wp-block-column p.title,
-    #post_list2 .article .wp-block-column p.title strong,
-    body.single #post_list2 li.article .wp-block-column p.title,
-    body.single #post_list2 li.article .wp-block-column p.title strong {
-        font-size: 24px !important;
+    body.single li.article.gm-doctor-article .wp-block-column p.title,
+    body.single li.article.gm-doctor-article .wp-block-column p.title strong,
+    body.single #post_list2 li.article:not(.gm-media-article) .wp-block-column p.title,
+    body.single #post_list2 li.article:not(.gm-media-article) .wp-block-column p.title strong {
+        font-size: 26px !important;
     }
 }
 
@@ -2828,6 +2948,7 @@ body.single #post_list2 li.article .wp-block-column p.title.gm-preserve strong {
     flex: 0 0 auto !important;
 }
 
+/* Tag pills — height 30px, line-height 30px (= height for perfect vertical center) */
 #post_list2 .article ul#post_meta_top li.cat a,
 #post_list2 .article ul.meta li.cat a,
 #post_list2 .article ul#post_meta_top li.cat span.cat-category,
@@ -2839,15 +2960,15 @@ body.single #post_list2 li.article .wp-block-column p.title.gm-preserve strong {
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    height: 28px !important;
-    min-height: 28px !important;
-    max-height: 28px !important;
-    padding: 0 12px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+    padding: 0 14px !important;
     font-family: var(--gm-sans) !important;
-    font-size: 11.5px !important;
+    font-size: 12px !important;
     font-weight: 600 !important;
     letter-spacing: .04em !important;
-    line-height: 1 !important;
+    line-height: 30px !important;
     border-radius: 2px !important;
     white-space: nowrap !important;
     word-break: keep-all !important;
@@ -2855,18 +2976,18 @@ body.single #post_list2 li.article .wp-block-column p.title.gm-preserve strong {
     vertical-align: middle !important;
 }
 
-/* Inner span inside tag — vertically centered text */
+/* Inner span — also line-height 30px to match parent (text vertical center) */
 #post_list2 .article ul#post_meta_top li.cat a span,
-#post_list2 .article ul#post_meta_top li.cat span span {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    line-height: 1 !important;
-    height: 100% !important;
+#post_list2 .article ul#post_meta_top li.cat span > span,
+#post_list2 .article ul.meta li.cat a span {
+    display: inline-block !important;
+    line-height: 30px !important;
+    height: 30px !important;
     padding: 0 !important;
     margin: 0 !important;
     font-size: inherit !important;
     color: inherit !important;
+    vertical-align: middle !important;
 }
 
 /* Hide the SP duplicate entirely — .article.pc is our styled target at every width.
