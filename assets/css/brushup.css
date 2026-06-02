@@ -2561,21 +2561,41 @@ a[href=""]:hover {
    - .gm-media-article  on li.article without .cat-category
    ========================================================================= */
 
-/* DOCTOR card — clean vertical stack, no white frame */
-body.single li.article.gm-doctor-article {
+/* DOCTOR ol container — centered within <center> wrapper, max-width capped */
+body.single ol#post_list2,
+body.single #post_list2 {
+    max-width: 480px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    list-style: none !important;
+    text-align: center !important;
+}
+
+/* The PHP-generated <center> wrappers — ensure they center the ol */
+body.single #article > center,
+body.single #left_col > center {
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+}
+
+/* DOCTOR card — clean vertical stack, generous padding, centered */
+body.single li.article.gm-doctor-article,
+body.single #post_list2 > li.article:not(.gm-media-article) {
     background: transparent !important;
     border: none !important;
     border-radius: 0 !important;
-    padding: 16px !important;
+    padding: 36px 24px 30px !important;
     margin: 0 auto !important;
     list-style: none !important;
     box-shadow: none !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    gap: 14px !important;
+    justify-content: center !important;
+    gap: 16px !important;
     width: 100% !important;
-    max-width: 100% !important;
+    max-width: 480px !important;
     box-sizing: border-box !important;
     text-align: center !important;
 }
@@ -2976,18 +2996,51 @@ body.single #post_list2 li.article:not(.gm-media-article) .wp-block-column p.tit
     vertical-align: middle !important;
 }
 
-/* Inner span — also line-height 30px to match parent (text vertical center) */
+/* Inner span — flex-center alignment for perfect vertical center */
 #post_list2 .article ul#post_meta_top li.cat a span,
 #post_list2 .article ul#post_meta_top li.cat span > span,
-#post_list2 .article ul.meta li.cat a span {
-    display: inline-block !important;
-    line-height: 30px !important;
-    height: 30px !important;
+#post_list2 .article ul.meta li.cat a span,
+body.single ul#post_meta_top li.cat a span,
+body.single ul#post_meta_top li.cat span > span,
+body.single #post_list2 ul.meta li.cat a span {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
+    height: 100% !important;
     padding: 0 !important;
     margin: 0 !important;
     font-size: inherit !important;
     color: inherit !important;
     vertical-align: middle !important;
+    background: transparent !important;
+}
+
+/* Outer tag anchor — flex-center, override any parent ::before/::after that pushes text */
+body.single ul#post_meta_top li.cat,
+body.single ul#post_meta_top li.cat a,
+body.single #post_list2 ul.meta li.cat,
+body.single #post_list2 ul.meta li.cat a,
+body.single #post_list2 ul.meta li.cat a.cat-category,
+body.single #post_list2 ul.meta li.cat a.cat-category2,
+body.single #post_list2 ul.meta li.cat a.cat-category3,
+body.single #post_list2 ul.meta li.cat span.cat-category,
+body.single #post_list2 ul.meta li.cat span.cat-category2,
+body.single #post_list2 ul.meta li.cat span.cat-category3 {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
+    vertical-align: middle !important;
+}
+
+body.single #post_list2 ul#post_meta_top {
+    align-items: center !important;
+    line-height: 1 !important;
+}
+
+body.single #post_list2 ul#post_meta_top li.cat {
+    line-height: 1 !important;
 }
 
 /* Hide the SP duplicate entirely — .article.pc is our styled target at every width.
