@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('GYOSEI_CHILD_VERSION', '1.51.0');
+define('GYOSEI_CHILD_VERSION', '1.52.0');
 
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style(
@@ -174,16 +174,16 @@ add_filter('pre_get_document_title', function ($title) {
 /**
  * Inject JSON-LD structured data for GEO (LLM/Generative Engine) discovery.
  *
- * Rank Math already outputs Organization + WebSite + BreadcrumbList, so when
- * it is active we only add our unique MedicalClinic schema (Rank Math Free
- * does not emit MedicalClinic). When Rank Math is absent, emit the full set.
+ * Rank Math may also output Organization/WebSite, but it's unreliable and
+ * generative engines benefit from explicit, self-contained schemas. We always
+ * emit our own Organization + WebSite (graph @id makes duplicates harmless).
  */
 add_action('wp_head', function () {
     $json_flags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
     $rankmath_active = defined('RANK_MATH_VERSION');
 
+    // Always emit MedicalClinic on individual clinic pages (Rank Math doesn't)
     if ($rankmath_active) {
-        // Rank Math handles Organization / WebSite / BreadcrumbList — only add MedicalClinic here
         if (is_singular('post')) {
             $cats = get_the_category();
             $specialty = !empty($cats) ? $cats[0]->name : null;
@@ -216,7 +216,7 @@ add_action('wp_head', function () {
             echo "\n<!-- GYOSEI MedicalClinic JSON-LD -->\n";
             echo '<script type="application/ld+json">' . wp_json_encode($clinic, $json_flags) . '</script>' . "\n";
         }
-        return;
+        // Continue below to also emit Organization + WebSite even when Rank Math active
     }
 
     // Organization (site-wide)
