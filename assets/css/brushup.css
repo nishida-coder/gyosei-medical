@@ -4458,12 +4458,12 @@ input[type="submit"]:hover,
    Archive page cards — doctor-enriched view (JS injects photo + info)
    ========================================================================= */
 
-/* Search results / category archives (#post_list2) — grid like home */
+/* Search results / category archives (#post_list2) — grid (NOT on single pages) */
 body:not(.single) ol#post_list2,
 body.archive ol#post_list2,
 body.search ol#post_list2,
-#main_col > ol#post_list2,
-#main_col ol#post_list2 {
+body:not(.single) #main_col > ol#post_list2,
+body:not(.single) #main_col ol#post_list2 {
     display: grid !important;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
     gap: 28px !important;

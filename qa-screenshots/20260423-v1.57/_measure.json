@@ -1,0 +1,29 @@
+{
+  "found": true,
+  "parentTag": "ol",
+  "parentClass": "",
+  "parent": {
+    "left": 112,
+    "right": 848,
+    "width": 736,
+    "paddingLeft": 20,
+    "paddingRight": 20,
+    "innerLeft": 132,
+    "innerRight": 828,
+    "innerWidth": 696,
+    "display": "grid",
+    "justifyContent": "normal",
+    "textAlign": "center"
+  },
+  "card": {
+    "left": 132,
+    "right": 466,
+    "width": 334,
+    "marginLeft": "0px",
+    "marginRight": "0px"
+  },
+  "leftOffset": 0,
+  "rightOffset": 362,
+  "centered": false,
+  "delta": -362
+}
