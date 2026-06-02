@@ -1668,24 +1668,31 @@ ul.meta li.cat a.cat-category3 > span,
     transform: translateY(-1px);
 }
 
-/* 科目（診療科） → navy — applies to both <a> and <span> variants */
+/* 科目（診療科） → navy — applies to both <a> and <span> variants
+   Uses inline-flex + line-height equal to height for perfect vertical centering */
 a.cat-category,
 span.cat-category,
 li.cat .cat-category,
 #post_list .article .cat-category,
 #post_list2 .article .cat-category,
 .cb_content-blog_list .cat-category {
-    display: inline-block !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     background: var(--gm-navy) !important;
     color: #fff !important;
-    padding: 4px 10px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    padding: 0 14px !important;
     font-family: var(--gm-sans) !important;
-    font-size: 10.5px !important;
+    font-size: 11.5px !important;
     font-weight: 600 !important;
     letter-spacing: .04em !important;
-    line-height: 1.5 !important;
+    line-height: 30px !important;
     border-radius: 2px !important;
     border: none !important;
+    vertical-align: middle !important;
+    box-sizing: border-box !important;
 }
 
 /* 地域 → gold */
@@ -1695,20 +1702,26 @@ li.cat .cat-category2,
 #post_list .article .cat-category2,
 #post_list2 .article .cat-category2,
 .cb_content-blog_list .cat-category2 {
-    display: inline-block !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     background: var(--gm-gold) !important;
     color: var(--gm-navy) !important;
-    padding: 4px 10px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    padding: 0 14px !important;
     font-family: var(--gm-sans) !important;
-    font-size: 10.5px !important;
+    font-size: 11.5px !important;
     font-weight: 600 !important;
     letter-spacing: .04em !important;
-    line-height: 1.5 !important;
+    line-height: 30px !important;
     border-radius: 2px !important;
     border: none !important;
+    vertical-align: middle !important;
+    box-sizing: border-box !important;
 }
 
-/* 卒業年代 → cream with navy outline (clearly distinct from navy & gold) */
+/* 卒業年代 → white with navy outline */
 a.cat-category3,
 span.cat-category3,
 li.cat .cat-category3,
@@ -1717,27 +1730,60 @@ li.cat .cat-category3,
 .cb_content-blog_list .cat-category3,
 #post_list .article ul.meta li.cat a.cat-category3,
 #post_list .article ul.meta li.cat:nth-child(3) a {
-    display: inline-block !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     visibility: visible !important;
     opacity: 1 !important;
     background: #fff !important;
     background-color: #fff !important;
     color: var(--gm-navy) !important;
-    padding: 3px 10px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+    padding: 0 14px !important;
     font-family: var(--gm-sans) !important;
-    font-size: 10.5px !important;
+    font-size: 11.5px !important;
     font-weight: 600 !important;
     letter-spacing: .04em !important;
-    line-height: 1.5 !important;
+    line-height: 28px !important;
     border-radius: 2px !important;
     border: 1px solid var(--gm-navy) !important;
     width: auto !important;
-    height: auto !important;
     max-width: none !important;
-    max-height: none !important;
     position: static !important;
     clip: auto !important;
     clip-path: none !important;
+    vertical-align: middle !important;
+    box-sizing: border-box !important;
+}
+
+/* Inner <span> in every tag — flex-center inheritance for perfect vertical center */
+a.cat-category > span,
+a.cat-category2 > span,
+a.cat-category3 > span,
+span.cat-category > span,
+span.cat-category2 > span,
+span.cat-category3 > span,
+li.cat a span,
+li.cat span > span,
+#post_list .article ul.meta li.cat a span,
+#post_list2 .article ul.meta li.cat a span,
+#post_list2 .article ul#post_meta_top li.cat a span,
+body.single li.cat a span,
+body.single li.cat span > span {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
+    height: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: inherit !important;
+    color: inherit !important;
+    background: transparent !important;
+    border: none !important;
+    vertical-align: middle !important;
 }
 
 #post_list .article ul.meta li.cat a.cat-category3 span,
@@ -2609,7 +2655,7 @@ body.single #post_list2 > li.article:not(.gm-media-article) {
     background: transparent !important;
     border: none !important;
     border-radius: 0 !important;
-    padding: 36px 24px 30px !important;
+    padding: 50px 24px 40px !important;
     margin: 0 auto !important;
     list-style: none !important;
     box-shadow: none !important;
@@ -2617,7 +2663,7 @@ body.single #post_list2 > li.article:not(.gm-media-article) {
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 16px !important;
+    gap: 20px !important;
     width: 100% !important;
     max-width: 480px !important;
     box-sizing: border-box !important;
@@ -2861,7 +2907,8 @@ body.single section[style*="F3F2E9"] #post_list2 .article a p {
     box-sizing: border-box !important;
 }
 
-/* Doctor portrait — 180px circle, CLEAN (no white card frame, no outer ring) */
+/* Doctor portrait — 180px circle, CLEAN (no white card frame, no outer ring)
+   + adequate top margin from frame + bottom margin before name/tags */
 body.single li.article.gm-doctor-article .image,
 body.single li.article.gm-doctor-article .image[style],
 body.single #post_list2 li.article:not(.gm-media-article) .image {
@@ -2870,7 +2917,7 @@ body.single #post_list2 li.article:not(.gm-media-article) .image {
     max-width: 180px !important;
     max-height: 180px !important;
     padding: 0 !important;
-    margin: 0 auto !important;
+    margin: 24px auto 18px auto !important;
     border-radius: 50% !important;
     overflow: hidden !important;
     border: 3px solid var(--gm-gold) !important;
