@@ -2524,9 +2524,11 @@ a[href=""]:hover {
 #post_list2 .article .wp-block-column p.title[style],
 #post_list2 .article .wp-block-column p.title.gm-preserve,
 #post_list2 .article .wp-block-column p[style]:first-child,
-#post_list2 .article .wp-block-column > p:first-of-type {
+#post_list2 .article .wp-block-column > p:first-of-type,
+body.single #post_list2 li.article .wp-block-column p.title,
+body.single #post_list2 li.article .wp-block-column p.title.gm-preserve {
     font-family: var(--gm-serif) !important;
-    font-size: clamp(26px, 4vw, 32px) !important;
+    font-size: 28px !important;
     font-weight: 700 !important;
     color: var(--gm-navy) !important;
     line-height: 1.3 !important;
@@ -2537,6 +2539,30 @@ a[href=""]:hover {
     white-space: nowrap !important;
     word-break: keep-all !important;
     overflow: visible !important;
+}
+
+/* The <strong> inside also needs the larger size */
+#post_list2 .article .wp-block-column p.title strong,
+#post_list2 .article .wp-block-column p.title.gm-preserve strong,
+body.single #post_list2 li.article .wp-block-column p.title strong,
+body.single #post_list2 li.article .wp-block-column p.title.gm-preserve strong {
+    font-family: var(--gm-serif) !important;
+    font-size: 28px !important;
+    font-weight: 700 !important;
+    color: var(--gm-navy) !important;
+    letter-spacing: .06em !important;
+    line-height: 1.3 !important;
+    white-space: nowrap !important;
+    display: inline !important;
+}
+
+@media (max-width: 768px) {
+    #post_list2 .article .wp-block-column p.title,
+    #post_list2 .article .wp-block-column p.title strong,
+    body.single #post_list2 li.article .wp-block-column p.title,
+    body.single #post_list2 li.article .wp-block-column p.title strong {
+        font-size: 24px !important;
+    }
 }
 
 #post_list2 .article .wp-block-column p strong {
