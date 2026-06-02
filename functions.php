@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('GYOSEI_CHILD_VERSION', '1.48.0');
+define('GYOSEI_CHILD_VERSION', '1.49.0');
 
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style(
@@ -369,6 +369,107 @@ add_filter('wp_robots', function ($robots) {
     $robots['max-video-preview'] = -1;
     return $robots;
 });
+
+/* =========================================================================
+ * GEO (Generative Engine Optimization) — Area × Specialty long-tail
+ * ========================================================================= */
+
+/**
+ * Area × Specialty combo recognition for category-style queries.
+ * When a URL combines /category/{specialty}/ patterns + /category2/{area}/ or
+ * a single-clinic page with both specialty + area taxonomies, generate
+ * specialized meta/title/JSON-LD to capture "港区 内科 暁星" type queries.
+ */
+function gyosei_geo_combo_context() {
+    $combo = ['specialty' => null, 'area' => null, 'doctor' => null];
+
+    if (is_singular('post')) {
+        // Clinic page — extract specialty + area + doctor name
+        $cats = get_the_category();
+        if (!empty($cats)) $combo['specialty'] = $cats[0]->name;
+
+        $tax_area = get_the_terms(get_the_ID(), 'category2');
+        if (!is_wp_error($tax_area) && !empty($tax_area)) {
+            $combo['area'] = $tax_area[0]->name;
+        }
+    } elseif (is_tax('category2') || is_category()) {
+        // Area or specialty archive
+        $obj = get_queried_object();
+        if (is_object($obj)) {
+            if ($obj->taxonomy === 'category2') {
+                $combo['area'] = $obj->name;
+            } else {
+                $combo['specialty'] = $obj->name;
+            }
+        }
+    }
+
+    return $combo;
+}
+
+/**
+ * Emit GEO-rich meta description and JSON-LD specifically for area×specialty
+ * combinations. Targets queries like "暁星 港区 内科 開業医" or
+ * "千代田区 形成外科 暁星OB" via natural language phrasing.
+ */
+add_action('wp_head', function () {
+    $combo = gyosei_geo_combo_context();
+    if (!$combo['specialty'] && !$combo['area']) return;
+
+    $parts = [];
+    $kw_parts = ['暁星', 'OB', '医師', '開業'];
+    if ($combo['area']) {
+        $parts[] = $combo['area'];
+        $kw_parts[] = $combo['area'];
+    }
+    if ($combo['specialty']) {
+        $parts[] = $combo['specialty'];
+        $kw_parts[] = $combo['specialty'];
+    }
+    $combo_label = implode('・', $parts);
+
+    if (is_singular('post')) {
+        $desc = sprintf(
+            '%s（%s）の暁星学園OB医師が開業する%s。GYOSEI MEDICAL掲載。%sエリアで%sをお探しの方は信頼の暁星OBドクターネットワークから検索できます。',
+            get_the_title(),
+            $combo_label,
+            $combo['specialty'] ?: '医療機関',
+            $combo['area'] ?: '都内',
+            $combo['specialty'] ?: '医療機関'
+        );
+    } else {
+        $desc = sprintf(
+            '%sの暁星学園OB医師による%s情報。GYOSEI MEDICALは暁星卒業生による信頼の医療ネットワークを集約。エリア・診療科目・卒業年代から検索可能。',
+            $combo['area'] ?: '東京都',
+            $combo['specialty'] ? $combo['specialty'] . '・関連診療科' : '病院・クリニック'
+        );
+    }
+    $desc = mb_substr($desc, 0, 160);
+
+    echo "\n<!-- GYOSEI GEO meta -->\n";
+    echo '<meta name="geo.region" content="JP-13">' . "\n";
+    echo '<meta name="geo.placename" content="' . esc_attr($combo['area'] ?: '東京') . '">' . "\n";
+    echo '<meta name="keywords" content="' . esc_attr(implode(', ', $kw_parts)) . '">' . "\n";
+
+    // GEO-specific Place schema linking area + specialty
+    if ($combo['area'] && $combo['specialty']) {
+        $place = [
+            '@context'       => 'https://schema.org',
+            '@type'          => 'MedicalSpecialty',
+            'name'           => $combo['specialty'],
+            'areaServed'     => [
+                '@type' => 'AdministrativeArea',
+                'name'  => $combo['area'],
+                'containedInPlace' => [
+                    '@type' => 'AdministrativeArea',
+                    'name'  => '東京都',
+                ],
+            ],
+            'relevantSpecialty' => $combo['specialty'],
+        ];
+        echo '<script type="application/ld+json">' . wp_json_encode($place, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n";
+    }
+}, 4);
 
 /**
  * Force HTTPS on all gyosei-medical.com asset URLs rendered into the page.

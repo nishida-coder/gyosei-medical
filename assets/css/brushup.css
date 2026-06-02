@@ -768,20 +768,27 @@ body.header_fix #header {
     line-height: 1.6 !important;
 }
 
-/* Mobile news section — prevent mid-word breaks on titles */
+/* Mobile news section — prevent overflow + ensure proper wrapping */
 @media (max-width: 768px) {
     #index_news,
     #index_news_mobile {
         padding: 20px 16px !important;
         margin: 28px 14px !important;
+        overflow: hidden !important;
+        max-width: calc(100vw - 28px) !important;
+        box-sizing: border-box !important;
     }
 
     #index_news .inner,
     #index_news_mobile .inner {
         flex-direction: column !important;
         align-items: stretch !important;
-        gap: 14px !important;
+        gap: 12px !important;
         padding: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
     }
 
     #index_news .inner::before {
@@ -789,20 +796,71 @@ body.header_fix #header {
         border-right: none !important;
         border-bottom: 1px solid var(--gm-hair);
         margin: 0 !important;
-        text-align: left;
+        text-align: left !important;
+        display: block !important;
+        width: 100% !important;
+    }
+
+    #index_news .newsticker,
+    #index_news .newsticker-list {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        overflow: hidden !important;
+        box-sizing: border-box !important;
+    }
+
+    #index_news .newsticker-item,
+    .newsticker-item {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
     }
 
     .newsticker-item a {
-        word-break: keep-all !important;
-        overflow-wrap: break-word !important;
         display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        word-break: break-word !important;
+        overflow-wrap: anywhere !important;
+        white-space: normal !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 6px !important;
+        padding: 8px 0 !important;
+        box-sizing: border-box !important;
     }
 
     .newsticker-item .entry-date {
         display: block !important;
-        margin-bottom: 4px !important;
+        margin: 0 0 4px 0 !important;
         padding: 0 !important;
         border: none !important;
+        flex: 0 0 auto !important;
+        font-size: 12px !important;
+    }
+
+    .newsticker-item a span {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        word-break: break-word !important;
+        overflow-wrap: anywhere !important;
+        white-space: normal !important;
+        font-size: 14px !important;
+        line-height: 1.55 !important;
+    }
+
+    #index_news .archive_link {
+        align-self: flex-end !important;
+    }
+
+    #index_news .archive_link a {
+        padding: 10px 0 !important;
+        font-size: 11px !important;
     }
 }
 
@@ -2375,7 +2433,7 @@ a[href=""]:hover {
    ========================================================================= */
 
 #post_list2 {
-    max-width: 720px;
+    max-width: 560px !important;
     margin: 24px auto !important;
     padding: 0 16px !important;
     list-style: none !important;
@@ -2383,20 +2441,22 @@ a[href=""]:hover {
 
 #post_list2 .article,
 #post_list2 li.article {
-    background: #fff !important;
-    border: 1px solid var(--gm-gold) !important;
-    border-radius: 4px !important;
-    padding: 32px 20px !important;
-    margin: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 24px 16px !important;
+    margin: 0 auto !important;
     list-style: none !important;
-    box-shadow: var(--gm-shadow-soft);
+    box-shadow: none !important;
     opacity: 1 !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    gap: 20px !important;
+    gap: 18px !important;
     width: 100% !important;
+    max-width: 100% !important;
     box-sizing: border-box !important;
+    text-align: center !important;
 }
 
 #post_list2 .article > div {
@@ -2411,19 +2471,19 @@ a[href=""]:hover {
     box-sizing: border-box !important;
 }
 
-/* Doctor portrait — large 200px circle (160 on very narrow) */
+/* Doctor portrait — 180px circle (smaller, with breathing room from edges) */
 #post_list2 .article .image,
 #post_list2 .article .image[style] {
-    width: 200px !important;
-    height: 200px !important;
-    max-width: 200px !important;
-    max-height: 200px !important;
+    width: 180px !important;
+    height: 180px !important;
+    max-width: 180px !important;
+    max-height: 180px !important;
     padding: 0 !important;
     margin: 0 auto !important;
     border-radius: 50% !important;
     overflow: hidden !important;
     border: 3px solid var(--gm-gold) !important;
-    box-shadow: 0 12px 32px rgba(10, 31, 61, .22);
+    box-shadow: 0 10px 28px rgba(10, 31, 61, .18);
     background: #fff;
     position: relative;
     flex: 0 0 auto !important;
@@ -2459,19 +2519,19 @@ a[href=""]:hover {
     max-width: none !important;
 }
 
-/* Doctor name — must never wrap (rule 16) */
+/* Doctor name — large bold serif, never wraps (rule 16) */
 #post_list2 .article .wp-block-column p.title,
 #post_list2 .article .wp-block-column p.title[style],
 #post_list2 .article .wp-block-column p.title.gm-preserve,
 #post_list2 .article .wp-block-column p[style]:first-child,
 #post_list2 .article .wp-block-column > p:first-of-type {
     font-family: var(--gm-serif) !important;
-    font-size: clamp(22px, 3vw, 28px) !important;
-    font-weight: 600 !important;
+    font-size: clamp(26px, 4vw, 32px) !important;
+    font-weight: 700 !important;
     color: var(--gm-navy) !important;
-    line-height: 1.35 !important;
-    letter-spacing: .05em !important;
-    margin: 0 !important;
+    line-height: 1.3 !important;
+    letter-spacing: .06em !important;
+    margin: 8px 0 4px !important;
     padding: 0 !important;
     text-align: center !important;
     white-space: nowrap !important;
@@ -2523,14 +2583,19 @@ a[href=""]:hover {
 #post_list2 .article ul.meta li.cat a,
 #post_list2 .article ul#post_meta_top li.cat span.cat-category,
 #post_list2 .article ul#post_meta_top li.cat span.cat-category2,
-#post_list2 .article ul#post_meta_top li.cat span.cat-category3 {
+#post_list2 .article ul#post_meta_top li.cat span.cat-category3,
+#post_list2 .article ul#post_meta_top li.cat a.cat-category,
+#post_list2 .article ul#post_meta_top li.cat a.cat-category2,
+#post_list2 .article ul#post_meta_top li.cat a.cat-category3 {
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    height: 36px !important;
-    padding: 0 16px !important;
+    height: 28px !important;
+    min-height: 28px !important;
+    max-height: 28px !important;
+    padding: 0 12px !important;
     font-family: var(--gm-sans) !important;
-    font-size: 13px !important;
+    font-size: 11.5px !important;
     font-weight: 600 !important;
     letter-spacing: .04em !important;
     line-height: 1 !important;
@@ -2538,6 +2603,21 @@ a[href=""]:hover {
     white-space: nowrap !important;
     word-break: keep-all !important;
     box-sizing: border-box !important;
+    vertical-align: middle !important;
+}
+
+/* Inner span inside tag — vertically centered text */
+#post_list2 .article ul#post_meta_top li.cat a span,
+#post_list2 .article ul#post_meta_top li.cat span span {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
+    height: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: inherit !important;
+    color: inherit !important;
 }
 
 /* Hide the SP duplicate entirely — .article.pc is our styled target at every width.
