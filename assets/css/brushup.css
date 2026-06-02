@@ -2563,20 +2563,44 @@ a[href=""]:hover {
 
 /* DOCTOR ol container — centered within <center> wrapper, max-width capped */
 body.single ol#post_list2,
-body.single #post_list2 {
+body.single #post_list2,
+html body.single ol#post_list2,
+html body.single #post_list2 {
     max-width: 480px !important;
     margin: 0 auto !important;
     padding: 0 !important;
     list-style: none !important;
     text-align: center !important;
+    display: block !important;
 }
 
 /* The PHP-generated <center> wrappers — ensure they center the ol */
 body.single #article > center,
-body.single #left_col > center {
+body.single #left_col > center,
+body.single .gm-section > center,
+body.single .gm-section-beige > center,
+body.single .gm-section-white > center {
     display: block !important;
     width: 100% !important;
     text-align: center !important;
+    margin: 0 auto !important;
+}
+
+/* Inner .clearfix wrapper inside li.article (TCD adds inline margin:20px) — must also center */
+body.single li.article.gm-doctor-article > .clearfix,
+body.single li.article.gm-doctor-article > div,
+body.single #post_list2 li.article:not(.gm-media-article) > .clearfix,
+body.single #post_list2 li.article:not(.gm-media-article) > div {
+    margin: 0 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
 }
 
 /* DOCTOR card — clean vertical stack, generous padding, centered */

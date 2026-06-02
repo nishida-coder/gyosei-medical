@@ -1,0 +1,38 @@
+[
+  {
+    "slug": "kokoro",
+    "url": "https://gyosei-medical.com/kokoromental/",
+    "width": 1024,
+    "diag": {
+      "error": "Cannot read properties of null (reading 'getBoundingClientRect')",
+      "stack": "TypeError: Cannot read properties of null (reading 'getBoundingClientRect')\n    at <anonymous>:45:41\n    at <anonymous>:140:79"
+    }
+  },
+  {
+    "slug": "kokoro",
+    "url": "https://gyosei-medical.com/kokoromental/",
+    "width": 1280,
+    "diag": {
+      "error": "Cannot read properties of null (reading 'getBoundingClientRect')",
+      "stack": "TypeError: Cannot read properties of null (reading 'getBoundingClientRect')\n    at <anonymous>:45:41\n    at <anonymous>:140:79"
+    }
+  },
+  {
+    "slug": "class",
+    "url": "https://gyosei-medical.com/class-clinic/",
+    "width": 1024,
+    "diag": {
+      "error": "Cannot read properties of null (reading 'getBoundingClientRect')",
+      "stack": "TypeError: Cannot read properties of null (reading 'getBoundingClientRect')\n    at <anonymous>:45:41\n    at <anonymous>:140:79"
+    }
+  },
+  {
+    "slug": "class",
+    "url": "https://gyosei-medical.com/class-clinic/",
+    "width": 1280,
+    "diag": {
+      "error": "Cannot read properties of null (reading 'getBoundingClientRect')",
+      "stack": "TypeError: Cannot read properties of null (reading 'getBoundingClientRect')\n    at <anonymous>:45:41\n    at <anonymous>:140:79"
+    }
+  }
+]

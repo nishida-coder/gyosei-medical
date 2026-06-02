@@ -1,0 +1,182 @@
+[
+  {
+    "slug": "kokoro",
+    "url": "https://gyosei-medical.com/kokoromental/",
+    "width": 1024,
+    "file": "C:\\libunworks\\projects\\gyosei-medical\\qa-screenshots\\20260423-v1.56\\kokoro_1024.png",
+    "diag": {
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "leftCol": {
+        "x": 20,
+        "w": 664,
+        "h": 4765,
+        "padding": "0px",
+        "textAlign": "start"
+      },
+      "card": {
+        "sel": "#left_col > div",
+        "x": 21,
+        "w": 662,
+        "h": 4346,
+        "parentX": 20,
+        "parentW": 664,
+        "leftOffset": 1,
+        "rightOffset": 1,
+        "margin": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "padding": "0px",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(20, 23, 32)",
+        "borderRadius": "0px",
+        "boxShadow": "none"
+      },
+      "photo": {
+        "sel": "#left_col img",
+        "x": 21,
+        "y": 336,
+        "w": 662,
+        "h": 441,
+        "borderRadius": "0px",
+        "marginTop": "0px",
+        "gapFromCardTop": 145
+      }
+    }
+  },
+  {
+    "slug": "kokoro",
+    "url": "https://gyosei-medical.com/kokoromental/",
+    "width": 1280,
+    "file": "C:\\libunworks\\projects\\gyosei-medical\\qa-screenshots\\20260423-v1.56\\kokoro_1280.png",
+    "diag": {
+      "scrollWidth": 1280,
+      "innerWidth": 1280,
+      "leftCol": {
+        "x": 60,
+        "w": 840,
+        "h": 4876,
+        "padding": "0px",
+        "textAlign": "start"
+      },
+      "card": {
+        "sel": "#left_col > div",
+        "x": 61,
+        "w": 838,
+        "h": 4330,
+        "parentX": 60,
+        "parentW": 840,
+        "leftOffset": 1,
+        "rightOffset": 1,
+        "margin": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "padding": "0px",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(20, 23, 32)",
+        "borderRadius": "0px",
+        "boxShadow": "none"
+      },
+      "photo": {
+        "sel": "#left_col img",
+        "x": 61,
+        "y": 492,
+        "w": 838,
+        "h": 558,
+        "borderRadius": "0px",
+        "marginTop": "0px",
+        "gapFromCardTop": 164
+      }
+    }
+  },
+  {
+    "slug": "class",
+    "url": "https://gyosei-medical.com/class-clinic/",
+    "width": 1024,
+    "file": "C:\\libunworks\\projects\\gyosei-medical\\qa-screenshots\\20260423-v1.56\\class_1024.png",
+    "diag": {
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "leftCol": {
+        "x": 20,
+        "w": 664,
+        "h": 4490,
+        "padding": "0px",
+        "textAlign": "start"
+      },
+      "card": {
+        "sel": "#left_col > div",
+        "x": 21,
+        "w": 662,
+        "h": 3870,
+        "parentX": 20,
+        "parentW": 664,
+        "leftOffset": 1,
+        "rightOffset": 1,
+        "margin": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "padding": "0px",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(20, 23, 32)",
+        "borderRadius": "0px",
+        "boxShadow": "none"
+      },
+      "photo": {
+        "sel": "#left_col img",
+        "x": 21,
+        "y": 336,
+        "w": 662,
+        "h": 441,
+        "borderRadius": "0px",
+        "marginTop": "0px",
+        "gapFromCardTop": 145
+      }
+    }
+  },
+  {
+    "slug": "class",
+    "url": "https://gyosei-medical.com/class-clinic/",
+    "width": 1280,
+    "file": "C:\\libunworks\\projects\\gyosei-medical\\qa-screenshots\\20260423-v1.56\\class_1280.png",
+    "diag": {
+      "scrollWidth": 1280,
+      "innerWidth": 1280,
+      "leftCol": {
+        "x": 60,
+        "w": 840,
+        "h": 4770,
+        "padding": "0px",
+        "textAlign": "start"
+      },
+      "card": {
+        "sel": "#left_col > div",
+        "x": 61,
+        "w": 838,
+        "h": 3986,
+        "parentX": 60,
+        "parentW": 840,
+        "leftOffset": 1,
+        "rightOffset": 1,
+        "margin": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "padding": "0px",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(20, 23, 32)",
+        "borderRadius": "0px",
+        "boxShadow": "none"
+      },
+      "photo": {
+        "sel": "#left_col img",
+        "x": 61,
+        "y": 492,
+        "w": 838,
+        "h": 558,
+        "borderRadius": "0px",
+        "marginTop": "0px",
+        "gapFromCardTop": 164
+      }
+    }
+  }
+]
