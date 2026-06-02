@@ -3114,6 +3114,59 @@ body.single #post_list2 ul#post_meta_top li.cat {
     line-height: 1 !important;
 }
 
+/* ====================== NUCLEAR TAG VERTICAL CENTERING ======================
+   Final override — maximum specificity + line-height:1 + flex centering.
+   Use BOTH align-items:center AND line-height matching the height so the text
+   is centered regardless of which mode the browser falls back to.
+   Padding-top/bottom set to 0 so the line-box equals the height. */
+html body.single #post_list2 ul#post_meta_top li.cat a,
+html body.single #post_list2 ul#post_meta_top li.cat a.cat-category,
+html body.single #post_list2 ul#post_meta_top li.cat a.cat-category2,
+html body.single #post_list2 ul#post_meta_top li.cat a.cat-category3,
+html body.single #post_list2 ul.meta li.cat a,
+html body.single #post_list2 ul.meta li.cat a.cat-category,
+html body.single #post_list2 ul.meta li.cat a.cat-category2,
+html body.single #post_list2 ul.meta li.cat a.cat-category3,
+html body.single #post_list2 ul.meta li.cat span.cat-category,
+html body.single #post_list2 ul.meta li.cat span.cat-category2,
+html body.single #post_list2 ul.meta li.cat span.cat-category3 {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+    padding: 0 14px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    line-height: 1 !important;
+    font-size: 12px !important;
+    box-sizing: border-box !important;
+    vertical-align: middle !important;
+    text-decoration: none !important;
+}
+
+/* Inner span on single page tags — also nuclear flex center, line-height 1 */
+html body.single #post_list2 ul#post_meta_top li.cat a > span,
+html body.single #post_list2 ul#post_meta_top li.cat a span[data-href],
+html body.single #post_list2 ul.meta li.cat a > span,
+html body.single #post_list2 ul.meta li.cat span > span {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: inherit !important;
+    color: inherit !important;
+    background: transparent !important;
+    border: none !important;
+    vertical-align: middle !important;
+}
+
 /* Hide the SP duplicate entirely — .article.pc is our styled target at every width.
    Previously PC/SP were toggled by breakpoint; this caused BOTH to render together on
    some viewports. Forcing SP off everywhere + making PC work on all widths is cleaner. */
