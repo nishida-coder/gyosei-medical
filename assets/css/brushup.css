@@ -2432,15 +2432,19 @@ a[href=""]:hover {
    Vertical stack: photo top 200px → name nowrap → tags 36px unified height
    ========================================================================= */
 
-#post_list2 {
+/* DOCTOR block only — identified by presence of .cat-category inside.
+   MEDIA block (same #post_list2 li.article structure but NO cat tags) is excluded
+   so it can render with its own MEDIA-section styling. */
+body.single #post_list2:has(.cat-category),
+body.single ol#post_list2:has(.cat-category) {
     max-width: 560px !important;
     margin: 24px auto !important;
     padding: 0 16px !important;
     list-style: none !important;
 }
 
-#post_list2 .article,
-#post_list2 li.article {
+body.single #post_list2:has(.cat-category) > li.article,
+body.single ol#post_list2:has(.cat-category) > li.article {
     background: transparent !important;
     border: none !important;
     border-radius: 0 !important;
@@ -2457,6 +2461,120 @@ a[href=""]:hover {
     max-width: 100% !important;
     box-sizing: border-box !important;
     text-align: center !important;
+}
+
+/* MEDIA section: #post_list2 WITHOUT .cat-category — restore readable list layout */
+body.single #post_list2:not(:has(.cat-category)),
+body.single ol#post_list2:not(:has(.cat-category)) {
+    max-width: 720px !important;
+    margin: 0 auto !important;
+    padding: 0 16px !important;
+    list-style: none !important;
+}
+
+body.single #post_list2:not(:has(.cat-category)) > li.article,
+body.single ol#post_list2:not(:has(.cat-category)) > li.article {
+    background: #fff !important;
+    border: 1px solid var(--gm-hair) !important;
+    border-radius: 4px !important;
+    padding: 18px !important;
+    margin: 0 0 14px !important;
+    list-style: none !important;
+    box-shadow: var(--gm-shadow-soft) !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+body.single #post_list2:not(:has(.cat-category)) > li.article > div {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 14px !important;
+    margin: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+body.single #post_list2:not(:has(.cat-category)) > li.article .image,
+body.single #post_list2:not(:has(.cat-category)) > li.article .image[style] {
+    flex: 0 0 80px !important;
+    width: 80px !important;
+    height: 80px !important;
+    max-width: 80px !important;
+    max-height: 80px !important;
+    border-radius: 4px !important;
+    border: 1px solid var(--gm-hair) !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: var(--gm-ivory-2) !important;
+    box-shadow: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+body.single #post_list2:not(:has(.cat-category)) > li.article .image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+body.single #post_list2:not(:has(.cat-category)) > li.article .wp-block-column,
+body.single #post_list2:not(:has(.cat-category)) > li.article .wp-block-column[style] {
+    flex: 1 1 auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    text-align: left !important;
+}
+
+body.single #post_list2:not(:has(.cat-category)) > li.article p.title,
+body.single #post_list2:not(:has(.cat-category)) > li.article p.title.gm-preserve {
+    font-family: var(--gm-serif) !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: var(--gm-navy) !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: left !important;
+    word-break: break-word !important;
+    white-space: normal !important;
+    overflow: hidden !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+}
+
+/* Hide the raw URL line in MEDIA items — only show title + link */
+body.single #post_list2:not(:has(.cat-category)) > li.article a + p,
+body.single #post_list2:not(:has(.cat-category)) > li.article a p {
+    display: none !important;
+}
+
+body.single #post_list2:not(:has(.cat-category)) > li.article a {
+    display: inline-block !important;
+    margin-top: 6px !important;
+    color: var(--gm-gold-2) !important;
+    font-family: var(--gm-sans) !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: .08em !important;
+    text-decoration: none !important;
+    padding: 0 !important;
+}
+
+body.single #post_list2:not(:has(.cat-category)) > li.article a::after {
+    content: " 記事を読む ›";
+    color: var(--gm-gold-2);
 }
 
 #post_list2 .article > div {
