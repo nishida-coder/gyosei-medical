@@ -1,0 +1,40 @@
+{
+  "card": {
+    "found": true,
+    "parentTag": "ol",
+    "parentId": "post_list2",
+    "parentClass": "",
+    "parent": {
+      "left": 240,
+      "right": 720,
+      "width": 480,
+      "paddingLeft": 0,
+      "paddingRight": 0,
+      "innerLeft": 240,
+      "innerRight": 720,
+      "innerWidth": 480,
+      "display": "block",
+      "justifyContent": "normal",
+      "gridTemplateColumns": "none",
+      "textAlign": "center"
+    },
+    "card": {
+      "left": 240,
+      "right": 720,
+      "width": 480,
+      "marginLeft": "0px",
+      "marginRight": "0px",
+      "display": "flex"
+    },
+    "leftOffset": 0,
+    "rightOffset": 0,
+    "centered": true,
+    "delta": 0
+  },
+  "postList": {
+    "found": true,
+    "display": "block",
+    "gridTemplateColumns": "none",
+    "childCount": 1
+  }
+}
