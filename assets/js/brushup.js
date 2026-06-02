@@ -20,9 +20,7 @@
         // Kill SP-variant doctor cards AND their <center> wrappers — we keep only PC
         var spArticles = article.querySelectorAll("#post_list2 li.article.sp, ol#post_list2 li.article.sp");
         Array.prototype.forEach.call(spArticles, function (sp) {
-            // Hide SP li
             sp.style.display = "none";
-            // Also hide parent ol and its center wrapper if they become empty
             var ol = sp.closest("ol");
             if (ol && ol.querySelectorAll("li.article:not(.sp)").length === 0) {
                 ol.style.display = "none";
@@ -30,6 +28,18 @@
                 if (wrapper && !wrapper.querySelector("li.article:not(.sp)")) {
                     wrapper.style.display = "none";
                 }
+            }
+        });
+
+        // Tag each remaining li.article as either DOCTOR (has cat-category)
+        // or MEDIA (no cat-category) so CSS can target reliably without :has()
+        var allArticles = article.querySelectorAll("#post_list2 li.article, ol#post_list2 li.article");
+        Array.prototype.forEach.call(allArticles, function (li) {
+            if (li.classList.contains("sp")) return;
+            if (li.querySelector(".cat-category, .cat-category2, .cat-category3")) {
+                li.classList.add("gm-doctor-article");
+            } else {
+                li.classList.add("gm-media-article");
             }
         });
 

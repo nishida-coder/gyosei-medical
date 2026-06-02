@@ -768,99 +768,135 @@ body.header_fix #header {
     line-height: 1.6 !important;
 }
 
-/* Mobile news section — prevent overflow + ensure proper wrapping */
+/* Mobile news section — use #index_news_mobile (TCD's mobile variant), restore visibility */
 @media (max-width: 768px) {
-    #index_news,
+    /* TCD's responsive.css sets #index_news{display:none} on mobile.
+       We use #index_news_mobile only — make it readable as a card. */
     #index_news_mobile {
-        padding: 20px 16px !important;
-        margin: 28px 14px !important;
-        overflow: hidden !important;
+        display: block !important;
+        background: var(--gm-ivory-2) !important;
+        border: 1px solid var(--gm-hair) !important;
+        border-radius: 4px !important;
+        padding: 16px !important;
+        margin: 24px 14px !important;
+        height: auto !important;
+        min-height: 0 !important;
+        line-height: 1.5 !important;
+        position: relative !important;
         max-width: calc(100vw - 28px) !important;
         box-sizing: border-box !important;
+        overflow: visible !important;
     }
 
-    #index_news .inner,
-    #index_news_mobile .inner {
-        flex-direction: column !important;
-        align-items: stretch !important;
-        gap: 12px !important;
-        padding: 0 !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        box-sizing: border-box !important;
-        overflow: hidden !important;
-    }
-
-    #index_news .inner::before {
+    /* NEWS eyebrow at top */
+    #index_news_mobile::before {
+        content: "NEWS お知らせ";
+        display: block !important;
+        font-family: var(--gm-latin), var(--gm-serif) !important;
+        font-size: 11px !important;
+        font-weight: 600 !important;
+        letter-spacing: .2em !important;
+        color: var(--gm-navy) !important;
         padding: 0 0 10px 0 !important;
-        border-right: none !important;
-        border-bottom: 1px solid var(--gm-hair);
-        margin: 0 !important;
+        margin: 0 0 10px 0 !important;
+        border-bottom: 1px solid var(--gm-hair) !important;
         text-align: left !important;
-        display: block !important;
-        width: 100% !important;
     }
 
-    #index_news .newsticker,
-    #index_news .newsticker-list {
-        width: 100% !important;
-        max-width: 100% !important;
-        flex-direction: column !important;
-        gap: 10px !important;
-        overflow: hidden !important;
-        box-sizing: border-box !important;
-    }
-
-    #index_news .newsticker-item,
-    .newsticker-item {
-        width: 100% !important;
-        max-width: 100% !important;
-        overflow: hidden !important;
+    #index_news_mobile .inner {
         padding: 0 !important;
-        box-sizing: border-box !important;
-    }
-
-    .newsticker-item a {
-        display: block !important;
+        margin: 0 !important;
         width: 100% !important;
         max-width: 100% !important;
-        word-break: break-word !important;
-        overflow-wrap: anywhere !important;
-        white-space: normal !important;
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 6px !important;
-        padding: 8px 0 !important;
         box-sizing: border-box !important;
+        display: block !important;
     }
 
-    .newsticker-item .entry-date {
+    #index_news_mobile .newsticker {
+        margin: 0 !important;
+        padding: 0 !important;
+        position: relative !important;
+        width: 100% !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    #index_news_mobile ol {
+        position: relative !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        list-style: none !important;
+        display: block !important;
+    }
+
+    #index_news_mobile ol li,
+    #index_news_mobile li.newsticker-item {
+        display: block !important;
+        height: auto !important;
+        font-size: 14px !important;
+        overflow: visible !important;
+        white-space: normal !important;
+        margin: 0 !important;
+        padding: 10px 0 !important;
+        list-style: none !important;
+        border-bottom: 1px solid rgba(184, 147, 90, .2) !important;
+    }
+
+    #index_news_mobile ol li:last-child {
+        border-bottom: none !important;
+        padding-bottom: 0 !important;
+    }
+
+    #index_news_mobile ol li:first-child {
+        padding-top: 0 !important;
+    }
+
+    #index_news_mobile ol li a {
+        display: block !important;
+        line-height: 1.5 !important;
+        text-decoration: none !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        white-space: normal !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        word-break: keep-all !important;
+        overflow-wrap: break-word !important;
+        color: var(--gm-navy) !important;
+        padding: 0 !important;
+    }
+
+    #index_news_mobile .entry-date {
         display: block !important;
         margin: 0 0 4px 0 !important;
-        padding: 0 !important;
-        border: none !important;
-        flex: 0 0 auto !important;
         font-size: 12px !important;
+        color: var(--gm-gold-2) !important;
+        font-family: var(--gm-latin) !important;
+        letter-spacing: .08em !important;
+        border: none !important;
+        padding: 0 !important;
     }
 
-    .newsticker-item a span {
-        display: block !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        word-break: break-word !important;
-        overflow-wrap: anywhere !important;
+    #index_news_mobile .mobile_title {
+        margin: 0 !important;
         white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        word-break: keep-all !important;
+        overflow-wrap: break-word !important;
         font-size: 14px !important;
         line-height: 1.55 !important;
+        color: var(--gm-navy) !important;
     }
 
-    #index_news .archive_link {
-        align-self: flex-end !important;
-    }
-
-    #index_news .archive_link a {
-        padding: 10px 0 !important;
-        font-size: 11px !important;
+    /* Also handle desktop #index_news on mobile (only if TCD shows it) */
+    #index_news {
+        background: var(--gm-ivory-2) !important;
+        padding: 16px !important;
+        margin: 24px 14px !important;
+        max-width: calc(100vw - 28px) !important;
+        box-sizing: border-box !important;
     }
 }
 
@@ -2189,23 +2225,98 @@ body.single #side_col .widget {
 
     body:not(.single) ol#post_list2 > li.article > a,
     #main_col ol#post_list2 > li.article > a {
-        padding: 28px 20px !important;
-        gap: 14px !important;
+        padding: 18px 14px !important;
+        gap: 10px !important;
     }
 
     body:not(.single) ol#post_list2 > li.article > a > .image,
     #main_col ol#post_list2 > li.article > a > .image {
-        width: 140px !important;
-        height: 140px !important;
-        max-width: 140px !important;
+        width: 120px !important;
+        height: 120px !important;
+        max-width: 120px !important;
     }
 
     .gm-archive-doctor-name {
-        font-size: 20px !important;
+        font-size: 18px !important;
     }
 
     .gm-archive-clinic {
         font-size: 12px !important;
+    }
+
+    /* Archive page tag pills — uniform height, text VERTICALLY CENTERED */
+    body:not(.single) ol#post_list2 > li.article ul.meta li.cat a,
+    body:not(.single) ol#post_list2 > li.article ul.meta li.cat span.cat-category,
+    body:not(.single) ol#post_list2 > li.article ul.meta li.cat span.cat-category2,
+    body:not(.single) ol#post_list2 > li.article ul.meta li.cat span.cat-category3 {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        height: 24px !important;
+        min-height: 24px !important;
+        max-height: 24px !important;
+        padding: 0 10px !important;
+        line-height: 1 !important;
+        font-size: 10.5px !important;
+        white-space: nowrap !important;
+        word-break: keep-all !important;
+        box-sizing: border-box !important;
+        vertical-align: middle !important;
+    }
+
+    body:not(.single) ol#post_list2 > li.article ul.meta li.cat a span,
+    body:not(.single) ol#post_list2 > li.article ul.meta li.cat span > span {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        line-height: 1 !important;
+        height: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        font-size: inherit !important;
+    }
+
+    /* Home #post_list cards — tags also vertically centered */
+    #post_list .article ul.meta li.cat a,
+    #post_list .article ul.meta li.cat a.cat-category,
+    #post_list .article ul.meta li.cat a.cat-category2,
+    #post_list .article ul.meta li.cat a.cat-category3 {
+        height: 24px !important;
+        min-height: 24px !important;
+        max-height: 24px !important;
+        padding: 0 10px !important;
+        line-height: 1 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    #post_list .article ul.meta li.cat a span {
+        display: inline-flex !important;
+        align-items: center !important;
+        line-height: 1 !important;
+        height: 100% !important;
+    }
+
+    /* Home clinic card — reduce vertical padding so cards aren't too tall */
+    #post_list .article {
+        gap: 6px !important;
+    }
+
+    #post_list .article .wp-block-columns {
+        padding: 12px 16px 8px !important;
+        gap: 10px !important;
+    }
+
+    #post_list .article h3.title,
+    #post_list .article h2.title,
+    #post_list .article .title {
+        padding: 10px 18px 0 !important;
+    }
+
+    #post_list .article ul.meta {
+        padding: 8px 18px 14px !important;
+        margin: 6px 0 0 !important;
     }
 
     /* =========================================================================
@@ -2432,53 +2543,38 @@ a[href=""]:hover {
    Vertical stack: photo top 200px → name nowrap → tags 36px unified height
    ========================================================================= */
 
-/* DOCTOR block only — identified by presence of .cat-category inside.
-   MEDIA block (same #post_list2 li.article structure but NO cat tags) is excluded
-   so it can render with its own MEDIA-section styling. */
-body.single #post_list2:has(.cat-category),
-body.single ol#post_list2:has(.cat-category) {
-    max-width: 560px !important;
-    margin: 24px auto !important;
-    padding: 0 16px !important;
-    list-style: none !important;
-}
+/* =========================================================================
+   DOCTOR vs MEDIA differentiation — classes set by JS (reorderSingleClinic):
+   - .gm-doctor-article on li.article that contains .cat-category
+   - .gm-media-article  on li.article without .cat-category
+   ========================================================================= */
 
-body.single #post_list2:has(.cat-category) > li.article,
-body.single ol#post_list2:has(.cat-category) > li.article {
+/* DOCTOR card — clean vertical stack, no white frame */
+body.single li.article.gm-doctor-article {
     background: transparent !important;
     border: none !important;
     border-radius: 0 !important;
-    padding: 24px 16px !important;
+    padding: 16px !important;
     margin: 0 auto !important;
     list-style: none !important;
     box-shadow: none !important;
-    opacity: 1 !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    gap: 18px !important;
+    gap: 14px !important;
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
     text-align: center !important;
 }
 
-/* MEDIA section: #post_list2 WITHOUT .cat-category — restore readable list layout */
-body.single #post_list2:not(:has(.cat-category)),
-body.single ol#post_list2:not(:has(.cat-category)) {
-    max-width: 720px !important;
-    margin: 0 auto !important;
-    padding: 0 16px !important;
-    list-style: none !important;
-}
-
-body.single #post_list2:not(:has(.cat-category)) > li.article,
-body.single ol#post_list2:not(:has(.cat-category)) > li.article {
+/* MEDIA item — readable horizontal card (image left, title right) */
+body.single li.article.gm-media-article {
     background: #fff !important;
     border: 1px solid var(--gm-hair) !important;
     border-radius: 4px !important;
-    padding: 18px !important;
-    margin: 0 0 14px !important;
+    padding: 16px !important;
+    margin: 0 0 12px !important;
     list-style: none !important;
     box-shadow: var(--gm-shadow-soft) !important;
     display: block !important;
@@ -2488,7 +2584,7 @@ body.single ol#post_list2:not(:has(.cat-category)) > li.article {
     overflow: hidden !important;
 }
 
-body.single #post_list2:not(:has(.cat-category)) > li.article > div {
+body.single li.article.gm-media-article > div {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
@@ -2498,8 +2594,8 @@ body.single #post_list2:not(:has(.cat-category)) > li.article > div {
     box-sizing: border-box !important;
 }
 
-body.single #post_list2:not(:has(.cat-category)) > li.article .image,
-body.single #post_list2:not(:has(.cat-category)) > li.article .image[style] {
+body.single li.article.gm-media-article .image,
+body.single li.article.gm-media-article .image[style] {
     flex: 0 0 80px !important;
     width: 80px !important;
     height: 80px !important;
@@ -2517,7 +2613,11 @@ body.single #post_list2:not(:has(.cat-category)) > li.article .image[style] {
     justify-content: center !important;
 }
 
-body.single #post_list2:not(:has(.cat-category)) > li.article .image img {
+body.single li.article.gm-media-article .image::after {
+    content: none !important;
+}
+
+body.single li.article.gm-media-article .image img {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
@@ -2526,8 +2626,8 @@ body.single #post_list2:not(:has(.cat-category)) > li.article .image img {
     margin: 0 !important;
 }
 
-body.single #post_list2:not(:has(.cat-category)) > li.article .wp-block-column,
-body.single #post_list2:not(:has(.cat-category)) > li.article .wp-block-column[style] {
+body.single li.article.gm-media-article .wp-block-column,
+body.single li.article.gm-media-article .wp-block-column[style] {
     flex: 1 1 auto !important;
     width: auto !important;
     min-width: 0 !important;
@@ -2536,8 +2636,9 @@ body.single #post_list2:not(:has(.cat-category)) > li.article .wp-block-column[s
     text-align: left !important;
 }
 
-body.single #post_list2:not(:has(.cat-category)) > li.article p.title,
-body.single #post_list2:not(:has(.cat-category)) > li.article p.title.gm-preserve {
+body.single li.article.gm-media-article p.title,
+body.single li.article.gm-media-article p.title.gm-preserve,
+body.single li.article.gm-media-article p.title.js-ellipsis {
     font-family: var(--gm-serif) !important;
     font-size: 14px !important;
     font-weight: 600 !important;
@@ -2554,13 +2655,7 @@ body.single #post_list2:not(:has(.cat-category)) > li.article p.title.gm-preserv
     -webkit-box-orient: vertical !important;
 }
 
-/* Hide the raw URL line in MEDIA items — only show title + link */
-body.single #post_list2:not(:has(.cat-category)) > li.article a + p,
-body.single #post_list2:not(:has(.cat-category)) > li.article a p {
-    display: none !important;
-}
-
-body.single #post_list2:not(:has(.cat-category)) > li.article a {
+body.single li.article.gm-media-article a {
     display: inline-block !important;
     margin-top: 6px !important;
     color: var(--gm-gold-2) !important;
@@ -2570,11 +2665,21 @@ body.single #post_list2:not(:has(.cat-category)) > li.article a {
     letter-spacing: .08em !important;
     text-decoration: none !important;
     padding: 0 !important;
+    word-break: break-all !important;
+    overflow-wrap: anywhere !important;
 }
 
-body.single #post_list2:not(:has(.cat-category)) > li.article a::after {
-    content: " 記事を読む ›";
-    color: var(--gm-gold-2);
+body.single li.article.gm-media-article a p {
+    font-size: 10.5px !important;
+    color: var(--gm-mute) !important;
+    margin: 4px 0 0 !important;
+    word-break: break-all !important;
+    overflow-wrap: anywhere !important;
+    line-height: 1.4 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
 }
 
 #post_list2 .article > div {
