@@ -1,0 +1,46 @@
+[
+  {
+    "slug": "dr-mishima",
+    "url": "https://gyosei-medical.com/mishima-itami/",
+    "width": 390,
+    "file": "C:\\libunworks\\projects\\gyosei-medical\\qa-screenshots\\20260423-v1.50\\dr-mishima_390px.png",
+    "diag": {
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "bodyScrollWidth": 390
+    }
+  },
+  {
+    "slug": "dr-mishima",
+    "url": "https://gyosei-medical.com/mishima-itami/",
+    "width": 768,
+    "file": "C:\\libunworks\\projects\\gyosei-medical\\qa-screenshots\\20260423-v1.50\\dr-mishima_768px.png",
+    "diag": {
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "bodyScrollWidth": 768
+    }
+  },
+  {
+    "slug": "dr-class",
+    "url": "https://gyosei-medical.com/class-clinic/",
+    "width": 390,
+    "file": "C:\\libunworks\\projects\\gyosei-medical\\qa-screenshots\\20260423-v1.50\\dr-class_390px.png",
+    "diag": {
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "bodyScrollWidth": 390
+    }
+  },
+  {
+    "slug": "home",
+    "url": "https://gyosei-medical.com/",
+    "width": 390,
+    "file": "C:\\libunworks\\projects\\gyosei-medical\\qa-screenshots\\20260423-v1.50\\home_390px.png",
+    "diag": {
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "bodyScrollWidth": 390
+    }
+  }
+]
