@@ -1,0 +1,50 @@
+{
+  "found": true,
+  "card": {
+    "top": 1157,
+    "bottom": 1510,
+    "height": 352,
+    "width": 480,
+    "borderTopWidth": 1,
+    "paddingTop": 0,
+    "paddingBottom": 0
+  },
+  "photo": {
+    "top": 1182,
+    "bottom": 1368,
+    "height": 186,
+    "width": 186,
+    "borderRadius": "50%"
+  },
+  "topGap": {
+    "visual": 25,
+    "inner": 24,
+    "target": 24
+  },
+  "bottomGap": {
+    "value": 86,
+    "target": 18
+  },
+  "firstTag": {
+    "tag": "li",
+    "className": "cat",
+    "text": "形成外科・美容外科",
+    "height": 34,
+    "width": 113.03,
+    "top": 1454.69,
+    "bottom": 1488.69,
+    "lineHeight": "12px",
+    "fontSize": "12px",
+    "padding": "0px",
+    "paddingTop": "0px",
+    "paddingBottom": "0px",
+    "borderRadius": "0px",
+    "display": "flex",
+    "alignItems": "center",
+    "boxSizing": "content-box",
+    "ratioLHvsH": "0.353",
+    "innerSpan": null,
+    "tagsFound": 3
+  },
+  "tagsCount": 3
+}

@@ -1,0 +1,49 @@
+{
+  "card": {
+    "top": 1157,
+    "bottom": 1510,
+    "borderTopWidth": 1,
+    "paddingTop": 0
+  },
+  "photoImg": {
+    "top": 1185,
+    "bottom": 1365,
+    "height": 180,
+    "width": 180,
+    "borderRadius": "50%"
+  },
+  "photoWrap": {
+    "top": 1182,
+    "bottom": 1368
+  },
+  "topGap": {
+    "value": 28,
+    "target": 24,
+    "ok": true
+  },
+  "bottomGapPhotoToPill": {
+    "value": 89,
+    "target": 18,
+    "ok": true
+  },
+  "pill": {
+    "anchor": {
+      "height": 30,
+      "width": 113.03,
+      "lineHeight": "30px",
+      "fontSize": "10.5px",
+      "padding": "4px 10px",
+      "borderRadius": "2px",
+      "display": "block",
+      "ratioLHvsH": "1.000"
+    },
+    "wrapperLi": {
+      "height": 34,
+      "lineHeight": "12px",
+      "fontSize": "12px",
+      "display": "flex",
+      "alignItems": "center"
+    },
+    "innerSpan": null
+  }
+}
