@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('GYOSEI_CHILD_VERSION', '1.50.0');
+define('GYOSEI_CHILD_VERSION', '1.51.0');
 
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style(
@@ -470,6 +470,156 @@ add_action('wp_head', function () {
         echo '<script type="application/ld+json">' . wp_json_encode($place, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n";
     }
 }, 4);
+
+/* =========================================================================
+ * GEO Phase 1 — FAQPage, Physician, EducationalOrganization schemas
+ * ========================================================================= */
+
+/**
+ * FAQPage schema for home + clinic list — answers common queries that
+ * generative engines (ChatGPT, Perplexity, Gemini) cite verbatim.
+ */
+add_action('wp_head', function () {
+    if (!is_front_page() && !is_post_type_archive('post') &&
+        (!is_page() || get_post_field('post_name') !== 'clinic')) return;
+
+    $faq = [
+        '@context' => 'https://schema.org',
+        '@type'    => 'FAQPage',
+        'mainEntity' => [
+            [
+                '@type'          => 'Question',
+                'name'           => 'GYOSEI MEDICALとは何ですか？',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text'  => 'GYOSEI MEDICALは、暁星学園を卒業し医師となったOBが開業する病院・クリニックの情報を集約したポータルサイトです。同窓のネットワークを通じて信頼できる医療機関を診療科目・エリア・卒業年代から検索できます。',
+                ],
+            ],
+            [
+                '@type'          => 'Question',
+                'name'           => '掲載されている医師はどのような方々ですか？',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text'  => '東京都千代田区にある暁星学園（暁星小学校・中学校・高等学校）を卒業し、現在病院またはクリニックを開業されている医師の方々です。掲載には費用がかからず、暁星OBの有志が運営しています。',
+                ],
+            ],
+            [
+                '@type'          => 'Question',
+                'name'           => 'どのような診療科目から検索できますか？',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text'  => '内科、外科、形成外科・美容外科、産婦人科、心療内科・精神科、整形外科・リハビリ科、皮膚科、眼科、耳鼻咽喉科、小児科、不妊治療・婦人科、プライマリ・ケアの13カテゴリから検索できます。',
+                ],
+            ],
+            [
+                '@type'          => 'Question',
+                'name'           => 'どのエリアから検索できますか？',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text'  => '東京都23区（千代田区・中央区・港区・渋谷区・新宿区・文京区・目黒区・品川区・世田谷区・大田区・中野区・杉並区・豊島区・北区・練馬区・板橋区・台東区・墨田区・江東区・江戸川区・荒川区・足立区・葛飾区）、東京都23区外、神奈川県、その他地域から検索できます。',
+                ],
+            ],
+            [
+                '@type'          => 'Question',
+                'name'           => '掲載を希望する暁星OB医師はどうすればよいですか？',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text'  => '掲載は無料です。掲載申込ページ（/join/）から、または info@gyosei-medical.com 宛にメールでご連絡ください。クリニック名、所在地、診療科、院長プロフィールなどの情報をお送りいただき、運営事務局で原稿を整えてから公開いたします。',
+                ],
+            ],
+            [
+                '@type'          => 'Question',
+                'name'           => '暁星卒業年代から医師を検索できますか？',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text'  => 'はい。1960代卒から2010代卒まで、暁星卒業年代別に検索可能です。同窓・近年代の医師を探す際にご活用ください。',
+                ],
+            ],
+        ],
+    ];
+
+    echo "\n<!-- GYOSEI FAQ schema -->\n";
+    echo '<script type="application/ld+json">' . wp_json_encode($faq, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n";
+}, 5);
+
+/**
+ * Physician schema for individual clinic pages — names + specialty + affiliation
+ * to 暁星学園 (alumni network).
+ */
+add_action('wp_head', function () {
+    if (!is_singular('post')) return;
+
+    $clinic_title = get_the_title();
+    $cats = get_the_category();
+    $specialty = !empty($cats) ? $cats[0]->name : null;
+    $area = null;
+    $tax_area = get_the_terms(get_the_ID(), 'category2');
+    if (!is_wp_error($tax_area) && !empty($tax_area)) { $area = $tax_area[0]->name; }
+    $grad = null;
+    $tax_grad = get_the_terms(get_the_ID(), 'category3');
+    if (!is_wp_error($tax_grad) && !empty($tax_grad)) { $grad = $tax_grad[0]->name; }
+
+    $physician = [
+        '@context'         => 'https://schema.org',
+        '@type'            => 'Physician',
+        '@id'              => get_permalink() . '#physician',
+        'name'             => $clinic_title . ' 院長',
+        'description'      => '暁星学園OB医師。' . ($specialty ? $specialty . 'を専門とする。' : '') . ($area ? $area . 'にて' . $clinic_title . 'を開業。' : ''),
+        'worksFor'         => [
+            '@type' => 'MedicalClinic',
+            '@id'   => get_permalink() . '#clinic',
+            'name'  => $clinic_title,
+            'url'   => get_permalink(),
+        ],
+        'alumniOf'         => [
+            '@type' => 'EducationalOrganization',
+            '@id'   => 'https://www.gyosei-h.ed.jp/#school',
+            'name'  => '暁星学園',
+            'url'   => 'https://www.gyosei-h.ed.jp/',
+            'sameAs' => 'https://ja.wikipedia.org/wiki/%E6%9A%81%E6%98%9F%E5%AD%A6%E5%9C%92',
+        ],
+    ];
+    if ($specialty) {
+        $physician['medicalSpecialty'] = $specialty;
+    }
+    if ($grad) {
+        $physician['description'] .= ' ' . $grad . '。';
+    }
+
+    echo "\n<!-- GYOSEI Physician schema -->\n";
+    echo '<script type="application/ld+json">' . wp_json_encode($physician, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n";
+}, 5);
+
+/**
+ * EducationalOrganization schema (sitewide) — declares 暁星学園 entity once
+ * so all Physician.alumniOf references resolve to the same canonical entity.
+ */
+add_action('wp_head', function () {
+    if (!is_front_page()) return;
+
+    $school = [
+        '@context'    => 'https://schema.org',
+        '@type'       => 'EducationalOrganization',
+        '@id'         => 'https://www.gyosei-h.ed.jp/#school',
+        'name'        => '暁星学園',
+        'alternateName' => ['暁星', '暁星高等学校', '暁星中学校', '暁星小学校'],
+        'url'         => 'https://www.gyosei-h.ed.jp/',
+        'sameAs'      => [
+            'https://ja.wikipedia.org/wiki/%E6%9A%81%E6%98%9F%E5%AD%A6%E5%9C%92',
+            'https://ja.wikipedia.org/wiki/%E6%9A%81%E6%98%9F%E4%B8%AD%E5%AD%A6%E6%A0%A1%E3%83%BB%E9%AB%98%E7%AD%89%E5%AD%A6%E6%A0%A1',
+        ],
+        'address'     => [
+            '@type'           => 'PostalAddress',
+            'addressCountry'  => 'JP',
+            'addressRegion'   => '東京都',
+            'addressLocality' => '千代田区',
+        ],
+        'description' => '東京都千代田区にあるカトリック・マリア会系の私立男子校。1888年創立。',
+    ];
+
+    echo "\n<!-- GYOSEI EducationalOrganization schema -->\n";
+    echo '<script type="application/ld+json">' . wp_json_encode($school, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n";
+}, 5);
 
 /**
  * Force HTTPS on all gyosei-medical.com asset URLs rendered into the page.
