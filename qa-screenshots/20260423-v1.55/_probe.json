@@ -1,0 +1,66 @@
+{
+  "home_390": {
+    "index_news_mobile": {
+      "display": "block",
+      "visibility": "visible",
+      "opacity": "1",
+      "width": 362,
+      "height": 203.9375,
+      "backgroundColor": "rgb(243, 236, 220)",
+      "childCount": 1,
+      "hasItems": 4
+    },
+    "dr_image": {
+      "backgroundColor": "rgb(243, 236, 220)",
+      "boxShadow": "none",
+      "border": "0px none rgb(10, 31, 61)",
+      "borderRadius": "0px",
+      "width": "272px",
+      "height": "174.844px"
+    }
+  },
+  "cat_390": {
+    "index_news_mobile": null,
+    "dr_image": {
+      "backgroundColor": "rgb(243, 236, 220)",
+      "boxShadow": "rgba(10, 31, 61, 0.22) 0px 10px 28px 0px",
+      "border": "3px solid rgb(184, 147, 90)",
+      "borderRadius": "50%",
+      "width": "160px",
+      "height": "160px"
+    }
+  },
+  "kokoro_390": {
+    "index_news_mobile": null,
+    "dr_image": {
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "boxShadow": "none",
+      "border": "3px solid rgb(184, 147, 90)",
+      "borderRadius": "50%",
+      "width": "180px",
+      "height": "180px"
+    }
+  },
+  "class_390": {
+    "index_news_mobile": null,
+    "dr_image": {
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "boxShadow": "none",
+      "border": "3px solid rgb(184, 147, 90)",
+      "borderRadius": "50%",
+      "width": "180px",
+      "height": "180px"
+    }
+  },
+  "mishima_390": {
+    "index_news_mobile": null,
+    "dr_image": {
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "boxShadow": "none",
+      "border": "3px solid rgb(184, 147, 90)",
+      "borderRadius": "50%",
+      "width": "180px",
+      "height": "180px"
+    }
+  }
+}
