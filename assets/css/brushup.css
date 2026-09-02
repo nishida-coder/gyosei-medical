@@ -1024,33 +1024,66 @@ body.header_fix #header {
     width: 100%;
 }
 
-/* Home "お知らせ一覧" ticker — small inline link (not a CTA) */
+/* Home "お知らせ一覧" archive button — balanced black bar with inline arrow */
+#index_news .archive_link {
+    display: block !important;
+    text-align: center !important;
+    margin: 20px auto 4px !important;
+    padding: 0 !important;
+    width: auto !important;
+    flex: 0 0 auto !important;
+}
+
 #index_news .archive_link a {
     display: inline-flex !important;
-    align-items: center;
-    gap: 4px;
-    background: transparent !important;
-    color: var(--gm-navy) !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    background: #000 !important;
+    background-color: #000 !important;
+    color: #fff !important;
     font-family: var(--gm-sans) !important;
-    font-size: 11px !important;
-    font-weight: 600 !important;
-    letter-spacing: .12em !important;
-    padding: 8px 0 !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    letter-spacing: .16em !important;
+    padding: 12px 28px !important;
     border: none !important;
+    border-radius: 0 !important;
     line-height: 1 !important;
-    white-space: nowrap;
-    transition: color .25s ease;
+    white-space: nowrap !important;
+    min-height: 44px !important;
+    min-width: 180px;
+    box-sizing: border-box !important;
+    text-decoration: none !important;
+    transition: none !important;
 }
 
+/* Arrow sits INSIDE the button on the right, same color as text */
 #index_news .archive_link a::after {
-    content: "›";
-    font-size: 14px;
-    line-height: 1;
-    padding-left: 4px;
+    content: "›" !important;
+    display: inline-block !important;
+    font-size: 16px !important;
+    line-height: 1 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    color: inherit !important;
+    background: transparent !important;
+    position: static !important;
+    font-weight: 400 !important;
 }
 
-#index_news .archive_link a:hover {
-    color: var(--gm-gold-2) !important;
+/* No color changes on hover — clean static button */
+#index_news .archive_link a:hover,
+#index_news .archive_link a:focus,
+#index_news .archive_link a:active {
+    background: #000 !important;
+    background-color: #000 !important;
+    color: #fff !important;
+    border: none !important;
+    transform: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+    transition: none !important;
 }
 
 /* "病院一覧" CTA under clinic grid — simple black bar, no hover change */
