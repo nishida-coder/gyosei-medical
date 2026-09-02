@@ -3924,10 +3924,11 @@ select:focus {
 #cb_1 .inner .clearfix.gm-home-banners {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    grid-auto-rows: minmax(340px, auto) !important;
-    gap: 28px !important;
+    grid-template-rows: none !important;
+    grid-auto-rows: auto !important;
+    gap: 20px !important;
     max-width: 900px !important;
-    margin: 32px auto 0 !important;
+    margin: 20px auto 0 !important;
     padding: 0 20px !important;
     float: none !important;
     align-items: stretch !important;
@@ -3937,7 +3938,7 @@ select:focus {
 .gm-home-banners > div.gm-home-banner-item {
     display: flex !important;
     flex-direction: column;
-    padding: 30px 24px !important;
+    padding: 24px 22px !important;
     margin: 0 !important;
     background: #fff !important;
     border: 1px solid var(--gm-hair) !important;
@@ -3945,7 +3946,7 @@ select:focus {
     transition: transform .3s ease, box-shadow .3s ease;
     overflow: hidden;
     height: 100% !important;
-    min-height: 340px;
+    min-height: 240px !important;
     align-items: center !important;
     justify-content: center !important;
     text-align: center;

@@ -1,0 +1,160 @@
+{
+  "inner": {
+    "tagName": "DIV",
+    "className": "inner",
+    "rect": {
+      "top": 6406.03125,
+      "bottom": 7607.765625,
+      "height": 1201.734375,
+      "width": 929
+    },
+    "computed": {
+      "paddingTop": "0px",
+      "paddingBottom": "0px",
+      "marginTop": "0px",
+      "marginBottom": "0px",
+      "minHeight": "0px",
+      "height": "1201.73px",
+      "display": "block",
+      "rowGap": "normal",
+      "columnGap": "normal",
+      "gap": "normal",
+      "alignItems": "normal",
+      "justifyContent": "normal",
+      "gridTemplateRows": "none"
+    }
+  },
+  "children": [
+    {
+      "tagName": "DIV",
+      "id": null,
+      "className": "gm-home-link-heading",
+      "rect": {
+        "top": 6406.03125,
+        "bottom": 6499.765625,
+        "height": 93.734375,
+        "width": 929
+      },
+      "computed": {
+        "display": "block",
+        "visibility": "visible",
+        "marginTop": "0px",
+        "marginBottom": "0px",
+        "paddingTop": "0px",
+        "paddingBottom": "24px",
+        "minHeight": "0px",
+        "height": "69.7344px",
+        "position": "static",
+        "gridTemplateRows": "none",
+        "gridAutoRows": "auto",
+        "rowGap": "normal",
+        "gap": "normal"
+      },
+      "totalWithMargin": 93.734375
+    },
+    {
+      "tagName": "DIV",
+      "id": null,
+      "className": " clearfix gm-home-banners",
+      "rect": {
+        "top": 6531.765625,
+        "bottom": 7607.765625,
+        "height": 1076,
+        "width": 929
+      },
+      "computed": {
+        "display": "grid",
+        "visibility": "visible",
+        "marginTop": "32px",
+        "marginBottom": "0px",
+        "paddingTop": "0px",
+        "paddingBottom": "0px",
+        "minHeight": "0px",
+        "height": "1076px",
+        "position": "static",
+        "gridTemplateRows": "340px 340px 340px",
+        "gridAutoRows": "minmax(340px, auto)",
+        "rowGap": "28px",
+        "gap": "28px"
+      },
+      "totalWithMargin": 1108,
+      "banners": [
+        {
+          "tag": "DIV",
+          "cls": "gm-home-banner-item",
+          "rect": {
+            "top": 6531.765625,
+            "bottom": 6871.765625,
+            "height": 340
+          },
+          "marginTop": "0px",
+          "marginBottom": "0px",
+          "minHeight": "340px",
+          "alignSelf": "auto"
+        },
+        {
+          "tag": "DIV",
+          "cls": "gm-home-banner-item",
+          "rect": {
+            "top": 6531.765625,
+            "bottom": 6871.765625,
+            "height": 340
+          },
+          "marginTop": "0px",
+          "marginBottom": "0px",
+          "minHeight": "340px",
+          "alignSelf": "auto"
+        },
+        {
+          "tag": "DIV",
+          "cls": "gm-home-banner-item",
+          "rect": {
+            "top": 6899.765625,
+            "bottom": 7239.765625,
+            "height": 340
+          },
+          "marginTop": "0px",
+          "marginBottom": "0px",
+          "minHeight": "340px",
+          "alignSelf": "auto"
+        },
+        {
+          "tag": "DIV",
+          "cls": "gm-home-banner-item gm-home-cta-card",
+          "rect": {
+            "top": 6899.765625,
+            "bottom": 7239.765625,
+            "height": 340
+          },
+          "marginTop": "0px",
+          "marginBottom": "0px",
+          "minHeight": "300px",
+          "alignSelf": "auto"
+        }
+      ],
+      "rows": [
+        {
+          "top": 6532,
+          "maxHeight": 340,
+          "count": 2
+        },
+        {
+          "top": 6900,
+          "maxHeight": 340,
+          "count": 2
+        }
+      ],
+      "pseudoAfter": {
+        "content": "\".\"",
+        "height": "0px",
+        "display": "block"
+      }
+    }
+  ],
+  "sumChildrenWithMargins": 1201.734375,
+  "innerPseudo": {
+    "before": null,
+    "after": null
+  },
+  "childCount": 2
+}
