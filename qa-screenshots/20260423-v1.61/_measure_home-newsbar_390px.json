@@ -1,0 +1,75 @@
+{
+  "found": true,
+  "hiddenAncestor": null,
+  "secRect": {
+    "top": 681,
+    "bottom": 783,
+    "height": 102,
+    "width": 362,
+    "display": "block",
+    "visibility": "visible"
+  },
+  "link": {
+    "text": "お知らせ一覧",
+    "hasArrowInText": false,
+    "rect": {
+      "top": 718,
+      "bottom": 762,
+      "left": 149,
+      "right": 329,
+      "width": 180,
+      "height": 44
+    },
+    "style": {
+      "backgroundColor": "rgb(0, 0, 0)",
+      "color": "rgb(255, 255, 255)",
+      "padding": "12px 28px",
+      "paddingTop": "12px",
+      "paddingRight": "28px",
+      "paddingBottom": "12px",
+      "paddingLeft": "28px",
+      "minWidth": "180px",
+      "minHeight": "44px",
+      "width": "180px",
+      "height": "44px",
+      "display": "inline-flex",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "borderRadius": "0px",
+      "textAlign": "center",
+      "margin": "0px"
+    },
+    "after": {
+      "content": "\"›\"",
+      "color": "rgb(255, 255, 255)",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "display": "block",
+      "marginLeft": "0px",
+      "position": "static"
+    },
+    "before": {
+      "content": "none"
+    }
+  },
+  "container": {
+    "tag": "div",
+    "className": "archive_link",
+    "textAlign": "center",
+    "display": "block",
+    "justifyContent": "normal",
+    "rect": {
+      "left": 149,
+      "right": 329,
+      "width": 180
+    }
+  },
+  "centering": {
+    "linkCenter": 239,
+    "containerCenter": 239,
+    "parentCenter": 239,
+    "centeredInContainer": true,
+    "centeredInParent": true,
+    "offsetFromContainerCenter": 0,
+    "offsetFromParentCenter": 0
+  }
+}
